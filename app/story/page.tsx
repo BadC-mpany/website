@@ -22,114 +22,78 @@ export default function Story() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-6xl md:text-7xl font-bold mb-8">
-                <span className="text-gradient glow-red">How We Got Here</span>
+              <h1 className="text-6xl md:text-7xl font-bold mb-12">
+                <span className="text-gradient glow-red">Our Story</span>
               </h1>
 
-              <div className="space-y-12 text-lg text-gray-300 leading-relaxed">
-                <div>
-                  <h2 className="text-3xl font-bold text-cyber-pink mb-4">The Architecture Gap</h2>
-                  <p>
-                    There is a fundamental architecture gap in AI security. In the past few years, we've been building 
-                    the fastest, most powerful engines for AI models, and now we're doing the same for AI agents. But in 
-                    the rush, we completely forgot about the brakes.
-                  </p>
-                  <p className="mt-4">
-                    No airbags. No seatbelts. No crash tests.
-                  </p>
-                </div>
+              <div className="space-y-8 text-lg text-gray-300 leading-relaxed">
+                <p>
+                  For the past few years, we've been building and securing AI systems in enterprise environments. 
+                  We watched the industry pour billions into making AI faster, smarter, and more capable. We built some 
+                  of those systems ourselves. But somewhere in the rush for capability, something critical was forgotten: 
+                  the brakes.
+                </p>
 
-                <div>
-                  <h2 className="text-3xl font-bold text-cyber-pink mb-4">Our Timeline</h2>
-                  <ul className="space-y-4">
-                    <li className="flex gap-4">
-                      <span className="text-cyber-red font-bold min-w-fit">Since 2022</span>
-                      <span>Developing AI applications in enterprise settings</span>
-                    </li>
-                    <li className="flex gap-4">
-                      <span className="text-cyber-red font-bold min-w-fit">Since 2024</span>
-                      <span>Researching the AI security vertical</span>
-                    </li>
-                    <li className="flex gap-4">
-                      <span className="text-cyber-red font-bold min-w-fit">June 2025</span>
-                      <span>Started actively building full-time</span>
-                    </li>
-                    <li className="flex gap-4">
-                      <span className="text-cyber-red font-bold min-w-fit">September 2025</span>
-                      <span>Lock-in 24/7 mode</span>
-                    </li>
-                  </ul>
-                </div>
+                <p>
+                  There's a fundamental architecture gap in AI security. We have no airbags, no seatbelts, no crash tests 
+                  for the most powerful technology being deployed in production systems right now.
+                </p>
 
-                <div>
-                  <h2 className="text-3xl font-bold text-cyber-pink mb-4">Domain Expertise</h2>
-                  <p>
-                    We're not new to this space. We've been building and securing AI systems in enterprise environments 
-                    for years. We have deep expertise in:
-                  </p>
-                  <ul className="mt-4 space-y-3 ml-6">
-                    <li className="flex gap-3">
-                      <span className="text-cyber-red">▪</span>
-                      <span>Enterprise AI application architecture</span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-cyber-red">▪</span>
-                      <span>Adversarial AI research and red-teaming</span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-cyber-red">▪</span>
-                      <span>LLM security vulnerabilities and exploitation techniques</span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-cyber-red">▪</span>
-                      <span>Real-world impact assessment and risk modeling</span>
-                    </li>
-                  </ul>
-                </div>
+                <h2 className="text-3xl font-bold text-cyber-pink mt-12 mb-4">The Real Problem</h2>
+                
+                <p>
+                  As regulations grow around AI, companies need to adapt. But it's not just compliance. The issue is deeper: 
+                  as more freedom is given to AI—like RAG systems with tool access—the stochastic nature of AI makes it 
+                  incredibly difficult to control, align to your interests, and keep secure.
+                </p>
 
-                <div className="border-t border-cyber-red/20 pt-8">
-                  <h2 className="text-3xl font-bold text-cyber-pink mb-4">What We've Found</h2>
-                  <p>
-                    We started by jailbreaking the largest adult content creators and one of Europe's leading banks. 
-                    We exposed critical vulnerabilities in every state-of-the-art LLM.
-                  </p>
-                  <p className="mt-4">
-                    But here's what we realized: jailbreaking alone doesn't drive urgency. One-off vulnerabilities don't 
-                    cost these companies money directly. We got a few consulting contracts, nothing more.
-                  </p>
-                  <p className="mt-4 font-bold text-cyber-red glow-red">
-                    Then we poisoned their agentic frameworks.
-                  </p>
-                  <p className="mt-4">
-                    These frameworks were integrated with their payroll, billing, and financial operations. With a single 
-                    prompt-injected PDF, we demonstrated we could hijack their bank accounts.
-                  </p>
-                  <p className="mt-4">
-                    Suddenly, the conversations shifted. The discussions accelerated. They understood the risk immediately.
-                  </p>
-                </div>
+                <p>
+                  We started testing this in the wild. We jailbroke the LLMs of banks and enterprises. We showed how 
+                  prompt-injected documents could manipulate their systems. We exposed vulnerabilities in every state-of-the-art model.
+                </p>
 
-                <div>
-                  <h2 className="text-3xl font-bold text-cyber-pink mb-4">Why This Matters</h2>
-                  <p>
-                    AI agents in the very near future will have authority over bank accounts—whether fiat or crypto. 
-                    They'll control payment rails, internal accounting operations, and financial workflows.
-                  </p>
-                  <p className="mt-4">
-                    We are literally building a playground for hackers with zero guardrails.
-                  </p>
-                  <p className="mt-4">
-                    That's not acceptable. That's what we're here to fix.
-                  </p>
-                </div>
+                <p>
+                  But here's what struck us: when we looked at why some companies seemed more secure, we found something 
+                  unsettling. They weren't actually secure—they were just incapable. They had such a limited set of functions 
+                  their AI could perform that it was practically useless. The only way they achieved security was by removing all capability.
+                </p>
+
+                <p>
+                  That's not a solution. That's a trap.
+                </p>
+
+                <h2 className="text-3xl font-bold text-cyber-pink mt-12 mb-4">A Different Approach</h2>
+
+                <p>
+                  What we're working on is different. Instead of choosing between capability and security, we're building both. 
+                  We use the underlying math and logic to probe, explore attacks, and defend against them. We don't just use data—we leverage 
+                  the mathematical foundations of how these models work to prevent exploitation and misalignment.
+                </p>
+
+                <p>
+                  Our goal is simple: an agent with the maximum amount of capability and the minimum amount of risk. 
+                  We're building runtime defense architectures that verify every action, ensure provenance of every decision, 
+                  and enforce least-privilege at the cryptographic level.
+                </p>
+
+                <p>
+                  This isn't detection. This isn't a band-aid. This is prevention.
+                </p>
 
                 <div className="bg-cyber-black/50 border-2 border-cyber-red/30 rounded-xl p-8 mt-12">
-                  <h3 className="text-2xl font-bold text-cyber-pink mb-4">Private Beta Status</h3>
+                  <h3 className="text-2xl font-bold text-cyber-pink mb-4">Where We Are Now</h3>
                   <p>
-                    Our agentic guardrails and red-teaming agents are in private beta with four enterprise clients. 
-                    We're validating our approach in real-world conditions with teams that understand the stakes.
+                    Our guardrails and defense architectures are in private beta with four enterprise clients. 
+                    We're validating our approach in real-world conditions—in systems where the stakes are high and the 
+                    need for both capability and security is urgent. We've moved from proving the problem exists to proving 
+                    that solutions can work.
                   </p>
                 </div>
+
+                <p className="text-gray-400 italic mt-12">
+                  Since 2022 we've been building enterprise AI applications. Since 2024 we've focused on AI security research. 
+                  Since June 2025 we've been fully committed to this. Since September 2025, it's been 24/7.
+                </p>
               </div>
             </motion.div>
           </div>
@@ -138,4 +102,3 @@ export default function Story() {
     </main>
   )
 }
-

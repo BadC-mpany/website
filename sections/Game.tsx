@@ -16,13 +16,16 @@ export default function Game() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-cyber-red/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyber-purple/10 rounded-full blur-3xl"></div>
           
-          <div className="relative z-10 text-center max-w-3xl mx-auto">
+              <div className="relative z-10 text-center max-w-3xl mx-auto">
             <h2 className="text-5xl md:text-6xl font-bold mb-6">
               <span className="text-gradient glow-red">Hack the AI</span>
             </h2>
-            <p className="text-xl text-gray-300 mb-8">
-              Think you can break our AI? Try your skills in our interactive security challenge game. 
-              Find vulnerabilities, exploit weaknesses, and climb the leaderboard.
+            <p className="text-xl text-gray-300 mb-6">
+              Put your red teaming skills to the test
+            </p>
+            <p className="text-lg text-gray-400 mb-8">
+              Hack prompt injections, jailbreaks, RAG attacks, and supply-chain exploits across difficulty levels. 
+              Help build the adversarial knowledge that secures AI systems at scale.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a 
@@ -31,10 +34,10 @@ export default function Game() {
                 rel="noopener noreferrer"
                 className="px-10 py-4 bg-cyber-red hover:bg-cyber-pink transition-colors rounded-lg font-bold text-lg"
               >
-                Launch Game
+                Play Beta
               </a>
               <p className="text-sm text-gray-400">
-                No installation required • Browser-based • Free to play
+                Browser-based • Free to play
               </p>
             </div>
           </div>

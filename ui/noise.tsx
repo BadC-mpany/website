@@ -13,9 +13,9 @@ interface NoiseProps {
 }
 
 const Noise: React.FC<NoiseProps> = ({
-  patternSize = 250,
+  patternSize = 500,
   patternRefreshInterval = 2,
-  patternAlpha = 15,
+  patternAlpha = 5,
   quality = 'medium',
   performanceMode = false
 }) => {
