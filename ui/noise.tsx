@@ -1,3 +1,5 @@
+'use client'
+
 import type React from 'react';
 import { useRef, useEffect, useCallback } from 'react';
 import { useInView } from 'react-intersection-observer';
