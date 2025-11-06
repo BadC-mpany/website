@@ -1,10 +1,10 @@
-import Header from '@/components/Header'
-import Hero from '@/sections/Hero'
-import Repositories from '@/sections/Repositories'
-import Game from '@/sections/Game'
-import Unique from '@/sections/Unique'
-import Team from '@/sections/Team'
-import Noise from '@/ui/noise'
+import Header from '../components/Header'
+import Hero from '../sections/Hero'
+import Repositories from '../sections/Repositories'
+import Game from '../sections/Game'
+import Unique from '../sections/Unique'
+import Team from '../sections/Team'
+import Noise from '../ui/noise'
 
 export default function Home() {
   return (
