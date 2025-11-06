@@ -1,9 +1,11 @@
 import Header from '../components/Header'
+import Footer from '../components/Footer'
 import Hero from '../sections/Hero'
 import Repositories from '../sections/Repositories'
 import Game from '../sections/Game'
 import Unique from '../sections/Unique'
 import Team from '../sections/Team'
+import Contact from '../sections/Contact'
 import Noise from '../ui/noise'
 
 export default function Home() {
@@ -26,6 +28,8 @@ export default function Home() {
         <Game />
         <Unique />
         <Team />
+        <Contact />
+        <Footer />
       </div>
     </main>
   )

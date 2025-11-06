@@ -26,7 +26,9 @@ export default function Game() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a 
-                href="/game"
+                href="https://play.badcompany.xyz"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-10 py-4 bg-cyber-red hover:bg-cyber-pink transition-colors rounded-lg font-bold text-lg"
               >
                 Launch Game
