@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-cyber-black text-white antialiased;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyber-red to-cyber-pink;
+  }
+  
+  .glow-red {
+    text-shadow: 0 0 20px rgba(255, 0, 85, 0.5);
+  }
+  
+  .border-glow {
+    box-shadow: 0 0 20px rgba(255, 0, 85, 0.3);
+  }
+}
+
