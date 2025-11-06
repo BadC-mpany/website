@@ -37,16 +37,22 @@ export default function Header() {
 
           <div className="flex items-center space-x-8">
             <Link 
-              href="#about" 
+              href="/product" 
               className="text-gray-300 hover:text-cyber-red transition-colors"
             >
-              About
+              Product
             </Link>
             <Link 
               href="#team" 
               className="text-gray-300 hover:text-cyber-red transition-colors"
             >
               Team
+            </Link>
+            <Link 
+              href="#contact" 
+              className="text-gray-300 hover:text-cyber-red transition-colors"
+            >
+              Contact
             </Link>
             <Link 
               href="#blog" 
