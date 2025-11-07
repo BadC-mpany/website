@@ -32,7 +32,7 @@ export default function Product() {
                 <div>
                   <h2 className="text-3xl font-bold text-cyber-pink mb-4">From Detection to Prevention</h2>
                   <p>
-                    We're building a pluggable, production-grade security layer that shifts the industry from detection-first 
+                    We're building a pluggable, production-grade security layer to ensure agents are safe, shifting the industry from detection-first 
                     to prevention-first guarantees. Our product combines self-evolving runtime guardrails, a cryptographic 
                     capability-and-provenance layer, and a risk engine that enforces least-privilege at call time.
                   </p>

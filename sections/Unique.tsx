@@ -38,9 +38,9 @@ export default function Unique() {
           <h2 className="text-5xl font-bold text-center mb-4">
             Our strongsuit
           </h2>
-          <p className="text-xl text-gray-400 text-center mb-16">
+          {/* <p className="text-xl text-gray-400 text-center mb-16">
             Not your typical security company
-          </p>
+          </p> */}
 
           <div className="grid md:grid-cols-2 gap-8">
             {features.map((feature, index) => (
