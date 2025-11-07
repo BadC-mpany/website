@@ -43,7 +43,7 @@ export default function Story() {
                 
                 <p>
                   As regulations grow around AI, companies need to adapt. But it's not just compliance. The issue is deeper: 
-                  as more freedom is given to AI—like RAG systems with tool access—the stochastic nature of AI makes it 
+                  as more freedom is given to AI—like access to documents and tools—the stochastic nature of AI makes it 
                   incredibly difficult to control, align to your interests, and keep secure.
                 </p>
 
@@ -90,10 +90,10 @@ export default function Story() {
                   </p>
                 </div>
 
-                <p className="text-gray-400 italic mt-12">
+                {/* <p className="text-gray-400 italic mt-12">
                   Since 2022 we've been building enterprise AI applications. Since 2024 we've focused on AI security research. 
                   Since June 2025 we've been fully committed to this. Since September 2025, it's been 24/7.
-                </p>
+                </p> */}
               </div>
             </motion.div>
           </div>

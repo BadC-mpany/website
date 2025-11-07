@@ -4,29 +4,30 @@ import { motion } from 'framer-motion'
 
 const team = [
   {
-    name: 'Alex Stone',
+    name: 'Matteo Horváth',
     role: 'Chief Hacker',
-    bio: 'Former red teamer with 15+ years breaking things',
+    bio: 'placeholder. ... with X+ years breaking things',
     image: '👾'
   },
   {
-    name: 'Sam Rivera',
-    role: 'AI Security Lead',
-    bio: 'PhD in adversarial ML, conference speaker',
+    name: 'János Mozer',
+    role: 'Technical Lead',
+    bio: 'placeholder',
     image: '🤖'
   },
   {
-    name: 'Jordan Cross',
+    name: 'Péter Tallósy',
     role: 'Research Engineer',
-    bio: 'Published researcher in prompt injection defenses',
+    bio: 'placeholder. Developing architectures for safe agentic AI implementations.',
     image: '🔬'
   },
   {
-    name: 'Taylor Quinn',
-    role: 'DevSecOps',
-    bio: 'Building secure infrastructure for AI systems',
-    image: '⚙️'
+    name: 'Gregorio Jaca',
+    role: 'Research Engineer',
+    bio: 'Physics and Biology background. Currently studying LLMs dynamics and interpretability through the lens of chaos theory.',
+    image: '🥷'
   }
+  // TODO: confirm roles. write bios. Koppany ?
 ]
 
 export default function Team() {

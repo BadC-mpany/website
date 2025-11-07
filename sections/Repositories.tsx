@@ -3,27 +3,25 @@
 import { motion } from 'framer-motion'
 
 const repositories = [
+  // {
+  //   name: 'AI-Adversarial-Toolkit',
+  //   description: 'Advanced toolkit for testing AI model robustness against adversarial attacks',
+  //   language: 'Python',
+  //   url: 'https://github.com/badcompany'
+  // },
   {
-    name: 'AI-Adversarial-Toolkit',
-    description: 'Advanced toolkit for testing AI model robustness against adversarial attacks',
+    name: 'Red-Teaming Agent',
+    description: 'A comprehensive framework for LLM safety through adversarial prompt generation and automated evaluation.',
     language: 'Python',
-    stars: '2.3k',
-    url: 'https://github.com/badcompany'
+    url: 'https://github.com/BadC-mpany/red-teaming-agent'
   },
   {
-    name: 'Neural-Fuzzer',
-    description: 'Intelligent fuzzing framework specifically designed for ML models',
-    language: 'Rust',
-    stars: '1.8k',
-    url: 'https://github.com/badcompany'
-  },
-  {
-    name: 'Prompt-Injection-DB',
-    description: 'Comprehensive database of prompt injection techniques and defenses',
-    language: 'TypeScript',
-    stars: '3.1k',
-    url: 'https://github.com/badcompany'
+    name: 'Hacker Bounty', // TODO: name ?
+    description: 'Red-Teaming game where users hack realistic multimodal agent systems with RAG, memory, and tool usage.',
+    language: 'TypeScript', // add multiple {'TypeScript', 'SQL', 'CSS', "JavaScript"}
+    url: 'https://github.com/BadC-mpany/rag-game'
   }
+  // TODO are we going to put 2 or 3 repos here? if 2, align and center properly 
 ]
 
 export default function Repositories() {
@@ -60,8 +58,6 @@ export default function Repositories() {
                 <div className="flex items-start justify-between mb-4">
                   <h3 className="text-2xl font-bold text-white">{repo.name}</h3>
                   <div className="flex items-center space-x-1 text-cyber-pink">
-                    <span>★</span>
-                    <span className="text-sm">{repo.stars}</span>
                   </div>
                 </div>
                 <p className="text-gray-400 mb-4">{repo.description}</p>
