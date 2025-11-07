@@ -24,8 +24,8 @@ export default function Game() {
               Put your red teaming skills to the test
             </p>
             <p className="text-lg text-gray-400 mb-8">
-              Hack prompt injections, jailbreaks, RAG attacks, and supply-chain exploits across difficulty levels. 
-              Help build the adversarial knowledge that secures AI systems at scale.
+              Prompt injections, jailbreaks, RAG attacks, and privilege escalation across difficulty levels. 
+              Help build the adversarial knowledge that secures AI systems at scale. Train.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a 

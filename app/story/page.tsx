@@ -65,13 +65,7 @@ export default function Story() {
                 <h2 className="text-3xl font-bold text-cyber-pink mt-12 mb-4">A Different Approach</h2>
 
                 <p>
-                  What we're working on is different. Instead of choosing between capability and security, we're building both. 
-                  We use the underlying math and logic to probe, explore attacks, and defend against them. We don't just use data—we leverage 
-                  the mathematical foundations of how these models work to prevent exploitation and misalignment.
-                </p>
-
-                <p>
-                  Our goal is simple: an agent with the maximum amount of capability and the minimum amount of risk. 
+                  What we're working on is different. Instead of choosing between capability and security, we're building both. Our goal is simple: an agent with the maximum amount of capability and the minimum amount of risk. 
                   We're building runtime defense architectures that verify every action, ensure provenance of every decision, 
                   and enforce least-privilege at the cryptographic level.
                 </p>

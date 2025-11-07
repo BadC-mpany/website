@@ -10,17 +10,17 @@ const features = [
   },
   {
     title: 'Architectures, Not Just Guardrails',
-    description: 'Brittle detection fails at scale. We build architectures that prevent exploitation at runtime, with cryptographic proof of authorization.',
+    description: 'Just detection fails at scale. We build architectures that prevent risks using cryptographic proof of authorization.',
     icon: '🛡️'
   },
   {
-    title: 'Enterprise Battle-Tested',
+    title: 'Enterprise Battle-Tested', // TODO will we include this?
     description: 'Our product is in private beta with four enterprise clients. Real systems, real stakes, real protection.',
     icon: '⚙️'
   },
   {
-    title: 'We See the Gap',
-    description: 'While others chase speed, we\'re building the brakes. We understand the architecture gap that everyone else forgot.',
+    title: 'R&D',
+    description: 'We are a team of engineers and researchers at the frontier of AI and cybersecurity progress. We are constanly prottyping and improving our products',
     icon: '🔭'
   }
 ]

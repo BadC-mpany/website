@@ -79,6 +79,10 @@ export default function Product() {
                       <span className="text-cyber-red">✓</span>
                       <span>Enables safe delegation between agents and subagents</span>
                     </li>
+                    <li className="flex gap-3">
+                      <span className="text-cyber-red">✓</span>
+                      <span>Integration with enterprise tools</span>
+                    </li>
                   </ul>
                 </div>
 
@@ -99,7 +103,7 @@ export default function Product() {
                   <p>
                     As a complement to our core product, we're launching a Kaggle-style platform for AI-security bounties 
                     and competitive games. Researchers and practitioners hack realistic scenarios including prompt injections, 
-                    jailbreaks, RAG attacks, and supply-chain tricks across difficulty levels.
+                    jailbreaks, RAG attacks, and context escalation across difficulty levels.
                   </p>
 
                   <div className="mt-4 space-y-3">
