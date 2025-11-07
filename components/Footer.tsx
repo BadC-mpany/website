@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="bg-cyber-black/80 border-t border-cyber-red/20 py-12">
       <div className="container mx-auto px-6 text-center">
         <p className="text-2xl font-bold text-cyber-red glow-red">
-          Explore the Borealis
+          We help build trust in AI systems
         </p>
       </div>
     </footer>

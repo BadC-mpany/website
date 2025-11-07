@@ -37,10 +37,10 @@ export default function Repositories() {
           viewport={{ once: true }}
         >
           <h2 className="text-5xl font-bold text-center mb-4">
-            Open Source <span className="text-gradient">Arsenal</span>
+            Open Source <span className="text-gradient">Research</span>
           </h2>
           <p className="text-xl text-gray-400 text-center mb-16">
-            Tools built by rebels, for rebels
+            Publishing our findings to secure the future of AI
           </p>
 
           <div className="grid md:grid-cols-3 gap-8">

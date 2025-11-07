@@ -43,6 +43,12 @@ export default function Header() {
               Product
             </Link>
             <Link 
+              href="/story" 
+              className="text-gray-300 hover:text-cyber-red transition-colors"
+            >
+              Story
+            </Link>
+            <Link 
               href="#team" 
               className="text-gray-300 hover:text-cyber-red transition-colors"
             >
@@ -53,12 +59,6 @@ export default function Header() {
               className="text-gray-300 hover:text-cyber-red transition-colors"
             >
               Contact
-            </Link>
-            <Link 
-              href="#blog" 
-              className="text-gray-300 hover:text-cyber-red transition-colors"
-            >
-              Blog
             </Link>
           </div>
         </div>
