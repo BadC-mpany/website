@@ -22,7 +22,7 @@ export default function Hero() {
             </p>
             <p className="text-lg text-gray-400 leading-relaxed mb-8">
               We've jailbroken every state-of-the-art LLM. AI agents now have authority over bank accounts, 
-              payment rails, and financial operations. We're building the security the industry needs.
+              payment rails, and financial operations. We're building the security the industry forgot.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a 
@@ -33,7 +33,7 @@ export default function Hero() {
               </a>
               <a 
                 href="#contact"
-                className="px-8 py-3 bg-cyber-red hover:bg-cyber-pink transition-colors rounded-lg font-semibold text-center"
+                className="flex items-center justify-center px-8 py-3 bg-cyber-red hover:bg-cyber-pink transition-colors rounded-lg font-semibold"
               >
                 Get in Touch
               </a>
