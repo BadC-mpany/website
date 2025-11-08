@@ -11,7 +11,7 @@ export default function Game() {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="relative bg-gradient-to-br from-cyber-red/20 to-cyber-purple/20 border-2 border-cyber-red/40 rounded-3xl p-12 overflow-hidden"
+          className="relative bg-gradient-to-br from-cyber-red/20 to-cyber-purple/20 border-2 border-cyber-red/40 rounded-3xl p-12 overflow-hidden" 
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-cyber-red/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyber-purple/10 rounded-full blur-3xl"></div>
