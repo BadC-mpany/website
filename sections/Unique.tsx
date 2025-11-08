@@ -14,13 +14,13 @@ const features = [
     icon: '🛡️'
   },
   {
-    title: 'Enterprise Battle-Tested', // TODO will we include this?
-    description: 'Our product is in private beta with four enterprise clients. Real systems, real stakes, real protection.',
+    title: 'Battle-Tested', // TODO will we include this?
+    description: 'We continuously validate our products through communities and ethical hacking of enterprise clients.',
     icon: '⚙️'
   },
   {
     title: 'R&D',
-    description: 'We are a team of engineers and researchers at the frontier of AI and cybersecurity progress. We are constanly prottyping and improving our products',
+    description: 'We are a team of engineers and researchers at the frontier of AI and cybersecurity progress. We are constanly prototyping and improving our products',
     icon: '🔭'
   }
 ]

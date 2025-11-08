@@ -6,25 +6,25 @@ const team = [
   {
     name: 'Matteo Horváth',
     role: 'Chief Hacker',
-    bio: 'placeholder. ... with X+ years breaking things',
+    bio: 'placeholder',
     image: '👾'
   },
   {
     name: 'János Mozer',
     role: 'Technical Lead',
-    bio: 'placeholder',
+    bio: 'Physics background with experience in error-proof systems and resilient distributed architectures ensuring high availability and consistency via secure protocols.',
     image: '🤖'
   },
   {
     name: 'Péter Tallósy',
     role: 'Research Engineer',
-    bio: 'placeholder. Developing architectures for safe agentic AI implementations.',
+    bio: 'placeholder',
     image: '🔬'
   },
   {
     name: 'Gregorio Jaca',
     role: 'Research Engineer',
-    bio: 'Physics and Biology background. Currently studying LLMs dynamics and interpretability through the lens of chaos theory.',
+    bio: 'Physics and Biology background. Currently studying LLM dynamics and interpretability through the lens of chaos theory.',
     image: '🥷'
   }
   // TODO: confirm roles. write bios. Koppany ?
