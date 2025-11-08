@@ -4,24 +4,24 @@ import { motion } from 'framer-motion'
 
 const features = [
   {
-    title: 'Adversarial Mindset',
-    description: 'We think like attackers to build better defenses. Our team includes ethical hackers and red teamers who understand the dark arts.',
-    icon: '⚔️'
+    title: 'We Jailbreak Everything',
+    description: 'We\'ve cracked every state-of-the-art LLM. We understand the attack surface better than anyone.',
+    icon: '💣'
   },
   {
-    title: 'Open Source First',
-    description: 'Security through obscurity is dead. We believe in transparent, community-driven tools that everyone can audit and improve.',
-    icon: '🔓'
+    title: 'Architectures, Not Just Guardrails',
+    description: 'Just detection fails at scale. We build architectures that prevent risks using cryptographic proof of authorization.',
+    icon: '🛡️'
   },
   {
-    title: 'Real-World Testing',
-    description: 'No theoretical BS. Every tool and technique we develop is battle-tested against actual AI systems in production environments.',
-    icon: '🎯'
+    title: 'Battle-Tested', // TODO will we include this?
+    description: 'We continuously validate our products through communities and ethical hacking of enterprise clients.',
+    icon: '⚙️'
   },
   {
-    title: 'Cutting Edge Research',
-    description: 'We publish our findings, speak at conferences, and push the boundaries of what\'s possible in AI security research.',
-    icon: '🧬'
+    title: 'R&D',
+    description: 'We are a team of engineers and researchers at the frontier of AI and cybersecurity progress. We are constanly prototyping and improving our products',
+    icon: '🔭'
   }
 ]
 
@@ -36,11 +36,11 @@ export default function Unique() {
           viewport={{ once: true }}
         >
           <h2 className="text-5xl font-bold text-center mb-4">
-            Why We're <span className="text-gradient">Different</span>
+            Our strongsuit
           </h2>
-          <p className="text-xl text-gray-400 text-center mb-16">
+          {/* <p className="text-xl text-gray-400 text-center mb-16">
             Not your typical security company
-          </p>
+          </p> */}
 
           <div className="grid md:grid-cols-2 gap-8">
             {features.map((feature, index) => (

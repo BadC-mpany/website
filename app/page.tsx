@@ -2,6 +2,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Hero from '../sections/Hero'
 import Repositories from '../sections/Repositories'
+import Subscribe from '../sections/Subscribe'
 import Game from '../sections/Game'
 import Unique from '../sections/Unique'
 import Team from '../sections/Team'
@@ -25,6 +26,7 @@ export default function Home() {
         <Header />
         <Hero />
         <Repositories />
+        <Subscribe />
         <Game />
         <Unique />
         <Team />

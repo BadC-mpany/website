@@ -22,17 +22,19 @@ export default function Product() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-6xl md:text-7xl font-bold mb-8">
-                <span className="text-gradient glow-red">Our Product</span>
+              <h1 className="text-6xl md:text-7xl font-bold mb-4">
+                <span className="text-gradient glow-red">Runtime Defense</span>
+                <span className="text-white block mt-2">for Autonomous AI Agents</span>
               </h1>
+              <p className="text-xl text-cyber-pink mb-8">In private beta</p>
 
               <div className="space-y-8 text-lg text-gray-300 leading-relaxed">
                 <div>
-                  <h2 className="text-3xl font-bold text-cyber-pink mb-4">Production-Grade Security for Agentic AI</h2>
+                  <h2 className="text-3xl font-bold text-cyber-pink mb-4">From Detection to Prevention</h2>
                   <p>
-                    Badcompany is building a pluggable, production-grade security layer for agentic AI that shifts the industry 
-                    from brittle detection to prevention-first guarantees. Our product combines self-evolving runtime guardrails, 
-                    a cryptographic capability-and-provenance layer, and a risk engine that enforces least-privilege at call time.
+                    We're building a pluggable, production-grade security layer to ensure agents are safe, shifting the industry from detection-first 
+                    to prevention-first guarantees. Our product combines self-evolving runtime guardrails, a cryptographic 
+                    capability-and-provenance layer, and a risk engine that enforces least-privilege at call time.
                   </p>
                 </div>
 
@@ -45,7 +47,7 @@ export default function Product() {
                     </li>
                     <li className="flex gap-3">
                       <span className="text-cyber-red">▪</span>
-                      <span><strong>Cryptographic Capability Layer:</strong> Issues attenuable, auditable tokens and cryptographic verification so every tool invocation and side-effect is verifiably authorized</span>
+                      <span><strong>Cryptographic Capability Layer:</strong> Issues attenuable, auditable tokens and cryptographic verification so every tool invocation and side-effect is verifiably authorized and traceable</span>
                     </li>
                     <li className="flex gap-3">
                       <span className="text-cyber-red">▪</span>
@@ -77,15 +79,31 @@ export default function Product() {
                       <span className="text-cyber-red">✓</span>
                       <span>Enables safe delegation between agents and subagents</span>
                     </li>
+                    <li className="flex gap-3">
+                      <span className="text-cyber-red">✓</span>
+                      <span>Integration with enterprise tools</span>
+                    </li>
                   </ul>
                 </div>
 
+                <div>
+                  <h3 className="text-2xl font-bold text-cyber-pink mb-3">The Problem We Solve</h3>
+                  <p>
+                    We've jailbroken every state-of-the-art LLM. We've poisoned agentic frameworks integrated with payroll, 
+                    billing, and financial systems. We've demonstrated how a single prompt-injected PDF can hijack bank accounts.
+                  </p>
+                  <p className="mt-4">
+                    AI agents are about to control payment rails, crypto transfers, and financial operations. Without runtime 
+                    defense, we're building an open playground for attackers.
+                  </p>
+                </div>
+
                 <div className="border-t border-cyber-red/20 pt-8 mt-12">
-                  <h2 className="text-3xl font-bold text-cyber-pink mb-4">Side Project: AI Security Bounty Platform</h2>
+                  <h2 className="text-3xl font-bold text-cyber-pink mb-4">The Bounty Platform</h2>
                   <p>
                     As a complement to our core product, we're launching a Kaggle-style platform for AI-security bounties 
                     and competitive games. Researchers and practitioners hack realistic scenarios including prompt injections, 
-                    jailbreaks, RAG attacks, and supply-chain tricks across difficulty levels.
+                    jailbreaks, RAG attacks, and context escalation across difficulty levels.
                   </p>
 
                   <div className="mt-4 space-y-3">

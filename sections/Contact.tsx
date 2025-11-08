@@ -45,7 +45,7 @@ export default function Contact() {
                   GrowMesh.io
                 </a>
               </li>
-              <li>
+              <li className="flex items-center">
                 <a 
                   href="https://discord.gg/mu5QZ98A"
                   target="_blank"
