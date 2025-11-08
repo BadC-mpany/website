@@ -29,8 +29,8 @@ export default function Story() {
               <div className="space-y-8 text-lg text-gray-300 leading-relaxed">
                 <p>
                   For the past few years, we've been building and securing AI systems in enterprise environments. 
-                  We watched the industry pour billions into making AI faster, smarter, and more capable. We built some 
-                  of those systems ourselves. But somewhere in the rush for capability, something critical was forgotten: 
+                  We have seen the industry pour billions into making AI faster, smarter, and more capable. We built some 
+                  of those systems ourselves. But somewhere in the rush for performance, something critical was forgotten: 
                   the brakes.
                 </p>
 
