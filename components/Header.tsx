@@ -24,15 +24,8 @@ export default function Header() {
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-3">
-            <div className="relative w-12 h-12">
-              <Image
-                src="/images/badcompany_logo1.jpg"
-                alt="Badcompany Logo"
-                fill
-                className="object-contain"
-              />
-            </div>
-            <span className="text-2xl font-bold text-gradient">Badcompany</span>
+            
+          <span className="text-2xl font-bold text-gradient">Badcompany</span>
           </Link>
 
           <div className="flex items-center space-x-8">

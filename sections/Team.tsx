@@ -14,42 +14,34 @@ const team = [
   {
     name: 'János Mozer',
     role: 'Architect',
-    bio: 'Physics background with experience in error-proof systems and distributed, resilient architectures ensuring high availability and consistency via secure protocols.',
+    bio: 'Physics background with experience in developing error-proof systems for distributed, resilient architectures, guaranteeing high availability through secure protocols.',
     image: '/images/profile.jpeg'
   },
   {
     name: 'Péter Tallósy',
     role: 'ML Engineer',
-    bio: 'placeholder',
+    bio: 'Highly skilled builder with deep understanding of ML and AI systems. Built everything from generative CAD AI to ML based optimization technologies in infrastructure.',
     image: '/images/petya.jpeg'
   },
   {
     name: 'Gregorio Jaca',
     role: 'Research Engineer',
-    bio: 'Physics and Biology background. Currently studying LLM dynamics and interpretability through the lens of chaos theory.',
+    bio: 'Physics and Biology background. Worked on simulations from fluid dynamics and rockets to network systems. Currently researching LLM dynamics and interpretability through the lens of chaos theory.',
     image: '/images/grego.jpeg'
-  },
-  {
-    name: 'Koppany Kovats',
-    role: 'Advisor',
-    bio: 'placeholder',
-    image: '/images/koppany.jpeg'
   }
 ]
 
 const createRows = () => {
   const shuffled = [...team].sort(() => Math.random() - 0.5)
   return {
-    topRow: shuffled.slice(0, 2),
-    bottomRow: shuffled.slice(2)
+    allRows: shuffled
   }
 }
 
 export default function Team() {
   const initialRows = useMemo(
     () => ({
-      topRow: team.slice(0, 2),
-      bottomRow: team.slice(2)
+      allRows: team
     }),
     []
   )
@@ -99,16 +91,8 @@ export default function Team() {
             The rebels behind the code
           </p>
 
-          <div className="space-y-6">
-            <div className="mx-auto grid w-full max-w-3xl grid-cols-1 gap-6 md:grid-cols-2">
-              {rows.topRow.map((member, index) => renderCard(member, index))}
-            </div>
-
-            <div className="mx-auto grid w-full max-w-4xl grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
-              {rows.bottomRow.map((member, index) =>
-                renderCard(member, index + rows.topRow.length)
-              )}
-            </div>
+          <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
+            {rows.allRows.map((member, index) => renderCard(member, index))}
           </div>
         </motion.div>
       </div>
