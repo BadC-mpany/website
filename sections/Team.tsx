@@ -7,8 +7,8 @@ import { motion } from 'framer-motion'
 const team = [
   {
     name: 'Matteo Horváth',
-    role: 'Chief Hacker',
-    bio: 'placeholder',
+    role: 'Engineer',
+    bio: 'Software builder and technical lead with core expertise in Computer Vision, optimization, and end-to-end automatization. Extensive experience across engineering and business roles.',
     image: '/images/matteo.jpeg'
   },
   {
@@ -20,7 +20,7 @@ const team = [
   {
     name: 'Péter Tallósy',
     role: 'ML Engineer',
-    bio: 'Highly skilled builder with deep understanding of ML and AI systems. Built everything from generative CAD AI to ML based optimization technologies in infrastructure.',
+    bio: 'Physics-trained research engineer with deep expertise in ML/AI and strong full-stack software engineering capability. Experienced in building system spanning generative CAD, large-scale ML optimization, and ML-enabled infrastructure solutions.',
     image: '/images/petya.jpeg'
   },
   {
