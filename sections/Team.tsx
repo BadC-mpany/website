@@ -10,7 +10,7 @@ const team = [
     role: 'Engineer',
     bio: 'Software builder and technical lead with core expertise in Computer Vision, optimization, and end-to-end automatization. Extensive experience across engineering and business roles.',
     image: '/images/matteo.jpeg'
-  },
+  }, 
   {
     name: 'János Mozer',
     role: 'Architect',
