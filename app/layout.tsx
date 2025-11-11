@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: 'Badcompany - AI Security',
   description: 'Breaking the rules to protect your AI systems',
   icons: {
-    icon: '/images/badcompany_logo1_nobkg.png',
+    icon: '/images/badcompany_logo2.jpg',
   },
 }
 
