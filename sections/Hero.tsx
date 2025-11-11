@@ -51,6 +51,7 @@ export default function Hero() {
                 src="/images/badcompany_logo_2.jpg"
                 alt="Badcompany Cyberpunk Logo"
                 fill
+                loading="lazy"
                 className="object-contain border-4 border-cyber-red/30 rounded-2xl border-glow"
               />
             </div>
