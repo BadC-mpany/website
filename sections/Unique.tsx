@@ -1,27 +1,28 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 const features = [
   {
     title: 'We Jailbreak Everything',
     description: 'We\'ve cracked every state-of-the-art LLM. We understand the attack surface better than anyone.',
-    icon: '💣'
+    icon: '/svg/bomb.svg'
   },
   {
     title: 'Architectures, Not Just Guardrails',
     description: 'Just detection fails at scale. We build architectures that prevent risks using cryptographic proof of authorization.',
-    icon: '🛡️'
+    icon: '/svg/shield.svg'
   },
   {
     title: 'Battle-Tested', // TODO will we include this?
     description: 'We continuously validate our products through communities and ethical hacking of enterprise clients.',
-    icon: '⚙️'
+    icon: '/svg/gear.svg'
   },
   {
     title: 'R&D',
     description: 'We are a team of engineers and researchers at the frontier of AI and cybersecurity progress. We are constanly prototyping and improving our products',
-    icon: '🔭'
+    icon: '/svg/telescope.svg'
   }
 ]
 
@@ -52,7 +53,14 @@ export default function Unique() {
                 viewport={{ once: true }}
                 className="bg-cyber-black/50 border-2 border-cyber-red/30 rounded-xl p-8 hover:border-cyber-red transition-all"
               >
-                <div className="text-5xl mb-4">{feature.icon}</div>
+                <div className="mb-4 w-12 h-12 relative">
+                  <Image
+                    src={feature.icon}
+                    alt={feature.title}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
                 <h3 className="text-2xl font-bold mb-3 text-cyber-pink">{feature.title}</h3>
                 <p className="text-gray-400 leading-relaxed">{feature.description}</p>
               </motion.div>
