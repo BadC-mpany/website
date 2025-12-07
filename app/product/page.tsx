@@ -1,19 +1,13 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Link from 'next/link'
+import Header from '../../components/Header'
 
 export default function Product() {
   return (
     <main className="relative min-h-screen">
+      <Header />
       <div className="relative z-10">
-        <header className="fixed top-0 left-0 right-0 z-50 bg-cyber-black/80 backdrop-blur-md border-b border-cyber-red/20">
-          <nav className="container mx-auto px-6 py-4">
-            <Link href="/" className="text-cyber-pink hover:text-cyber-red transition-colors">
-              ← Back to Home
-            </Link>
-          </nav>
-        </header>
 
         <section className="min-h-screen pt-32 px-6 pb-20">
           <div className="container mx-auto max-w-4xl">

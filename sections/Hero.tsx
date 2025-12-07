@@ -32,10 +32,10 @@ export default function Hero() {
                 Learn More
               </a>
               <a 
-                href="#contact"
+                href="#subscribe"
                 className="flex items-center justify-center px-8 py-3 bg-cyber-red hover:bg-cyber-pink transition-colors rounded-lg font-semibold"
               >
-                Get in Touch
+                Stay Updated
               </a>
             </div>
           </motion.div>

@@ -33,7 +33,7 @@ const repositories = [
     name: 'CHIMERA',
     description: 'Cryptographic Honeypot & Intent-Mediated Enforcement Response Architecture',
     language: 'Python',
-    url: 'https://github.com/BadC-mpany/chimera-hackathon'
+    url: '/blog?post=vsaml'
   }
 ]
 
@@ -69,7 +69,11 @@ export default function Repositories() {
                     if (repo.hasOptions) {
                       setSelectedRepo(repo.name)
                     } else if (repo.url) {
-                      window.open(repo.url, '_blank', 'noopener,noreferrer')
+                      if (repo.url.startsWith('/')) {
+                        window.location.href = repo.url
+                      } else {
+                        window.open(repo.url, '_blank', 'noopener,noreferrer')
+                      }
                     }
                   }}
                   className={`${repo.hasOptions || repo.url ? 'cursor-pointer' : ''}`}
