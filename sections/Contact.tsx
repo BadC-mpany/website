@@ -28,21 +28,21 @@ export default function Contact() {
               <li className="flex items-center gap-3">
                 <span className="text-cyber-green font-semibold">Email:</span>
                 <a 
-                  href="mailto:janos.mozer@growmesh.io"
+                  href="mailto:mozer@badcompany.xyz"
                   className="text-cyber-green hover:text-cyber-pink transition-colors"
                 >
-                  janos.mozer@growmesh.io
+                  mozer@badcompany.xyz
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <span className="text-cyber-blue font-semibold">LinkedIn:</span>
                 <a 
-                  href="https://www.linkedin.com/company/growmesh-io"
+                  href="https://www.linkedin.com/in/janos-mozer/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-cyber-blue hover:text-cyber-pink transition-colors"
                 >
-                  GrowMesh.io
+                  Janos Mozer
                 </a>
               </li>
               <li className="flex items-center">

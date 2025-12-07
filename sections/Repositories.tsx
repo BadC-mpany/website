@@ -20,7 +20,7 @@ const repositories = [
       {
         title: 'Interactive Game',
         description: 'Play the browser-based hacking game and test your red-teaming skills',
-        url: 'https://github.com/BadC-mpany/rag-game'
+        url: 'https://play.badcompany.xyz/'
       },
       {
         title: 'RAG System',
@@ -28,6 +28,12 @@ const repositories = [
         url: 'https://github.com/BadC-mpany/rag-system'
       }
     ]
+  },
+  {
+    name: 'CHIMERA',
+    description: 'Cryptographic Honeypot & Intent-Mediated Enforcement Response Architecture',
+    language: 'Python',
+    url: '/blog?post=vsaml'
   }
 ]
 
@@ -51,7 +57,7 @@ export default function Repositories() {
           </p>
 
           <div className="flex justify-center">
-            <div className="grid md:grid-cols-2 gap-8 max-w-3xl">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl">
               {repositories.map((repo, index) => (
                 <motion.div
                   key={repo.name}
@@ -59,8 +65,18 @@ export default function Repositories() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  onClick={() => repo.hasOptions && setSelectedRepo(repo.name)}
-                  className={`${repo.hasOptions ? 'cursor-pointer' : ''}`}
+                  onClick={() => {
+                    if (repo.hasOptions) {
+                      setSelectedRepo(repo.name)
+                    } else if (repo.url) {
+                      if (repo.url.startsWith('/')) {
+                        window.location.href = repo.url
+                      } else {
+                        window.open(repo.url, '_blank', 'noopener,noreferrer')
+                      }
+                    }
+                  }}
+                  className={`${repo.hasOptions || repo.url ? 'cursor-pointer' : ''}`}
                 >
                   <motion.div
                     whileHover={{ scale: 1.05 }}

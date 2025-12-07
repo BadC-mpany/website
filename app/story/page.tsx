@@ -1,19 +1,13 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Link from 'next/link'
+import Header from '../../components/Header'
 
 export default function Story() {
   return (
     <main className="relative min-h-screen">
+      <Header />
       <div className="relative z-10">
-        <header className="fixed top-0 left-0 right-0 z-50 bg-cyber-black/80 backdrop-blur-md border-b border-cyber-red/20">
-          <nav className="container mx-auto px-6 py-4">
-            <Link href="/" className="text-cyber-pink hover:text-cyber-red transition-colors">
-              ← Back to Home
-            </Link>
-          </nav>
-        </header>
 
         <section className="min-h-screen pt-32 px-6 pb-20">
           <div className="container mx-auto max-w-4xl">
@@ -43,7 +37,7 @@ export default function Story() {
                 
                 <p>
                   As regulations grow around AI, companies need to adapt. But it's not just compliance. The issue is deeper: 
-                  as more freedom is given to AI—like access to documents and tools—the stochastic nature of AI makes it 
+                  as more freedom is given to AI, like access to documents and tools, the stochastic nature of AI makes it 
                   incredibly difficult to control, align to your interests, and keep secure.
                 </p>
 
@@ -54,7 +48,7 @@ export default function Story() {
 
                 <p>
                   But here's what struck us: when we looked at why some companies seemed more secure, we found something 
-                  unsettling. They weren't actually secure—they were just incapable. They had such a limited set of functions 
+                  unsettling. They weren't actually secure; they were just incapable. They had such a limited set of functions 
                   their AI could perform that it was practically useless. The only way they achieved security was by removing all capability.
                 </p>
 
@@ -78,7 +72,7 @@ export default function Story() {
                   <h3 className="text-2xl font-bold text-cyber-pink mb-4">Where We Are Now</h3>
                   <p>
                     Our guardrails and defense architectures are in private beta with four enterprise clients. 
-                    We're validating our approach in real-world conditions—in systems where the stakes are high and the 
+                    We're validating our approach in real-world conditions; in systems where the stakes are high and the 
                     need for both capability and security is urgent. We've moved from proving the problem exists to proving 
                     that solutions can work.
                   </p>

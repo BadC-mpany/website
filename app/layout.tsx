@@ -46,6 +46,64 @@ export default function RootLayout({
       <body>
         {children}
         <Analytics />
+        <Script
+          id="scroll-offset-handler"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                function handleAnchorScroll() {
+                  const hash = window.location.hash;
+                  if (hash) {
+                    const element = document.querySelector(hash);
+                    if (element) {
+                      setTimeout(() => {
+                        const headerOffset = 100;
+                        const elementPosition = element.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        window.scrollTo({
+                          top: offsetPosition,
+                          behavior: 'smooth'
+                        });
+                      }, 100);
+                    }
+                  }
+                }
+                
+                // Handle on page load
+                if (window.location.hash) {
+                  handleAnchorScroll();
+                }
+                
+                // Handle hash changes
+                window.addEventListener('hashchange', handleAnchorScroll);
+                
+                // Handle clicks on anchor links
+                document.addEventListener('click', function(e) {
+                  const target = e.target.closest('a[href^="#"]');
+                  if (target && target.getAttribute('href') !== '#') {
+                    const hash = target.getAttribute('href');
+                    if (hash.startsWith('#')) {
+                      const element = document.querySelector(hash);
+                      if (element) {
+                        e.preventDefault();
+                        const headerOffset = 100;
+                        const elementPosition = element.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        window.scrollTo({
+                          top: offsetPosition,
+                          behavior: 'smooth'
+                        });
+                        // Update URL without triggering scroll
+                        window.history.pushState(null, '', hash);
+                      }
+                    }
+                  }
+                });
+              })();
+            `,
+          }}
+        />
       </body>
     </html>
   )

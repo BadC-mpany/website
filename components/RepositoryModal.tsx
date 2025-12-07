@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useMemo, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface RepositoryOption {
@@ -23,6 +23,22 @@ export default function RepositoryModal({ isOpen, onClose, options }: Repository
       y: (Math.random() - 0.5) * 200,
     }
   }, [isOpen])
+
+  useEffect(() => {
+    if (!isOpen) return
+
+    const handleScroll = () => {
+      onClose()
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    document.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      document.removeEventListener('scroll', handleScroll)
+    }
+  }, [isOpen, onClose])
 
   return (
     <AnimatePresence>
