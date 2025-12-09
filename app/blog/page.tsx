@@ -14,7 +14,7 @@ interface BlogPost {
 
 const blogPosts: BlogPost[] = [
   {
-    title: 'Beyond the Context Window: Why We Built a Stateful Security Layer for AI Agents',
+    title: 'vSAML: Primitives for a General Architecture of Agent Security',
     date: 'December 2025',
     slug: 'vsaml'
   }

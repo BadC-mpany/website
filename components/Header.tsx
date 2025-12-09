@@ -25,7 +25,7 @@ export default function Header() {
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-3">
             
-          <span className="text-2xl font-bold text-gradient">Badcompany</span>
+            <span className="text-2xl font-bold text-gradient">Badcompany</span>
           </Link>
 
           <div className="flex items-center space-x-8">

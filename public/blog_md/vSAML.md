@@ -1,4 +1,4 @@
-# Beyond the Context Window: Why We Built a Stateful Security Layer for AI Agents
+# vSAML: Primitives for a General Architecture of Agent Security
 
 
 **By BadCompany Research December 2025**
