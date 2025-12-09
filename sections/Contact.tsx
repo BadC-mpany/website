@@ -1,8 +1,13 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
+import CalModal from '../components/CalModal'
 
 export default function Contact() {
+  const [isCalModalOpen, setIsCalModalOpen] = useState(false)
+  
+  const calUrl = process.env.NEXT_PUBLIC_CALCOM_URL || 'https://cal.com/janos-mozer/30min'
   return (
     <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-20">
       <div className="container mx-auto max-w-3xl">
@@ -24,16 +29,7 @@ export default function Contact() {
               For inquiries, bug reports, or collaboration, reach out:
             </p>
 
-            <ul className="space-y-4">
-              <li className="flex items-center gap-3">
-                <span className="text-cyber-green font-semibold">Email:</span>
-                <a 
-                  href="mailto:mozer@badcompany.xyz"
-                  className="text-cyber-green hover:text-cyber-pink transition-colors"
-                >
-                  mozer@badcompany.xyz
-                </a>
-              </li>
+            <ul className="space-y-4 mb-8">
               <li className="flex items-center gap-3">
                 <span className="text-cyber-blue font-semibold">LinkedIn:</span>
                 <a 
@@ -56,9 +52,24 @@ export default function Contact() {
                 </a>
               </li>
             </ul>
+
+            <div className="pt-6 border-t border-cyber-red/20">
+              <button
+                onClick={() => setIsCalModalOpen(true)}
+                className="inline-flex items-center justify-center w-full px-6 py-3 bg-cyber-red hover:bg-cyber-pink transition-colors rounded-lg font-semibold text-white"
+              >
+                Schedule a Meeting
+              </button>
+            </div>
           </div>
         </motion.div>
       </div>
+
+      <CalModal
+        isOpen={isCalModalOpen}
+        onClose={() => setIsCalModalOpen(false)}
+        calUrl={calUrl}
+      />
     </section>
   )
 }
