@@ -7,10 +7,10 @@ const ContentSecurityPolicy = `
   style-src 'self' 'unsafe-inline';
   img-src 'self' data: https:;
   font-src 'self' data:;
-  connect-src 'self' https:;
+  connect-src 'self' https: https://cal.com;
   media-src 'self' https:;
   object-src 'none';
-  frame-src 'none';
+  frame-src 'self' https://cal.com;
   base-uri 'self';
   form-action 'self';
   frame-ancestors 'none';
@@ -45,7 +45,7 @@ const nextConfig = {
           },
           {
             key: 'Permissions-Policy',
-            value: 'geolocation=(), microphone=(), camera=(), payment=()',
+            value: 'geolocation=(self "https://cal.com"), microphone=(self "https://cal.com"), camera=(self "https://cal.com"), payment=()',
           },
         ],
       },
