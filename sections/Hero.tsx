@@ -14,14 +14,14 @@ export default function Hero() {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-6xl md:text-7xl font-bold mb-6">
-              <span className="text-gradient glow-red">Runtime Defense</span>
+              <span className="text-gradient glow-red whitespace-nowrap">Runtime Defense</span>
               <span className="text-white block mt-2">for Autonomous AI Agents</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-300 mb-2">
               In private beta with enterprise clients
             </p>
             <p className="text-lg text-gray-400 leading-relaxed mb-8">
-              Providing mathematical certainty for enterprises, so Agents can be used in critical infrastructure too.
+              AI agents now have authority over bank accounts, sensitive data, and financial operations. We're building the security the industry forgot.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a

@@ -26,7 +26,7 @@ export default function OpenSource() {
 
                     <div className="relative z-10 text-center max-w-4xl mx-auto">
                         <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                            <span className="text-cyber-blue">Sentinel Framework</span>
+                            <span className="text-cyber-blue">Sentinel v1.0</span>
                         </h2>
 
                         <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
