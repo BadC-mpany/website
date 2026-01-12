@@ -17,71 +17,52 @@ export default function Story() {
               transition={{ duration: 0.6 }}
             >
               <h1 className="text-6xl md:text-7xl font-bold mb-12">
-                <span className="text-gradient glow-red">Our Story</span>
+                <span className="text-gradient glow-red">Our Evolution</span>
               </h1>
 
-              <div className="space-y-8 text-lg text-gray-300 leading-relaxed">
-                <p>
-                  For the past few years, we've been building and securing AI systems in enterprise environments. 
-                  We watched the industry pour billions into making AI faster, smarter, and more capable. We built some 
-                  of those systems ourselves. But somewhere in the rush for capability, something critical was forgotten: 
-                  the brakes.
-                </p>
-
-                <p>
-                  There's a fundamental architecture gap in AI security. We have no airbags, no seatbelts, no crash tests 
-                  for the most powerful technology being deployed in production systems right now.
-                </p>
-
-                <h2 className="text-3xl font-bold text-cyber-pink mt-12 mb-4">The Real Problem</h2>
-                
-                <p>
-                  As regulations grow around AI, companies need to adapt. But it's not just compliance. The issue is deeper: 
-                  as more freedom is given to AI, like access to documents and tools, the stochastic nature of AI makes it 
-                  incredibly difficult to control, align to your interests, and keep secure.
-                </p>
-
-                <p>
-                  We started testing this in the wild. We jailbroke the LLMs of banks and enterprises. We showed how 
-                  prompt-injected documents could manipulate their systems. We exposed vulnerabilities in every state-of-the-art model.
-                </p>
-
-                <p>
-                  But here's what struck us: when we looked at why some companies seemed more secure, we found something 
-                  unsettling. They weren't actually secure; they were just incapable. They had such a limited set of functions 
-                  their AI could perform that it was practically useless. The only way they achieved security was by removing all capability.
-                </p>
-
-                <p>
-                  That's not a solution. That's a trap.
-                </p>
-
-                <h2 className="text-3xl font-bold text-cyber-pink mt-12 mb-4">A Different Approach</h2>
-
-                <p>
-                  What we're working on is different. Instead of choosing between capability and security, we're building both. Our goal is simple: an agent with the maximum amount of capability and the minimum amount of risk. 
-                  We're building runtime defense architectures that verify every action, ensure provenance of every decision, 
-                  and enforce least-privilege at the cryptographic level.
-                </p>
-
-                <p>
-                  This isn't detection. This isn't a band-aid. This is prevention.
-                </p>
-
-                <div className="bg-cyber-black/50 border-2 border-cyber-red/30 rounded-xl p-8 mt-12">
-                  <h3 className="text-2xl font-bold text-cyber-pink mb-4">Where We Are Now</h3>
+              <div className="space-y-12 text-lg text-gray-300 leading-relaxed">
+                <div>
+                  <h2 className="text-3xl font-bold text-cyber-pink mb-4">2023 - 2025</h2>
                   <p>
-                    Our guardrails and defense architectures are in private beta with four enterprise clients. 
-                    We're validating our approach in real-world conditions; in systems where the stakes are high and the 
-                    need for both capability and security is urgent. We've moved from proving the problem exists to proving 
-                    that solutions can work.
+                    We watched the industry build guardrails. As we analyzed enterprise AI applications
+                    we realized that ensuring safety typically meant wrapping model outputs in layers of prompt engineering and
+                    regex filters. We followed this closely.
+                  </p>
+                  <p className="mt-4">
+                    By breaking them constantly, we found that probabilistic defenses could be bypassed with enough
+                    persistence. A clever jailbreak or a subtle context manipulation could always slip through the cracks.
+                    Security was a cat and mouse game and the attackers were winning.
                   </p>
                 </div>
 
-                {/* <p className="text-gray-400 italic mt-12">
-                  Since 2022 we've been building enterprise AI applications. Since 2024 we've focused on AI security research. 
-                  Since June 2025 we've been fully committed to this. Since September 2025, it's been 24/7.
-                </p> */}
+                <div>
+                  <h2 className="text-3xl font-bold text-cyber-pink mb-4">August 2025</h2>
+                  <p>
+                    Everything changed in August 2025. The release of truly autonomous agentic frameworks triggered an
+                    explosion in capability. Assistants were no longer just chatting; they were executing code, managing
+                    databases, and moving money.
+                  </p>
+                  <p className="mt-4">
+                    We watched as traditional guardrails crumbled under the weight of agentic complexity.
+                    You cannot prompt an agent into security when it has shell access. The stakes had shifted from
+                    offensive text to remote code execution and data exfiltration. We realized that linguistic defenses were fundamentally
+                    insufficient for behavioral threats.
+                  </p>
+                </div>
+
+                <div>
+                  <h2 className="text-3xl font-bold text-cyber-pink mb-4">Current Stage</h2>
+                  <p>
+                    This led us to our current architecture. We realized that policy enforcement at the application layer does not solve all security issues.
+                  </p>
+                  <p className="mt-4">
+                    We moved to the kernel because it changes very slowly. High-level AI frameworks are volatile but the kernel and syscall interface is stable. Security architecture needs to last.
+                  </p>
+                  <p className="mt-4">
+                    By operating at the OS level, we not only make the performance overhead a lot smaller but we enable the architecture to catch even more malicious activity. We don't just suggest that an agent shouldn't access a file; the operating system simply pretends the file does not exist.
+                  </p>
+                </div>
+
               </div>
             </motion.div>
           </div>

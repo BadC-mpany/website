@@ -21,17 +21,16 @@ export default function Hero() {
               In private beta with enterprise clients
             </p>
             <p className="text-lg text-gray-400 leading-relaxed mb-8">
-              We've jailbroken every state-of-the-art LLM. AI agents now have authority over bank accounts, 
-              payment rails, and financial operations. We're building the security the industry forgot.
+              Providing mathematical certainty for enterprises, so Agents can be used in critical infrastructure too.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a 
+              <a
                 href="/product"
                 className="px-8 py-3 border-2 border-cyber-red hover:bg-cyber-red/10 transition-colors rounded-lg font-semibold text-center"
               >
                 Learn More
               </a>
-              <a 
+              <a
                 href="#subscribe"
                 className="flex items-center justify-center px-8 py-3 bg-cyber-red hover:bg-cyber-pink transition-colors rounded-lg font-semibold"
               >

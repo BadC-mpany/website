@@ -17,104 +17,107 @@ export default function Product() {
               transition={{ duration: 0.6 }}
             >
               <h1 className="text-6xl md:text-7xl font-bold mb-4">
-                <span className="text-gradient glow-red">Runtime Defense</span>
-                <span className="text-white block mt-2">for Autonomous AI Agents</span>
+                <span className="text-gradient glow-red">The Product</span>
+                <span className="text-white block mt-2 text-4xl md:text-5xl">Deterministic Security Substrate</span>
               </h1>
-              <p className="text-xl text-cyber-pink mb-8">In private beta</p>
+              <p className="text-xl text-cyber-pink mb-8">Cross-platform protection for Linux, Windows, and MacOS systems</p>
 
-              <div className="space-y-8 text-lg text-gray-300 leading-relaxed">
+              <div className="space-y-12 text-lg text-gray-300 leading-relaxed">
                 <div>
-                  <h2 className="text-3xl font-bold text-cyber-pink mb-4">From Detection to Prevention</h2>
-                  <p>
-                    We're building a pluggable, production-grade security layer to ensure agents are safe, shifting the industry from detection-first 
-                    to prevention-first guarantees. Our product combines self-evolving runtime guardrails, a cryptographic 
-                    capability-and-provenance layer, and a risk engine that enforces least-privilege at call time.
+                  <p className="text-xl leading-relaxed">
+                    Badcompany develops a cross-platform, deterministic security substrate that establishes a mathematically verifiable safety envelope for autonomous agents. We replace probabilistic guardrails with execution-layer enforcement, securing critical infrastructure by making safety an immutable physical constraint of the system.
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-bold text-cyber-pink mb-3">How It Works</h3>
-                  <ul className="space-y-3 ml-6">
+                  <h2 className="text-3xl font-bold text-cyber-pink mb-6">The Architectural Core</h2>
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-2">Deterministic Policy Enforcement Point (PEP)</h3>
+                      <p>
+                        The PEP sits directly in the execution path between the agent and the operating system. It acts as a
+                        mandatory gatekeeper for every tool call, API request, and file system interaction. By intercepting
+                        actions at the syscall level, it replaces best-effort filters with absolute, binary enforcement.
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-2">RL-Driven Intent Recognition</h3>
+                      <p>
+                        While the PEP handles static rules, a specialized Reinforcement Learning Engine analyzes
+                        high-fidelity logs in real-time. It identifies intent patterns, detecting multi-step injection
+                        attacks or anomalous logic branches that static signatures miss, and communicates with the PEP to
+                        dynamically revoke capabilities.
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-2">Stateful Taint Tracking</h3>
+                      <p>
+                        We track the origin and flow of data throughout the agentic session. If an agent interacts with
+                        untrusted context (e.g., a RAG-retrieved document or a web search), the system taints the session,
+                        automatically restricting access to sensitive tools until the state is verified or cleansed.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h2 className="text-3xl font-bold text-cyber-pink mb-6">Technical Reasoning: The Kernel-Level Shift</h2>
+                  <p className="mb-6">
+                    Current AI infrastructure resembles the Enterprise Java era of the 2000s; bloated with high-level
+                    abstractions that introduce massive latency and unobservable debt. We move enforcement to the kernel
+                    level for two reasons:
+                  </p>
+                  <ul className="space-y-4 ml-2">
                     <li className="flex gap-3">
-                      <span className="text-cyber-red">▪</span>
-                      <span><strong>Self-Evolving Guardrails:</strong> Guardrails evolve continuously through automated red-teaming and incorporation of the latest AI-security research</span>
+                      <span className="text-cyber-red mt-1">▪</span>
+                      <div>
+                        <strong className="text-white">Zero-Latency Performance (&lt;10ms):</strong> Security cannot be a trade-off
+                        for utility. By operating at the lowest level of the stack, we achieve a target latency of less than
+                        10ms, ensuring that real-time agentic workflows remain fast enough for business-critical operations.
+                      </div>
                     </li>
                     <li className="flex gap-3">
-                      <span className="text-cyber-red">▪</span>
-                      <span><strong>Cryptographic Capability Layer:</strong> Issues attenuable, auditable tokens and cryptographic verification so every tool invocation and side-effect is verifiably authorized and traceable</span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-cyber-red">▪</span>
-                      <span><strong>Risk Engine:</strong> Enforces least-privilege at call time with deterministic, auditable agent behavior</span>
+                      <span className="text-cyber-red mt-1">▪</span>
+                      <div>
+                        <strong className="text-white">Architectural Durability:</strong> High-level AI frameworks and Gemini/GPT
+                        integrations are volatile and change monthly. The kernel/syscall interface is stable. By building at
+                        this level, our security substrate remains immune to the rapid obsolescence of high-abstraction software.
+                      </div>
                     </li>
                   </ul>
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-bold text-cyber-pink mb-3">Key Benefits</h3>
-                  <ul className="space-y-2 ml-6">
+                  <h2 className="text-3xl font-bold text-cyber-pink mb-6">Observability and Verification</h2>
+                  <ul className="space-y-4 ml-2">
                     <li className="flex gap-3">
-                      <span className="text-cyber-red">✓</span>
-                      <span>Minimal integration overhead</span>
+                      <span className="text-cyber-red mt-1">▪</span>
+                      <div>
+                        <strong className="text-white">High-Fidelity Logs:</strong> We provide deep visibility into agent
+                        behavior that is impossible at the application layer, capturing exactly how an agent interacts with
+                        the underlying infrastructure.
+                      </div>
                     </li>
                     <li className="flex gap-3">
-                      <span className="text-cyber-red">✓</span>
-                      <span>High autonomy with verifiable authority</span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-cyber-red">✓</span>
-                      <span>No UX compromises</span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-cyber-red">✓</span>
-                      <span>Prevents privilege escalation</span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-cyber-red">✓</span>
-                      <span>Enables safe delegation between agents and subagents</span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-cyber-red">✓</span>
-                      <span>Integration with enterprise tools</span>
+                      <span className="text-cyber-red mt-1">▪</span>
+                      <div>
+                        <strong className="text-white">Cryptographic Capability Binding:</strong> Every tool access is backed
+                        by a cryptographically signed token. An agent cannot hallucinate its way into an unauthorized
+                        database; the execution environment simply refuses to resolve the request without a valid, policy-backed signature.
+                      </div>
                     </li>
                   </ul>
-                </div>
-
-                <div>
-                  <h3 className="text-2xl font-bold text-cyber-pink mb-3">The Problem We Solve</h3>
-                  <p>
-                    We've jailbroken every state-of-the-art LLM. We've poisoned agentic frameworks integrated with payroll, 
-                    billing, and financial systems. We've demonstrated how a single prompt-injected PDF can hijack bank accounts.
-                  </p>
-                  <p className="mt-4">
-                    AI agents are about to control payment rails, crypto transfers, and financial operations. Without runtime 
-                    defense, we're building an open playground for attackers.
-                  </p>
                 </div>
 
                 <div className="border-t border-cyber-red/20 pt-8 mt-12">
-                  <h2 className="text-3xl font-bold text-cyber-pink mb-4">The Bounty Platform</h2>
-                  <p>
-                    As a complement to our core product, we're launching a Kaggle-style platform for AI-security bounties 
-                    and competitive games. Researchers and practitioners hack realistic scenarios including prompt injections, 
-                    jailbreaks, RAG attacks, and context escalation across difficulty levels.
+                  <p className="text-xl font-medium text-gray-200">
+                    In summary, Badcompany transforms security from a linguistic suggestion into a deterministic
+                    execution substrate, allowing organizations to deploy autonomous agents with mathematical certainty.
                   </p>
-
-                  <div className="mt-4 space-y-3">
-                    <p>
-                      <strong className="text-cyber-pink">Custom Challenges:</strong> Create custom challenge scenarios using 
-                      privacy-preserving building blocks that mimic real systems without revealing proprietary logic.
-                    </p>
-                    <p>
-                      <strong className="text-cyber-pink">Continuous Red-Teaming:</strong> This marketplace accelerates continuous 
-                      red-teaming and builds a corpus of exploitable patterns.
-                    </p>
-                    <p>
-                      <strong className="text-cyber-pink">Feedback Loop:</strong> Practical adversarial data feeds back into our 
-                      guardrails and threat models, creating a virtuous cycle of security improvement.
-                    </p>
-                  </div>
                 </div>
+
               </div>
             </motion.div>
           </div>
