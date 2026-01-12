@@ -18,7 +18,7 @@ export default function Product() {
             >
               <h1 className="text-6xl md:text-7xl font-bold mb-4">
                 <span className="text-gradient glow-red">The Product</span>
-                <span className="text-white block mt-2 text-4xl md:text-5xl">Deterministic Security Substrate</span>
+                <span className="text-white block mt-2 text-4xl md:text-5xl">Deterministic Security Framework</span>
               </h1>
               <p className="text-xl text-cyber-pink mb-8">Cross-platform protection for Linux, Windows, and MacOS systems</p>
 
