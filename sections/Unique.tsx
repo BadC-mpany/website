@@ -5,8 +5,8 @@ import Image from 'next/image'
 
 const features = [
   {
-    title: 'We Jailbreak Everything',
-    description: 'We\'ve cracked every state-of-the-art LLM. We understand the attack surface better than anyone.',
+    title: 'Extremely Agile',
+    description: 'We react and adopt to news and articles coming out in the field immediately.',
     icon: '/svg/bomb.svg'
   },
   {

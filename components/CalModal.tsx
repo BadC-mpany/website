@@ -7,9 +7,10 @@ interface CalModalProps {
   isOpen: boolean
   onClose: () => void
   calUrl: string
+  theme?: 'red' | 'blue'
 }
 
-export default function CalModal({ isOpen, onClose, calUrl }: CalModalProps) {
+export default function CalModal({ isOpen, onClose, calUrl, theme = 'red' }: CalModalProps) {
   useEffect(() => {
     if (!isOpen) return
 
@@ -30,6 +31,9 @@ export default function CalModal({ isOpen, onClose, calUrl }: CalModalProps) {
     }
   }, [isOpen, onClose])
 
+  const borderColor = theme === 'blue' ? 'border-cyber-blue/30' : 'border-cyber-red/30'
+  const hoverBorderColor = theme === 'blue' ? 'hover:border-cyber-blue' : 'hover:border-cyber-red'
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -42,7 +46,7 @@ export default function CalModal({ isOpen, onClose, calUrl }: CalModalProps) {
             onClick={onClose}
             className="fixed inset-0 z-50 bg-black/50 backdrop-blur-md"
           />
-          
+
           {/* Modal */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -52,11 +56,11 @@ export default function CalModal({ isOpen, onClose, calUrl }: CalModalProps) {
             className="fixed inset-4 md:inset-8 lg:inset-16 z-50 flex items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative w-full h-full max-w-5xl max-h-[90vh] bg-cyber-black border-2 border-cyber-red/30 rounded-xl overflow-hidden shadow-2xl">
+            <div className={`relative w-full h-full max-w-5xl max-h-[90vh] bg-cyber-black border-2 ${borderColor} rounded-xl overflow-hidden shadow-2xl transition-colors`}>
               {/* Close button */}
               <button
                 onClick={onClose}
-                className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center bg-cyber-black/80 border border-cyber-red/30 rounded-lg hover:border-cyber-red transition-colors text-white"
+                className={`absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center bg-cyber-black/80 border ${borderColor} rounded-lg ${hoverBorderColor} transition-colors text-white`}
                 aria-label="Close"
               >
                 <svg

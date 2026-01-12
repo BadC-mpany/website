@@ -35,4 +35,4 @@ bun run start
 - Tailwind CSS
 - Framer Motion
 - Bun
-
+ 

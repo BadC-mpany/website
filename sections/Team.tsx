@@ -6,14 +6,8 @@ import { motion } from 'framer-motion'
 
 const team = [
   {
-    name: 'Matteo Horváth',
-    role: 'Engineer',
-    bio: 'Software builder and technical lead with core expertise in Computer Vision, optimization, and end-to-end automatization. Extensive experience across engineering and business roles.',
-    image: '/images/matteo.jpeg'
-  }, 
-  {
     name: 'János Mozer',
-    role: 'Architect',
+    role: 'CEO & Architect',
     bio: 'Physics background with experience in developing error-proof systems for distributed, resilient architectures, guaranteeing high availability through secure protocols.',
     image: '/images/profile.jpeg'
   },
@@ -31,26 +25,7 @@ const team = [
   }
 ]
 
-const createRows = () => {
-  const shuffled = [...team].sort(() => Math.random() - 0.5)
-  return {
-    allRows: shuffled
-  }
-}
-
 export default function Team() {
-  const initialRows = useMemo(
-    () => ({
-      allRows: team
-    }),
-    []
-  )
-  const [rows, setRows] = useState(initialRows)
-
-  useEffect(() => {
-    setRows(createRows())
-  }, [])
-
   const renderCard = (member: (typeof team)[number], index: number) => (
     <motion.div
       key={member.name}
@@ -61,17 +36,17 @@ export default function Team() {
       className="bg-cyber-black/50 border-2 border-cyber-red/30 rounded-xl p-6 text-center hover:border-cyber-red transition-all h-full flex flex-col items-center"
     >
       <div className="relative mx-auto mb-3 h-24 w-24 overflow-hidden rounded-full border-2 border-cyber-red/40">
-                  <Image
-                    src={member.image}
-                    alt={`${member.name} portrait`}
-                    fill
-                    className="object-cover"
-                    sizes="96px"
-                  />
-                </div>
-                <h3 className="text-lg font-bold mb-1 text-white">{member.name}</h3>
-                <p className="text-cyber-pink font-semibold mb-2 text-sm">{member.role}</p>
-                <p className="text-xs text-gray-400 flex-1">{member.bio}</p>
+        <Image
+          src={member.image}
+          alt={`${member.name} portrait`}
+          fill
+          className="object-cover"
+          sizes="96px"
+        />
+      </div>
+      <h3 className="text-lg font-bold mb-1 text-white">{member.name}</h3>
+      <p className="text-cyber-pink font-semibold mb-2 text-sm">{member.role}</p>
+      <p className="text-xs text-gray-400 flex-1">{member.bio}</p>
     </motion.div>
   )
 
@@ -91,8 +66,8 @@ export default function Team() {
             The rebels behind the code
           </p>
 
-          <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
-            {rows.allRows.map((member, index) => renderCard(member, index))}
+          <div className="mx-auto grid w-full max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+            {team.map((member, index) => renderCard(member, index))}
           </div>
         </motion.div>
       </div>
