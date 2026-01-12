@@ -64,6 +64,7 @@ export default function OpenSource() {
                 isOpen={isCalModalOpen}
                 onClose={() => setIsCalModalOpen(false)}
                 calUrl={calUrl}
+                theme="blue"
             />
         </section>
     )
