@@ -45,7 +45,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            <div className="relative w-full aspect-square">
+            <div className="relative w-[80%] mx-auto aspect-square">
               <Image
                 src="/images/badcompany_logo_2.jpg"
                 alt="Badcompany Cyberpunk Logo"
