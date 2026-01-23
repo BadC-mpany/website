@@ -20,7 +20,7 @@ const repositories = [
       {
         title: 'Interactive Game',
         description: 'Play the browser-based hacking game and test your red-teaming skills',
-        url: 'https://play.badcompany.xyz/'
+        url: 'https://github.com/BadC-mpany/rag-game'
       },
       {
         title: 'RAG System',
