@@ -1,87 +1,63 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
-  const [isBlueTheme, setIsBlueTheme] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
-
-      // Check if header overlaps with the opensource section
-      const opensourceSection = document.getElementById('opensource')
-      if (opensourceSection) {
-        const rect = opensourceSection.getBoundingClientRect()
-        const headerHeight = 80 // approximate header height
-        const offset = 150 // Trigger transition slightly earlier/later
-
-        // If the section is in view (with offset)
-        // Start blue sooner (when section is approaching top)
-        // End blue sooner (when section is leaving top)
-        const isOverOpensource = rect.top < (headerHeight + offset) && rect.bottom > offset
-        setIsBlueTheme(isOverOpensource)
-      } else {
-        setIsBlueTheme(false)
-      }
     }
     window.addEventListener('scroll', handleScroll)
-    handleScroll() // Initial check
+    handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Color values for smooth transitions
-  const accentColor = isBlueTheme ? '#3b82f6' : '#ff0055' // cyber-blue vs cyber-red
-  const borderColorValue = isBlueTheme ? 'rgba(59, 130, 246, 0.3)' : 'rgba(255, 0, 85, 0.2)'
+  const navLinks = [
+    { href: '/product', label: 'PRODUCT' },
+    { href: '/blog', label: 'BLOG' },
+    // { href: '/story', label: 'STORY' },
+    { href: '/#team', label: 'TEAM' },
+  ]
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-cyber-black/80 backdrop-blur-md' : ''
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-cyber-black/90 backdrop-blur-md border-b border-white/10' : 'bg-transparent'
         }`}
-      style={{
-        borderBottom: scrolled ? `1px solid ${borderColorValue}` : 'none',
-        transition: 'all 0.5s ease-in-out'
-      }}
     >
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-3">
-            <span
-              className="text-2xl font-bold"
-              style={{
-                color: accentColor,
-                transition: 'color 0.5s ease-in-out'
-              }}
-            >
-              Badcompany
+          {/* Left: Logo */}
+          <Link href="/" className="flex items-center">
+            <span className="text-xl font-bold font-mono text-cyber-red tracking-tighter">
+              Bad Company
             </span>
           </Link>
 
-          <div className="flex items-center space-x-8">
-            {[
-              { href: '/product', label: 'Product' },
-              { href: '/blog', label: 'Blog' },
-              { href: '/story', label: 'Story' },
-              { href: '/#team', label: 'Team' },
-              { href: '/#contact', label: 'Contact' }
-            ].map((link) => (
+          {/* Center: Navigation */}
+          <div className="hidden md:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
+            {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-gray-300 transition-colors duration-500"
-                style={{
-                  ['--hover-color' as string]: accentColor,
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = accentColor)}
-                onMouseLeave={(e) => (e.currentTarget.style.color = '')}
+                className="text-sm font-mono text-gray-400 hover:text-white transition-colors tracking-wide"
               >
                 {link.label}
               </Link>
             ))}
           </div>
+
+          {/* Right: Contact Button */}
+          <Link
+            href="/#contact"
+            className="text-sm font-mono font-bold bg-white text-black px-5 py-2 rounded hover:bg-gray-200 transition-colors tracking-wide"
+          >
+            CONTACT US
+          </Link>
         </div>
       </nav>
     </header>

@@ -1,0 +1,58 @@
+graph TB
+    subgraph User_Space ["User Space"]
+        Agent[("AI Agent")]
+    end
+
+    subgraph Lilith_Substrate ["Lilith Substrate"]
+        direction TB
+        subgraph Hardware_L0 ["L0: Silicon Protection"]
+            Enclave["Confidential Enclave"]
+        end
+        subgraph Kernel_L1 ["L1/L2: Kernel Interdiction"]
+            BPF["BPF-LSM Hooks"]
+        end
+        subgraph Logic_L4 ["L4: Defense Engine"]
+            Gate{{"Capability Gate"}}
+            Taint["Taint Tracking"]
+            Secrets["Sealed Secrets"]
+        end
+    end
+
+    subgraph Ext_Infra ["External Infrastructure"]
+        DB[("Database")]
+        Web["APIs"]
+        Shell["Shell"]
+    end
+
+    %% Agent Flow
+    Agent -->|"1. Action"| Enclave
+    Enclave -->|"2. Tool Call"| Gate
+    
+    %% Defense Logic
+    Gate -->|"3. Policy"| BPF
+    BPF -->|"4. Intent"| Taint
+    Taint -->|"5. Context"| Secrets
+
+    %% Enforcement
+    Secrets -.->|"Deny"| Agent
+    Secrets -->|"6. Exec"| DB
+    Secrets -->|"6. Exec"| Web
+    Secrets -->|"6. Exec"| Shell
+
+    %% Styling
+    style User_Space fill:none,stroke:#800080,stroke-width:2px,color:#800080
+    style Lilith_Substrate fill:none,stroke:#FF0000,stroke-width:3px,color:#FF0000
+    style Ext_Infra fill:none,stroke:#800080,stroke-width:2px,color:#800080
+    
+    style Agent fill:none,stroke:#800080,color:#800080
+    style Enclave fill:none,stroke:#FF0000,stroke-dasharray: 5 5,color:#FF0000
+    style BPF fill:none,stroke:#FF0000,color:#FF0000
+    style Gate fill:#800080,stroke:#FF0000,color:#fff,font-weight:bold
+    style Taint fill:none,stroke:#FF0000,color:#FF0000
+    style Secrets fill:none,stroke:#FF0000,color:#FF0000
+    
+    style DB fill:none,stroke:#800080,color:#800080
+    style Web fill:none,stroke:#800080,color:#800080
+    style Shell fill:none,stroke:#800080,color:#800080
+
+    linkStyle default stroke:#FF0000,stroke-width:1px

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, JetBrains_Mono } from 'next/font/google'
 import Script from 'next/script'
 import { Analytics } from '@vercel/analytics/react'
+import RoutePrefetcher from '../components/RoutePrefetcher'
 import './globals.css'
 
 const inter = Inter({
@@ -9,8 +10,13 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+})
+
 export const metadata: Metadata = {
-  title: 'Badcompany - Agent Security',
+  title: 'Bad Company - Agent Security',
   description: 'Breaking the rules to protect your AI systems',
   icons: {
     icon: '/images/badcompany_logo_2.jpg',
@@ -23,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <head>
         {/* Google Analytics */}
         <Script
@@ -46,6 +52,7 @@ export default function RootLayout({
       <body>
         {children}
         <Analytics />
+        <RoutePrefetcher />
         <Script
           id="scroll-offset-handler"
           strategy="afterInteractive"

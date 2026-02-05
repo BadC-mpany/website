@@ -17,7 +17,7 @@ export default function Story() {
               transition={{ duration: 0.6 }}
             >
               <h1 className="text-6xl md:text-7xl font-bold mb-12">
-                <span className="text-gradient glow-red">Our Evolution</span>
+                <span className="text-gradient">Our Evolution</span>
               </h1>
 
               <div className="space-y-12 text-lg text-gray-300 leading-relaxed">
