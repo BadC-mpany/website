@@ -10,7 +10,7 @@ import Contact from '../sections/Contact'
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-cyber-black">
+    <main className="relative min-h-screen bg-cyber-black overflow-x-hidden">
       <div className="relative z-10">
         <Header />
         <Hero />

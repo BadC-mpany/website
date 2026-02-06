@@ -39,12 +39,12 @@ export default function Header() {
           </Link>
 
           {/* Center: Navigation */}
-          <div className="hidden md:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
+          <div className="flex items-center space-x-2 md:space-x-8 md:absolute md:left-1/2 md:transform md:-translate-x-1/2">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm font-mono text-gray-400 hover:text-white transition-colors tracking-wide"
+                className="text-[10px] md:text-sm font-mono text-gray-400 hover:text-white transition-colors tracking-wide whitespace-nowrap"
               >
                 {link.label}
               </Link>
@@ -54,7 +54,7 @@ export default function Header() {
           {/* Right: Contact Button */}
           <Link
             href="/#contact"
-            className="text-sm font-mono font-bold bg-white text-black px-5 py-2 rounded hover:bg-gray-200 transition-colors tracking-wide"
+            className="text-[10px] md:text-sm font-mono font-bold bg-white text-black px-2 md:px-5 py-1 md:py-2 rounded hover:bg-gray-200 transition-colors tracking-wide"
           >
             CONTACT US
           </Link>

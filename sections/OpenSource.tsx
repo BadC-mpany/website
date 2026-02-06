@@ -19,7 +19,7 @@ export default function OpenSource() {
     }
 
     return (
-        <section id="opensource" data-section="opensource" className="min-h-[70vh] flex items-center justify-center px-6 py-20 bg-cyber-black">
+        <section id="opensource" data-section="opensource" className="min-h-[70vh] flex items-center justify-center px-6 py-20 bg-cyber-black overflow-hidden">
             <div className="container mx-auto max-w-7xl">
                 <div className="grid lg:grid-cols-2 gap-16 items-center">
                     {/* Left: Content */}
@@ -52,7 +52,7 @@ export default function OpenSource() {
                                     text="EXPLORE DOCS"
                                     disabled={false}
                                     speed={2}
-                                    color="#b5b5b5"
+                                    color="#4b5563"
                                     shineColor="#ffffff"
                                     className="shiny-text"
                                 />
