@@ -247,7 +247,7 @@ export default function Blog() {
   return (
     <main className="relative min-h-screen">
       <Header />
-      <div className="container mx-auto px-6 pt-32 pb-20">
+      <div className="container mx-auto px-6 pt-32 pb-[33vh]">
         <div className="flex gap-12 max-w-6xl mx-auto">
           {/* Sidebar Navigation */}
           <aside className="hidden lg:block w-64 flex-shrink-0 sticky top-32 h-fit">
@@ -255,22 +255,20 @@ export default function Blog() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
-              className="p-6"
             >
-              <h3 className="text-lg font-bold text-white mb-4">Contents</h3>
-              <nav className="space-y-2">
+              <h4 className="text-white font-bold mb-6 font-mono border-b border-zinc-800 pb-2">CONTENTS</h4>
+              <nav className="space-y-3">
                 {headings.map((heading) => (
                   <button
                     key={heading.id}
                     onClick={() => scrollToHeading(heading.id)}
-                    className={`block w-full text-left px-3 py-2 transition-all text-sm ${activeHeading === heading.id
-                      ? 'text-white font-semibold'
-                      : 'text-gray-500 hover:text-white'
+                    className={`block w-full text-left transition-colors text-sm font-mono ${activeHeading === heading.id
+                      ? 'text-white font-bold'
+                      : 'text-zinc-500 hover:text-white'
                       }`}
-                    style={{ paddingLeft: `${(heading.level - 1) * 0.75 + 0.75}rem` }}
-                  >
-                    {heading.text}
-                  </button>
+                    style={{ paddingLeft: `${(heading.level - 1) * 12}px` }}
+                    dangerouslySetInnerHTML={{ __html: heading.text.replace(/Lilith/g, 'Lilith') }}
+                  />
                 ))}
               </nav>
             </motion.div>

@@ -8,39 +8,130 @@ import Header from '../../components/Header'
 
 export default function Product() {
   const [markdown, setMarkdown] = useState<string>('')
+  const [headings, setHeadings] = useState<{ id: string; text: string; level: number }[]>([])
+  const [activeHeading, setActiveHeading] = useState<string>('')
+
+  const slugify = (text: string) => text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')
 
   useEffect(() => {
     fetch('/tech_doc/doc.md')
       .then(res => res.text())
       .then(text => {
-        // Transform HTML images to Markdown images and fix paths
-        // Matches: <div align="center"> <img src="..." alt="..."> </div>
         let processedText = text.replace(
           /<div align="center">\s*<img src="([^"]+)" alt="([^"]+)">\s*<\/div>(?:\s*<br\s*\/?>)?/g,
           '![$2](/tech_doc/$1)'
         )
-
-        // Also handle potential standalone invalid HTML img tags if any, or just failover
-        // The regex above handles the specific format in the doc.md file.
-
         setMarkdown(processedText)
+
+        // Extract headings
+        const lines = processedText.split('\n')
+        const extractedHeadings = []
+        for (const line of lines) {
+          const match = line.match(/^(#{1,3})\s+(.+)$/)
+          if (match) {
+            // Remove markdown formatting (bold/italic markers)
+            let cleanText = match[2].replace(/\*\*\*/g, '').replace(/\*\*/g, '').replace(/\*/g, '').replace(/_/g, '')
+            extractedHeadings.push({
+              level: match[1].length,
+              text: cleanText,
+              id: slugify(cleanText)
+            })
+          }
+        }
+        setHeadings(extractedHeadings)
       })
       .catch(err => console.error('Error loading product doc:', err))
   }, [])
 
+  useEffect(() => {
+    if (headings.length === 0) return
+
+    const handleScroll = () => {
+      const headingElements = headings.map(h => {
+        const el = document.getElementById(h.id)
+        return el ? { id: h.id, top: el.getBoundingClientRect().top } : null
+      }).filter(Boolean) as Array<{ id: string; top: number }>
+
+      if (headingElements.length === 0) return
+
+      // Find the heading closest to the top of viewport
+      const viewportTop = 120
+      let activeId = headingElements[0].id
+
+      for (const { id, top } of headingElements) {
+        if (top <= viewportTop) {
+          activeId = id
+        }
+      }
+
+      setActiveHeading(activeId)
+    }
+
+    // Set initial state after delay
+    setTimeout(handleScroll, 300)
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [headings])
+
+  const HeadingRenderer = ({ level, children }: { level: number, children: React.ReactNode }) => {
+    const text = extractText(children)
+    const id = slugify(text)
+    const Tag = `h${level}` as keyof JSX.IntrinsicElements
+    return <Tag id={id}>{children}</Tag>
+  }
+
+  // Helper to extract text from React children
+  const extractText = (children: any): string => {
+    if (typeof children === 'string') return children
+    if (Array.isArray(children)) return children.map(extractText).join('')
+    if (children?.props?.children) return extractText(children.props.children)
+    return ''
+  }
+
   return (
     <main className="relative min-h-screen">
       <Header />
-      <div className="relative z-10">
+      <div className="relative z-10 pt-32 px-6 pb-[50vh] font-sans">
+        <div className="container mx-auto max-w-7xl">
+          <div className="flex flex-col lg:flex-row gap-12">
 
-        <section className="min-h-screen pt-32 px-6 pb-20 font-sans">
-          <div className="container mx-auto max-w-3xl">
+            {/* Table of Contents - Sticky Sidebar */}
+            <motion.aside
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="hidden lg:block w-64 flex-shrink-0"
+            >
+              <div className="sticky top-32">
+                <h4 className="text-white font-bold mb-6 font-mono border-b border-zinc-800 pb-2">CONTENTS</h4>
+                <ul className="space-y-3">
+                  {headings.map((heading) => (
+                    <li key={heading.id} style={{ paddingLeft: `${(heading.level - 1) * 12}px` }}>
+                      <a
+                        href={`#${heading.id}`}
+                        className={`text-sm block font-mono transition-colors ${activeHeading === heading.id
+                          ? 'text-white font-bold'
+                          : 'text-zinc-500 hover:text-white'
+                          }`}
+                        dangerouslySetInnerHTML={{ __html: heading.text.replace(/Lilith/g, 'Lilith') }}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.aside>
+
+            {/* Main Content */}
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
+              className="flex-1 max-w-3xl"
             >
-              {/* Content using markdown-body for consistent typography */}
               <div className="markdown-body font-sans">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
@@ -52,7 +143,9 @@ export default function Product() {
                         style={{ maxHeight: '600px' }}
                       />
                     ),
-                    // Ensure headers have proper anchors/styles if needed, currently reusing global .markdown-body styles
+                    h1: ({ children }) => <HeadingRenderer level={1}>{children}</HeadingRenderer>,
+                    h2: ({ children }) => <HeadingRenderer level={2}>{children}</HeadingRenderer>,
+                    h3: ({ children }) => <HeadingRenderer level={3}>{children}</HeadingRenderer>,
                   }}
                 >
                   {markdown}
@@ -60,7 +153,7 @@ export default function Product() {
               </div>
             </motion.div>
           </div>
-        </section>
+        </div>
       </div>
     </main>
   )

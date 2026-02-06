@@ -6,21 +6,21 @@ import Image from 'next/image'
 const team = [
   {
     name: 'János Mozer',
-    role: 'CEO & ARCHITECT',
+    role: 'CEO',
     bio: 'Physics background with experience in developing error-proof systems for distributed, resilient architectures, guaranteeing high availability through secure protocols.',
     image: '/images/profile.jpeg'
   },
   {
-    name: 'Péter Tallósy',
-    role: 'ML ENGINEER',
-    bio: 'Physics-trained research engineer with deep expertise in ML/AI and strong full-stack software engineering capability. Experienced in building system spanning generative CAD, large-scale ML optimization, and ML-enabled infrastructure solutions.',
-    image: '/images/petya.jpeg'
-  },
-  {
     name: 'Gregorio Jaca',
-    role: 'RESEARCH ENGINEER',
+    role: 'RESEARCHER & ARCHITECT',
     bio: 'Physics and Biology background. Worked on simulations from fluid dynamics and rockets to network systems. Currently researching LLM dynamics and interpretability through the lens of chaos theory.',
     image: '/images/grego.jpeg'
+  },
+  {
+    name: 'Péter Tallósy',
+    role: 'CTO',
+    bio: 'Physics-trained research engineer with deep expertise in ML/AI and full-stack software engineering capability. Experience in security and building directly on the hardware.',
+    image: '/images/petya.jpeg'
   }
 ]
 

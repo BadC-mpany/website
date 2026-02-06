@@ -34,6 +34,12 @@ const repositories = [
     description: 'Cryptographic Honeypot & Intent-Mediated Enforcement Response Architecture',
     language: 'Python',
     url: '/blog?post=vsaml'
+  },
+  {
+    name: 'Agency Without Assurance',
+    description: 'Investigating the security risks of autonomous agents with full computer access and OpenClaw configuration vulnerabilities.',
+    language: 'Security Audit',
+    url: '/blog?post=clawdbot'
   }
 ]
 
@@ -42,7 +48,7 @@ export default function Repositories() {
 
   return (
     <section id="repositories" className="min-h-screen flex items-center justify-center px-6 py-20 bg-cyber-black">
-      <div className="container mx-auto max-w-7xl">
+      <div className="container mx-auto max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -58,7 +64,7 @@ export default function Repositories() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {repositories.map((repo, index) => (
               <motion.div
                 key={repo.name}
@@ -87,7 +93,11 @@ export default function Repositories() {
                   </div>
 
                   <p className="text-gray-400 text-sm leading-relaxed mb-6 font-mono">
-                    {repo.description}
+                    {repo.name === 'Agency Without Assurance' ? (
+                      <>
+                        <span className="font-bold text-white">Investigating the security risks of</span> autonomous agents with full computer access and <span className="font-bold text-white">OpenClaw</span> configuration vulnerabilities.
+                      </>
+                    ) : repo.description}
                   </p>
 
                   <div className="mt-auto pt-4 border-t border-zinc-800/50 flex items-center justify-between">

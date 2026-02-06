@@ -1,124 +1,40 @@
-# Bad Company
+# The Problem
 
-## Product Technical Specification
+AI systems and the underlying infrastructure are changing continuously. Security needs to last forever.
 
-<div align="center">
-  <img src="cover-art.png" alt="Bad Company Abstract Art">
-</div>
-<br>
+1. **Obsolete Architectures**: The AI stack changes week by week. That means security frameworks built around a specific model or API can become outdated almost as soon as the foundation underneath them shifts.
 
-## High Level Architecture
+2. **Execution Blind Spots**: Once an agent has tool access, what it actually does becomes a black box. Current stacks do not have the visibility to detect, or the control to stop, and data exfiltration.
 
-**Component 1 (Environment): The Lilith Runtime**
-A hardened container engine that uses Confidential Computing to isolate memory at the silicon level.
+3. **The "Guardrail" Fallacy**: AI security today relies on linguistic constraints and high-level filters. These controls are probabilistic, easy to bypass, and introduce significant latency. You cannot secure a system by asking it to behave safely.
 
-**Component 2 (Control): The Lilith Defense**
-A policy engine that enforces Sealed Secrets and Signed Capabilities.
+4. **Policy Definitions are Difficult**: The policies agents are expected to follow are narrow in scope, hard to formalize, and lack mathematical guarantees of soundness.
 
-<div align="center">
-  <img src="architecture-diagram.png" alt="High Level Architecture Diagram">
-</div>
-<br>
+# The Solution: Securing the Execution Layer
 
----
+Replace best effort guardrails with deterministic enforcement.
 
-## Component 1: Lilith Runtime
-**Confidential, Real-Time Execution Environment for AI Agents**
+* **Architectural Durability**: The kernel-level core is stable and durable, providing long-term, predictable security for critical infrastructure.
+* **Action-level Auditability**: Every privileged action is logged with searchable, tamper-evident integrity.
+* **Deny-by-Default Capabilities**: The agent retains its dynamic decision-making and tool-selection logic, but starts with zero execution authority. All privileged actions require cryptographic authorization.
+* **Natural Language for Policy Definitions**: A module to translate natural language to policy definitions. An algorithm that verifies the completeness and correctness of a policy.
 
-The **Lilith Runtime** is a deterministic, capability-mediated container engine that treats the Host OS as an availability-only provider (adversarial for confidentiality). It enforces a strict **Denial-by-Default** posture where agents possess no ambient authority; all side effects are mediated through typed handles, ensuring that even a compromised agent cannot exceed its provisioned blast radius.
+# The Product
 
-### L0: Hardware / Platform Abstraction Layer Architectures
-* **Tier A1 (Server, Confidential):** AMD EPYC SEV-SNP CVMs; attestation-gated key release; bounded by TCB/patch level.
-* **Tier A2 (Server, Confidential):** Intel TDX where attestation/quotes available; provider-dependent.
-* **Tier B (Server, Standard):** No TEE; enforce capability gating + signed policy as primary control.
-* **Tier C (Endpoint, Isolated):** Windows Enterprise VBS/VSM + vTPM measurement for runtime identity binding.
+Meet ***Lilith***: runtime security and observability at the kernel layer.
 
-> **Constraints:** CVM pricing/feature limits vary (e.g., AWS SEV-SNP +10% fee; lifecycle constraints); CC does not prevent DoS/side channels.
->
-> **Specs:** Platform tier; attestation report/quote; verifier; KMS release policy; patch-level pinning; threat-model exclusions (DoS/covert channels).
+* **Visibility**: at the kernel level, ***Lilith*** sees everything that happens in an AI execution environment
+* **Detection**: every system event and log is monitored, analyzed, and categorised in real time
+* **Enforcement**: harmful and non-compliant requests are revoked at layer zero
+* **Durability**: deployed at OS level
+* **Traceability**: cryptographically signed, tamper-evident audit logs
+* **Natural language**: unlocking common language description of to automate policy creation
 
-### L1/L2: Minimal TCB (Guest Kernel & Hypervisor)
-* **Host/VMM:** KVM + minimal VMM; trusted for availability only (not confidentiality boundary in Tier A).
-* **Guest OS (Lilith OS):** Minimal Linux (6.12 LTS baseline); immutable kernel; measured/signed image.
-* **Hardening:** `CONFIG_MODULES=n`; no interactive shell; `no_new_privs`; minimal drivers; locked-down boot chain.
-* **Syscall defense-in-depth:** `seccomp-bpf` allowlist; disable `ptrace`/`perf_event`/unprivileged namespaces as policy; eBPF restricted to signed artifacts if used (telemetry only).
+We provide ***Lilith*** as an execution environment that contains agent workloads, transforming untrusted AI agents into deterministic and secure systems. It provides a near-zero latency, provable and durable security environment for agents.
 
-> **Specs:** Kernel config set; seccomp profile; process sandbox flags; image signing; update cadence; telemetry BPF policy.
 
-### L3: Data Plane (Network I/O + Egress Mediation)
-* **Modes:** `virtio-net` compatibility; SR-IOV + AF_XDP optional perf path (not required for security).
-* **Egress model:** No raw socket capability for agent workers; all networking via runtime.
-* **Egress Handles:** Allowlist + quotas enforced per operation.
+# We offer ***Lilith*** for two deployment environments
 
-> **Specs:** Egress handle API; host allowlist (scheme/authority/method/path); size limits; concurrency limits; budgets (req/bytes/tokens); canonical URL parser.
+**Autonomous Agent Containment (Server-Side)**: For organizations deploying proprietary or third-party agents in cloud or on-premise environments. ***Lilith*** encapsulates the agent within a secure, hardened virtual machine. By monitoring execution at the kernel level, it prevents agents from exfiltrating sensitive data, installing unauthorized binaries, or compromising lateral infrastructure.
 
-### L4: Runtime Core (Wasm Execution + Capability Boundary)
-* **Engine:** Wasmtime; WASI 0.2 Component Model; memory64 opt-in; shared-nothing instantiation.
-* **Isolation:** Per-component instance; bounded WIT message sizes; per-instance quotas (mem/table/instances); CPU budgets (fuel/epoch).
-* **Hostcall Safety:** Copy-in validation; strict parsing/canonicalization; no guest pointer trust; version pinning + advisory tracking (e.g., CVE-2024-30266 fixed in 19.0.1).
-
-> **Specs:** Wasmtime config flags; fuel/epoch limits; resource limiter; WIT max message sizes; canonicalization rules; upgrade policy.
-
-### L5: Compute Bridge (GPU Acceleration, Optional)
-* **GPU worker:** Isolated process; seccomp-locked; no network; bounded IPC (shared ring buffer/vsock).
-* **GPU CC reality:** GPU compute uses plaintext in GPU memory; HBM not encrypted (per NVIDIA); treat as threat-model-bounded hardening not absolute secrecy.
-* **Output handling:** Model outputs treated untrusted; schema/tool-arg validation before privileged use.
-
-> **Specs:** GPU worker sandbox profile; IPC protocol + bounds; CC mode flags; allowed ops; output validation policy.
-
----
-
-## Component 2: Lilith Defense
-**Runtime Defense for AI agents (incorporated into Component 1; integrated with Runtime Gate)**
-
-**Lilith Defense** is the agentic defense layer that provides the provable constraints. It shifts security from detecting bad behavior to **making bad behavior inexpressible** via strict capability accounting and cryptographic anchoring.
-
-### L4.0 Policy Verification Layer
-Formal, pre-execution verification of agent policies and capability grants against a core security model (for completeness, soundness, non-violation).
-Specs: Logic: SMT solver/Datalog, TLA+/Promela; Model: CEDAR; Target: Policy completeness, soundness, non-violation; Deployment: Attestation-gated artifacts; Cadence: Updates must pass verification.
-
-### L4.1 WASI Object-Capability Gate
-The **fundamental control plane**.
-* **Handle model:** Opaque handles/resources (Egress/Secret/Tool/File optional); no ambient authority; rights checked every use.
-* **Anti-ABA:** Generational index table; stale handles fail deterministically.
-* **Revocation:** Immediate revocation + TTL expiry; no guest-cached privileges.
-
-> **Specs:** Handle encoding (idx+gen); rights bitmask; atomic check path; revocation API; TTL semantics; max handles per agent.
-
-### L4.2: Information Flow Control (Sealed Secrets)
-Anti-Exfil layer. Agents never possess raw secret bytes.
-* **Property:** Secret bytes never enter guest/agent memory; only `SecretHandle` is exposed.
-* **Use:** Runtime injects auth/signs requests after verifying destination allowlist + budgets; agent cannot read key bytes.
-* **Scope:** Does not prevent exfil of other data via allowed egress; controlled via allowlists/quotas/tool semantics.
-
-> **Specs:** Secret store location; SecretHandle API; sign/inject operation; binding to egress constraints; body-hash signing; per-secret usage policy.
-
-### L4.3 Signed Policy Capsules (Cryptographic Authorization)
-*Optional: Operationally deployable, cryptographically verifiable authorization of critical actions.*
-* **Capsule:** Signed token (with aud/exp/nbf/jti); binds `agent_id` + `build_hash`; grants capabilities + budgets.
-* **Enforcement:** Verified per privileged op or per short-lived session token minted by gate; replay resistance via jti/nonce.
-* **Revocation:** Short TTL + denylist emergency path.
-
-> **Specs:** Signature scheme; claim set; TTL max; replay cache window; session token derivation; key rotation; issuer trust policy; optional: human-in-the-loop/centralized auth server.
-
-### L4.4 Tool Argument Validator
-Prevent tool misuse and suppresses prompt injections. Syntactically it employs **structural output enforcement** and policy-conformant tool arguments; semantically it uses **probabilistic guardrails** and **Context-Aware Behavioral Analysis**.
-* **Structural:** Strict typed decode / JSON Schema validation for tool args.
-* **Semantics:** Canonicalization + per-tool constraints (allowlisted fields; max amounts; idempotency; commit tokens for irreversible ops).
-
-> **Specs:** Schema registry; canonicalization rules; optional (probabilistic) guardrails (indirect prompt injection defense); fail-closed policy; idempotency requirements; irreversible-op gating.
-
-### L4.5 Hardware-Anchored Forensics
-Provides non-repudiation for all agent actions and I/O.
-* **Audit:** Append-only log for every privileged boundary; allow/deny reason codes + canonical arg hashes.
-* **Integrity:** Hash chain / Merkle + monotonic sequence; periodic signed log tips.
-* **Binding (optional):** Signer identity bound to CVM/VBS attestation identity when available.
-
-> **Specs:** Event schema; hash function; sequence rules; anchoring interval; signature scheme; verifier tool; export formats (SIEM).
-
-### L4.6 Side-Channel Suppression
-**Reduces the practicality** of timing/cache attacks on shared infrastructure; does **not claim elimination** of covert channels.
-* **Controls:** CPU pinning/isolation; timer coarsening/fuzz; deterministic budgets; constant-time secret crypto; strict log/output quotas.
-* **Non-goal:** No claim of eliminating covert channels/DoS.
-
-> **Specs:** Pinning policy; timer config; budget parameters; crypto constant-time requirements; output/log rate limits; tenant isolation guidance.
+**Endpoint Agent Governance (Workstation-Side)**: Deployed directly on an employee's workstation to mitigate risks from local agentic interactions. This prevents data leakage and unauthorized breaches on the employee’s side. ***Lilith*** provides forensic-grade traceability, allowing organizations to determine whether a leak was intentional or accidental by tracking the data flow directly to the originating system call.
