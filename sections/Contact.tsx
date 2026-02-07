@@ -23,9 +23,6 @@ export default function Contact() {
             <h2 className="text-4xl md:text-5xl font-bold mb-6 font-mono text-white text-center uppercase">
               Get in <span className="text-cyber-red">Touch</span>
             </h2>
-            <p className="text-xl text-gray-500 text-center font-mono max-w-2xl">
-              Deterministic communication channels
-            </p>
           </div>
 
           <div className="group bg-zinc-900 border border-zinc-800 p-8 md:p-12 rounded-lg hover:border-cyber-red/50 transition-all duration-300">
