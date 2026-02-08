@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import Header from '../../components/Header'
+import MermaidDiagram from '../../components/MermaidDiagram'
 
 export default function Product() {
   const [markdown, setMarkdown] = useState<string>('')
@@ -92,6 +93,29 @@ export default function Product() {
     return ''
   }
 
+  const MermaidFetcher = ({ src, alt }: { src: string, alt: string }) => {
+    const [chart, setChart] = useState<string>('')
+    const [error, setError] = useState<boolean>(false)
+
+    useEffect(() => {
+      fetch(src)
+        .then(res => {
+          if (!res.ok) throw new Error('Failed to load diagram')
+          return res.text()
+        })
+        .then(setChart)
+        .catch(err => {
+          console.error(err)
+          setError(true)
+        })
+    }, [src])
+
+    if (error) return <div className="text-red-500">Failed to load diagram: {alt}</div>
+    if (!chart) return <div className="h-24 w-full animate-pulse bg-white/5 rounded-lg border border-white/10 my-8" />
+
+    return <MermaidDiagram chart={chart} />
+  }
+
   return (
     <main className="relative min-h-screen">
       <Header />
@@ -136,13 +160,18 @@ export default function Product() {
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={{
-                    img: (props: any) => (
-                      <img
-                        {...props}
-                        className="max-w-full h-auto mx-auto block rounded-lg my-8"
-                        style={{ maxHeight: '600px' }}
-                      />
-                    ),
+                    img: (props: any) => {
+                      if (props.src?.endsWith('.mmd')) {
+                        return <MermaidFetcher src={props.src} alt={props.alt} />
+                      }
+                      return (
+                        <img
+                          {...props}
+                          className="max-w-full h-auto mx-auto block rounded-lg my-8"
+                          style={{ maxHeight: '600px' }}
+                        />
+                      )
+                    },
                     h1: ({ children }) => <HeadingRenderer level={1}>{children}</HeadingRenderer>,
                     h2: ({ children }) => <HeadingRenderer level={2}>{children}</HeadingRenderer>,
                     h3: ({ children }) => <HeadingRenderer level={3}>{children}</HeadingRenderer>,
