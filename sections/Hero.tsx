@@ -1,28 +1,11 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useState } from 'react'
-import { Check, Copy, Lock, Cpu, Zap, Eye, BookOpen } from 'lucide-react'
+import { Lock, Cpu, Zap, Eye, BookOpen } from 'lucide-react'
 import AnimatedContent from '../components/AnimatedContent'
 import DecryptedText from '../components/DecryptedText'
 
 export default function Hero() {
-  const [copied, setCopied] = useState(false)
-  const [activeTab, setActiveTab] = useState<'unix' | 'windows'>('unix')
-
-  const commands = {
-    unix: "curl -fsSL https://badcompany.ai/install | bash",
-    windows: 'powershell -c "irm https://badcompany.ai/install.ps1 | iex"'
-  }
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(commands[activeTab])
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
-
-
-
   const features = [
     { icon: Lock, text: "deterministic security" },
     { icon: Cpu, text: "complete hardware isolation" },
@@ -53,40 +36,6 @@ export default function Hero() {
             <p className="text-lg text-gray-400 mb-12 max-w-lg font-mono leading-relaxed">
               The deterministic security architecture built for <span className="bg-white/10 px-1 py-0.5 rounded text-white text-sm">autonomous</span> AI systems.
             </p>
-
-            {/* Terminal Install Box */}
-            <div className="max-w-xl w-full max-w-[calc(100vw-3rem)]">
-              <div className="flex items-center gap-6 mb-2 ml-1">
-                <button
-                  onClick={() => setActiveTab('unix')}
-                  className={`text-xs font-mono pb-1 transition-colors ${activeTab === 'unix' ? 'text-white border-b border-cyber-red' : 'text-gray-500 hover:text-gray-300'}`}
-                >
-                  MAC / LINUX
-                </button>
-                <button
-                  onClick={() => setActiveTab('windows')}
-                  className={`text-xs font-mono pb-1 transition-colors ${activeTab === 'windows' ? 'text-white border-b border-cyber-red' : 'text-gray-500 hover:text-gray-300'}`}
-                >
-                  WINDOWS (POWERSHELL)
-                </button>
-              </div>
-              <div className="relative group bg-zinc-900 border border-zinc-800 rounded-lg p-5 flex items-center justify-between hover:border-zinc-700 transition-colors">
-                <div className="flex items-center gap-3 font-mono text-sm text-gray-300 overflow-x-auto no-scrollbar flex-1 min-w-0">
-                  <span className="text-gray-500 select-none">{'>'}</span>
-                  <span className="whitespace-nowrap">{commands[activeTab]}</span>
-                </div>
-                <button
-                  onClick={copyToClipboard}
-                  className="ml-4 p-2 text-gray-500 hover:text-white transition-colors rounded-md"
-                >
-                  {copied ? <Check size={18} /> : <Copy size={18} />}
-                </button>
-
-                {/* Corner accents */}
-                <div className="absolute -bottom-px -left-px w-2 h-2 border-b border-l border-zinc-600 rounded-bl-sm opacity-50"></div>
-                <div className="absolute -bottom-px -right-px w-2 h-2 border-b border-r border-zinc-600 rounded-br-sm opacity-50"></div>
-              </div>
-            </div>
 
           </motion.div>
 
