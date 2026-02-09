@@ -1,127 +1,188 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import Header from '../../components/Header'
+import MermaidDiagram from '../../components/MermaidDiagram'
 
 export default function Product() {
+  const [markdown, setMarkdown] = useState<string>('')
+  const [headings, setHeadings] = useState<{ id: string; text: string; level: number }[]>([])
+  const [activeHeading, setActiveHeading] = useState<string>('')
+
+  const slugify = (text: string) => text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')
+
+  useEffect(() => {
+    fetch('/tech_doc/doc.md')
+      .then(res => res.text())
+      .then(text => {
+        let processedText = text.replace(
+          /<div align="center">\s*<img src="([^"]+)" alt="([^"]+)">\s*<\/div>(?:\s*<br\s*\/?>)?/g,
+          '![$2](/tech_doc/$1)'
+        )
+        setMarkdown(processedText)
+
+        // Extract headings
+        const lines = processedText.split('\n')
+        const extractedHeadings = []
+        for (const line of lines) {
+          const match = line.match(/^(#{1,3})\s+(.+)$/)
+          if (match) {
+            // Remove markdown formatting (bold/italic markers)
+            let cleanText = match[2].replace(/\*\*\*/g, '').replace(/\*\*/g, '').replace(/\*/g, '').replace(/_/g, '')
+            extractedHeadings.push({
+              level: match[1].length,
+              text: cleanText,
+              id: slugify(cleanText)
+            })
+          }
+        }
+        setHeadings(extractedHeadings)
+      })
+      .catch(err => console.error('Error loading product doc:', err))
+  }, [])
+
+  useEffect(() => {
+    if (headings.length === 0) return
+
+    const handleScroll = () => {
+      const headingElements = headings.map(h => {
+        const el = document.getElementById(h.id)
+        return el ? { id: h.id, top: el.getBoundingClientRect().top } : null
+      }).filter(Boolean) as Array<{ id: string; top: number }>
+
+      if (headingElements.length === 0) return
+
+      // Find the heading closest to the top of viewport
+      const viewportTop = 120
+      let activeId = headingElements[0].id
+
+      for (const { id, top } of headingElements) {
+        if (top <= viewportTop) {
+          activeId = id
+        }
+      }
+
+      setActiveHeading(activeId)
+    }
+
+    // Set initial state after delay
+    setTimeout(handleScroll, 300)
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [headings])
+
+  const HeadingRenderer = ({ level, children }: { level: number, children: React.ReactNode }) => {
+    const text = extractText(children)
+    const id = slugify(text)
+    const Tag = `h${level}` as keyof JSX.IntrinsicElements
+    return <Tag id={id}>{children}</Tag>
+  }
+
+  // Helper to extract text from React children
+  const extractText = (children: any): string => {
+    if (typeof children === 'string') return children
+    if (Array.isArray(children)) return children.map(extractText).join('')
+    if (children?.props?.children) return extractText(children.props.children)
+    return ''
+  }
+
+  const MermaidFetcher = ({ src, alt }: { src: string, alt: string }) => {
+    const [chart, setChart] = useState<string>('')
+    const [error, setError] = useState<boolean>(false)
+
+    useEffect(() => {
+      fetch(src)
+        .then(res => {
+          if (!res.ok) throw new Error('Failed to load diagram')
+          return res.text()
+        })
+        .then(setChart)
+        .catch(err => {
+          console.error(err)
+          setError(true)
+        })
+    }, [src])
+
+    if (error) return <div className="text-red-500">Failed to load diagram: {alt}</div>
+    if (!chart) return <div className="h-24 w-full animate-pulse bg-white/5 rounded-lg border border-white/10 my-8" />
+
+    return <MermaidDiagram chart={chart} />
+  }
+
   return (
     <main className="relative min-h-screen">
       <Header />
-      <div className="relative z-10">
+      <div className="relative z-10 pt-32 px-6 pb-[50vh] font-sans">
+        <div className="container mx-auto max-w-7xl">
+          <div className="flex flex-col lg:flex-row gap-12">
 
-        <section className="min-h-screen pt-32 px-6 pb-20">
-          <div className="container mx-auto max-w-4xl">
+            {/* Table of Contents - Sticky Sidebar */}
+            <motion.aside
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="hidden lg:block w-64 flex-shrink-0"
+            >
+              <div className="sticky top-32">
+                <h4 className="text-white font-bold mb-6 font-mono border-b border-zinc-800 pb-2">CONTENTS</h4>
+                <ul className="space-y-3">
+                  {headings.map((heading) => (
+                    <li key={heading.id} style={{ paddingLeft: `${(heading.level - 1) * 12}px` }}>
+                      <a
+                        href={`#${heading.id}`}
+                        className={`text-sm block font-mono transition-colors ${activeHeading === heading.id
+                          ? 'text-white font-bold'
+                          : 'text-zinc-500 hover:text-white'
+                          }`}
+                        dangerouslySetInnerHTML={{ __html: heading.text.replace(/Lilith/g, 'Lilith') }}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.aside>
+
+            {/* Main Content */}
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
+              className="flex-1 max-w-3xl"
             >
-              <h1 className="text-6xl md:text-7xl font-bold mb-4">
-                <span className="text-gradient glow-red">The Product</span>
-                <span className="text-white block mt-2 text-4xl md:text-5xl">Deterministic Security Framework</span>
-              </h1>
-              <p className="text-xl text-cyber-pink mb-8">Cross-platform protection for Linux, Windows, and MacOS systems</p>
-
-              <div className="space-y-12 text-lg text-gray-300 leading-relaxed">
-                <div>
-                  <p className="text-xl leading-relaxed">
-                    Badcompany develops a cross-platform, deterministic security substrate that establishes a mathematically verifiable safety envelope for autonomous agents. We replace probabilistic guardrails with execution-layer enforcement, securing critical infrastructure by making safety an immutable physical constraint of the system.
-                  </p>
-                </div>
-
-                <div>
-                  <h2 className="text-3xl font-bold text-cyber-pink mb-6">The Architectural Core</h2>
-                  <div className="space-y-6">
-                    <div>
-                      <h3 className="text-xl font-bold text-white mb-2">Deterministic Policy Enforcement Point (PEP)</h3>
-                      <p>
-                        The PEP sits directly in the execution path between the agent and the operating system. It acts as a
-                        mandatory gatekeeper for every tool call, API request, and file system interaction. By intercepting
-                        actions at the syscall level, it replaces best-effort filters with absolute, binary enforcement.
-                      </p>
-                    </div>
-
-                    <div>
-                      <h3 className="text-xl font-bold text-white mb-2">RL-Driven Intent Recognition</h3>
-                      <p>
-                        While the PEP handles static rules, a specialized Reinforcement Learning Engine analyzes
-                        high-fidelity logs in real-time. It identifies intent patterns, detecting multi-step injection
-                        attacks or anomalous logic branches that static signatures miss, and communicates with the PEP to
-                        dynamically revoke capabilities.
-                      </p>
-                    </div>
-
-                    <div>
-                      <h3 className="text-xl font-bold text-white mb-2">Stateful Taint Tracking</h3>
-                      <p>
-                        We track the origin and flow of data throughout the agentic session. If an agent interacts with
-                        untrusted context (e.g., a RAG-retrieved document or a web search), the system taints the session,
-                        automatically restricting access to sensitive tools until the state is verified or cleansed.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <h2 className="text-3xl font-bold text-cyber-pink mb-6">Technical Reasoning: The Kernel-Level Shift</h2>
-                  <p className="mb-6">
-                    Current AI infrastructure resembles the Enterprise Java era of the 2000s; bloated with high-level
-                    abstractions that introduce massive latency and unobservable debt. We move enforcement to the kernel
-                    level for two reasons:
-                  </p>
-                  <ul className="space-y-4 ml-2">
-                    <li className="flex gap-3">
-                      <span className="text-cyber-red mt-1">▪</span>
-                      <div>
-                        <strong className="text-white">Zero-Latency Performance (&lt;10ms):</strong> Security cannot be a trade-off
-                        for utility. By operating at the lowest level of the stack, we achieve a target latency of less than
-                        10ms, ensuring that real-time agentic workflows remain fast enough for business-critical operations.
-                      </div>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-cyber-red mt-1">▪</span>
-                      <div>
-                        <strong className="text-white">Architectural Durability:</strong> High-level AI frameworks and Gemini/GPT
-                        integrations are volatile and change monthly. The kernel/syscall interface is stable. By building at
-                        this level, our security substrate remains immune to the rapid obsolescence of high-abstraction software.
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-
-                <div>
-                  <h2 className="text-3xl font-bold text-cyber-pink mb-6">Observability and Verification</h2>
-                  <ul className="space-y-4 ml-2">
-                    <li className="flex gap-3">
-                      <span className="text-cyber-red mt-1">▪</span>
-                      <div>
-                        <strong className="text-white">High-Fidelity Logs:</strong> We provide deep visibility into agent
-                        behavior that is impossible at the application layer, capturing exactly how an agent interacts with
-                        the underlying infrastructure.
-                      </div>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-cyber-red mt-1">▪</span>
-                      <div>
-                        <strong className="text-white">Cryptographic Capability Binding:</strong> Every tool access is backed
-                        by a cryptographically signed token. An agent cannot hallucinate its way into an unauthorized
-                        database; the execution environment simply refuses to resolve the request without a valid, policy-backed signature.
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="border-t border-cyber-red/20 pt-8 mt-12">
-                  <p className="text-xl font-medium text-gray-200">
-                    In summary, Badcompany transforms security from a linguistic suggestion into a deterministic
-                    execution substrate, allowing organizations to deploy autonomous agents with mathematical certainty.
-                  </p>
-                </div>
-
+              <div className="markdown-body font-sans">
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    img: (props: any) => {
+                      if (props.src?.endsWith('.mmd')) {
+                        return <MermaidFetcher src={props.src} alt={props.alt} />
+                      }
+                      return (
+                        <img
+                          {...props}
+                          className="max-w-full h-auto mx-auto block rounded-lg my-8"
+                          style={{ maxHeight: '600px' }}
+                        />
+                      )
+                    },
+                    h1: ({ children }) => <HeadingRenderer level={1}>{children}</HeadingRenderer>,
+                    h2: ({ children }) => <HeadingRenderer level={2}>{children}</HeadingRenderer>,
+                    h3: ({ children }) => <HeadingRenderer level={3}>{children}</HeadingRenderer>,
+                  }}
+                >
+                  {markdown}
+                </ReactMarkdown>
               </div>
             </motion.div>
           </div>
-        </section>
+        </div>
       </div>
     </main>
   )

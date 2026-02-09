@@ -9,7 +9,7 @@
 
 @layer base {
   body {
-    @apply bg-cyber-black text-white antialiased;
+    @apply bg-cyber-black text-white antialiased overflow-x-hidden;
   }
 
   html {
@@ -25,14 +25,6 @@
 @layer utilities {
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-cyber-red to-cyber-pink;
-  }
-
-  .glow-red {
-    /* Glow effect removed */
-  }
-
-  .border-glow {
-    box-shadow: 0 0 20px rgba(255, 0, 85, 0.3);
   }
 }
 
@@ -89,6 +81,14 @@
   margin-top: 0;
   margin-bottom: 16px;
   color: #ffffff;
+}
+
+.markdown-body ul {
+  list-style: disc;
+}
+
+.markdown-body ol {
+  list-style: decimal;
 }
 
 .markdown-body ul,

@@ -34,6 +34,12 @@ const repositories = [
     description: 'Cryptographic Honeypot & Intent-Mediated Enforcement Response Architecture',
     language: 'Python',
     url: '/blog?post=vsaml'
+  },
+  {
+    name: 'Agency Without Assurance',
+    description: 'Investigating the security risks of autonomous agents with full computer access and OpenClaw configuration vulnerabilities.',
+    language: 'Security Audit',
+    url: '/blog?post=clawdbot'
   }
 ]
 
@@ -41,63 +47,70 @@ export default function Repositories() {
   const [selectedRepo, setSelectedRepo] = useState<string | null>(null)
 
   return (
-    <section id="repositories" className="min-h-screen flex items-center justify-center px-6 py-20">
-      <div className="container mx-auto">
+    <section id="repositories" className="min-h-screen flex items-center justify-center px-6 py-20 bg-cyber-black">
+      <div className="container mx-auto max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-5xl font-bold text-center mb-4">
-            Open Source <span className="text-gradient">Research</span>
-          </h2>
-          <p className="text-xl text-gray-400 text-center mb-16">
-            Publishing our findings to secure the future of AI
-          </p>
+          <div className="flex flex-col items-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 font-mono text-white text-center">
+              OPEN SOURCE <span className="text-cyber-red">RESEARCH</span>
+            </h2>
+            <p className="text-xl text-gray-500 text-center font-mono max-w-2xl">
+              Publishing our findings to secure the future of AI
+            </p>
+          </div>
 
-          <div className="flex justify-center">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl">
-              {repositories.map((repo, index) => (
-                <motion.div
-                  key={repo.name}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  onClick={() => {
-                    if (repo.hasOptions) {
-                      setSelectedRepo(repo.name)
-                    } else if (repo.url) {
-                      if (repo.url.startsWith('/')) {
-                        window.location.href = repo.url
-                      } else {
-                        window.open(repo.url, '_blank', 'noopener,noreferrer')
-                      }
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {repositories.map((repo, index) => (
+              <motion.div
+                key={repo.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                onClick={() => {
+                  if (repo.hasOptions) {
+                    setSelectedRepo(repo.name)
+                  } else if (repo.url) {
+                    if (repo.url.startsWith('/')) {
+                      window.location.href = repo.url
+                    } else {
+                      window.open(repo.url, '_blank', 'noopener,noreferrer')
                     }
-                  }}
-                  className={`${repo.hasOptions || repo.url ? 'cursor-pointer' : ''}`}
-                >
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    className="bg-cyber-black/50 border-2 border-cyber-red/30 rounded-xl p-6 hover:border-cyber-red transition-all h-full"
-                  >
-                    <div className="flex items-start justify-between mb-4">
-                      <h3 className="text-2xl font-bold text-white">{repo.name}</h3>
-                      {repo.hasOptions && (
-                        <span className="text-xs text-cyber-pink bg-cyber-red/20 px-2 py-1 rounded ml-2">
-                          Multiple Options
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-gray-400 mb-4">{repo.description}</p>
-                    <div className="inline-block px-3 py-1 bg-cyber-red/20 rounded-full text-sm text-cyber-pink">
+                  }
+                }}
+                className={`group relative h-full ${repo.hasOptions || repo.url ? 'cursor-pointer' : ''}`}
+              >
+                <div className="h-full bg-zinc-900/50 border border-zinc-800 p-6 rounded-lg hover:border-cyber-red/50 transition-all duration-300">
+                  <div className="flex items-start justify-between mb-4">
+                    <h3 className="text-xl font-bold font-mono text-white transition-colors">
+                      {repo.name}
+                    </h3>
+                  </div>
+
+                  <p className="text-gray-400 text-sm leading-relaxed mb-6 font-mono">
+                    {repo.name === 'Agency Without Assurance' ? (
+                      <>
+                        <span className="font-bold text-white">Investigating the security risks of</span> autonomous agents with full computer access and <span className="font-bold text-white">OpenClaw</span> configuration vulnerabilities.
+                      </>
+                    ) : repo.description}
+                  </p>
+
+                  <div className="mt-auto pt-4 border-t border-zinc-800/50 flex items-center justify-between">
+                    <span className="text-xs font-mono text-zinc-500 border border-zinc-800 bg-zinc-900 px-2 py-1 rounded">
                       {repo.language}
-                    </div>
-                  </motion.div>
-                </motion.div>
-              ))}
-            </div>
+                    </span>
+                    <span className="text-zinc-600 group-hover:text-cyber-red transition-colors">
+                      →
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
       </div>

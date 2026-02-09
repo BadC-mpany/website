@@ -4,31 +4,20 @@ import Hero from '../sections/Hero'
 import OpenSource from '../sections/OpenSource'
 import Repositories from '../sections/Repositories'
 import Subscribe from '../sections/Subscribe'
-import Unique from '../sections/Unique'
+import Enterprise from '../sections/Enterprise'
 import Team from '../sections/Team'
 import Contact from '../sections/Contact'
-import Noise from '../ui/noise'
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen">
-      <div className="fixed inset-0 z-0">
-        <Noise
-          patternSize={200}
-          patternRefreshInterval={3}
-          patternAlpha={12}
-          quality="medium"
-          performanceMode={true}
-        />
-      </div>
-
+    <main className="relative min-h-screen bg-cyber-black overflow-x-hidden">
       <div className="relative z-10">
         <Header />
         <Hero />
         <OpenSource />
+        <Enterprise />
         <Repositories />
         <Subscribe />
-        <Unique />
         <Team />
         <Contact />
         <Footer />
@@ -36,4 +25,3 @@ export default function Home() {
     </main>
   )
 }
-

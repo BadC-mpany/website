@@ -1,7 +1,7 @@
 # vSAML: Primitives for a General Architecture of Agent Security
 
 
-**By BadCompany Research December 2025**
+**By Bad Company Research December 2025**
 
 The transition from LLMs as Chatbots to LLMs as **Agents** is a phase transition in software. We have moved from systems that _read_ to systems that _do_. Agents call APIs, execute code, query databases, manage infrastructure and are able to manage their own state by updating their memory.
 

@@ -14,6 +14,11 @@ interface BlogPost {
 
 const blogPosts: BlogPost[] = [
   {
+    title: 'Agency Without Assurance: The Security Risks of OpenClaw',
+    date: 'February 2026',
+    slug: 'clawdbot'
+  },
+  {
     title: 'vSAML: Primitives for a General Architecture of Agent Security',
     date: 'December 2025',
     slug: 'vsaml'
@@ -23,17 +28,17 @@ const blogPosts: BlogPost[] = [
 function extractHeadings(markdown: string): Array<{ id: string; text: string; level: number }> {
   const headings: Array<{ id: string; text: string; level: number }> = []
   const lines = markdown.split('\n')
-  
+
   for (const line of lines) {
     if (line.startsWith('#')) {
       const match = line.match(/^(#{1,6})\s+(.+)$/)
       if (match) {
         const level = match[1].length
         let text = match[2].trim()
-        
+
         // Remove markdown formatting (bold, italic, etc.)
         text = text.replace(/\*\*/g, '').replace(/\*/g, '').replace(/_/g, '')
-        
+
         // Only include h2 and below for sidebar navigation
         if (level >= 2) {
           const id = text
@@ -45,7 +50,7 @@ function extractHeadings(markdown: string): Array<{ id: string; text: string; le
       }
     }
   }
-  
+
   return headings
 }
 
@@ -70,7 +75,7 @@ export default function Blog() {
       fetch(`/blog_md/${selectedSlug === 'vsaml' ? 'vSAML' : selectedSlug}.md`)
         .then(res => res.text())
         .then(text => {
-          // Remove the first h1 (title) and the "By BadCompany Research" line
+          // Remove the first h1 (title) and the "By Bad Company Research" line
           const lines = text.split('\n')
           let skipNext = false
           const processedLines = lines.filter((line, index) => {
@@ -108,13 +113,13 @@ export default function Blog() {
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       // Find the entry that's intersecting (visible in viewport)
       const visibleEntries = entries.filter(entry => entry.isIntersecting)
-      
+
       if (visibleEntries.length > 0) {
         // Get the first visible heading (closest to top)
         const topEntry = visibleEntries.reduce((prev, current) => {
           return prev.boundingClientRect.top < current.boundingClientRect.top ? prev : current
         })
-        
+
         const id = topEntry.target.id
         if (id) {
           setActiveHeading(id)
@@ -124,7 +129,7 @@ export default function Blog() {
         const allEntries = entries.sort((a, b) => {
           return a.boundingClientRect.top - b.boundingClientRect.top
         })
-        
+
         // Find the last heading that's above the viewport
         for (let i = allEntries.length - 1; i >= 0; i--) {
           if (allEntries[i].boundingClientRect.top < 120) {
@@ -154,7 +159,7 @@ export default function Blog() {
         const el = document.getElementById(h.id)
         return el ? { element: el, id: h.id, top: el.getBoundingClientRect().top } : null
       }).filter(Boolean) as Array<{ element: HTMLElement; id: string; top: number }>
-      
+
       if (headingElements.length === 0) return
 
       // Find the heading closest to the top of viewport (with offset)
@@ -180,7 +185,7 @@ export default function Blog() {
     }, 300)
 
     window.addEventListener('scroll', handleScroll, { passive: true })
-    
+
     return () => {
       observer.disconnect()
       window.removeEventListener('scroll', handleScroll)
@@ -222,8 +227,8 @@ export default function Blog() {
                       onClick={() => setSelectedSlug(post.slug)}
                       className="w-full text-left py-6 hover:opacity-80 transition-opacity"
                     >
-                      <h2 className="text-2xl font-bold text-white mb-2">{post.title}</h2>
-                      <p className="text-gray-400">{post.date}</p>
+                      <h2 className="text-2xl font-bold font-mono text-white mb-2">{post.title}</h2>
+                      <p className="text-gray-400 font-mono">{post.date}</p>
                     </button>
                     {index < blogPosts.length - 1 && (
                       <hr className="border-white/20 my-0" />
@@ -242,7 +247,7 @@ export default function Blog() {
   return (
     <main className="relative min-h-screen">
       <Header />
-      <div className="container mx-auto px-6 pt-32 pb-20">
+      <div className="container mx-auto px-6 pt-32 pb-[33vh]">
         <div className="flex gap-12 max-w-6xl mx-auto">
           {/* Sidebar Navigation */}
           <aside className="hidden lg:block w-64 flex-shrink-0 sticky top-32 h-fit">
@@ -250,23 +255,20 @@ export default function Blog() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-cyber-black/50 border-2 border-cyber-red/30 rounded-xl p-6"
             >
-              <h3 className="text-lg font-bold text-cyber-pink mb-4">Contents</h3>
-              <nav className="space-y-2">
+              <h4 className="text-white font-bold mb-6 font-mono border-b border-zinc-800 pb-2">CONTENTS</h4>
+              <nav className="space-y-3">
                 {headings.map((heading) => (
                   <button
                     key={heading.id}
                     onClick={() => scrollToHeading(heading.id)}
-                    className={`block w-full text-left px-3 py-2 rounded-lg transition-all text-sm ${
-                      activeHeading === heading.id
-                        ? 'bg-cyber-red/20 text-cyber-pink border-l-2 border-cyber-red'
-                        : 'text-gray-400 hover:text-cyber-pink hover:bg-cyber-red/10'
-                    }`}
-                    style={{ paddingLeft: `${(heading.level - 1) * 0.75 + 0.75}rem` }}
-                  >
-                    {heading.text}
-                  </button>
+                    className={`block w-full text-left transition-colors text-sm font-mono ${activeHeading === heading.id
+                      ? 'text-white font-bold'
+                      : 'text-zinc-500 hover:text-white'
+                      }`}
+                    style={{ paddingLeft: `${(heading.level - 1) * 12}px` }}
+                    dangerouslySetInnerHTML={{ __html: heading.text.replace(/Lilith/g, 'Lilith') }}
+                  />
                 ))}
               </nav>
             </motion.div>
@@ -281,18 +283,18 @@ export default function Blog() {
             >
               {/* Blog Post Header */}
               <div className="mb-12">
-                <h1 className="text-5xl md:text-6xl font-bold mb-4">
+                <h1 className="text-5xl md:text-6xl font-bold mb-4 font-mono">
                   <span className="text-gradient">{currentPost?.title}</span>
                 </h1>
-                <div className="flex items-center gap-4 text-gray-400 mb-8">
+                <div className="flex items-center gap-4 text-gray-400 mb-8 font-mono">
                   <span>{currentPost?.date}</span>
                   <span>•</span>
-                  <span>BadCompany Research</span>
+                  <span>Bad Company Research</span>
                 </div>
               </div>
 
               {/* Markdown Content - render exactly like standard markdown viewer */}
-              <div className="markdown-body">
+              <div className="markdown-body font-sans">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={{
@@ -348,7 +350,7 @@ function extractId(children: any): string {
   } else if (children?.props?.children) {
     text = extractId(children.props.children)
   }
-  
+
   return text
     .toString()
     .toLowerCase()
