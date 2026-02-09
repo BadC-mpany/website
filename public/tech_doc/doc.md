@@ -19,8 +19,6 @@ Replace best effort guardrails with deterministic enforcement.
 * **Deny-by-Default Capabilities**: The agent retains its dynamic decision-making and tool-selection logic, but starts with zero execution authority. All privileged actions require cryptographic authorization.
 * **Natural Language for Policy Definitions**: A module to translate natural language to policy definitions. An algorithm that verifies the completeness and correctness of a policy.
 
-<!-- ![System Architecture](/tech_doc/diagram.mmd) -->
-
 # The Product
 
 Meet ***Lilith***: runtime security and observability at the kernel layer.
