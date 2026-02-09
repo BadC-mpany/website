@@ -13,7 +13,7 @@ export default function OpenSource() {
     const [copied, setCopied] = useState(false)
 
     const copyCloneCommand = () => {
-        navigator.clipboard.writeText('git clone https://github.com/BadC-mpany/lilith-v1.0')
+        navigator.clipboard.writeText('git clone https://github.com/BadC-mpany/lilith-zero')
         setCopied(true)
         setTimeout(() => setCopied(false), 2000)
     }
@@ -43,9 +43,7 @@ export default function OpenSource() {
 
                         <div className="flex flex-wrap gap-4 mb-10">
                             <a
-                                href="https://sentinel.badcompany.xyz/"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                href="/product"
                                 className="px-6 py-3 bg-white text-black hover:bg-gray-200 transition-colors rounded font-mono font-bold text-sm tracking-wide flex items-center justify-center min-w-[160px]"
                             >
                                 <ShinyText
@@ -58,7 +56,7 @@ export default function OpenSource() {
                                 />
                             </a>
                             <a
-                                href="https://github.com/BadC-mpany/"
+                                href="https://github.com/BadC-mpany/lilith-zero"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="px-6 py-3 border border-zinc-700 text-white hover:border-cyber-red hover:text-cyber-red transition-colors rounded font-mono font-bold text-sm tracking-wide flex items-center gap-2"
@@ -110,7 +108,7 @@ export default function OpenSource() {
                                     <code className="font-mono text-sm text-gray-300">
                                         <span className="text-[#ff7b72] mr-2">git</span>
                                         <span className="text-[#d2a8ff] mr-2">clone</span>
-                                        BadC-mpany/lilith-v1.0
+                                        BadC-mpany/lilith-zero
                                     </code>
                                     <button
                                         onClick={copyCloneCommand}
