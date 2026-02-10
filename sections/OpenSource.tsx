@@ -11,11 +11,25 @@ export default function OpenSource() {
     const [isCalModalOpen, setIsCalModalOpen] = useState(false)
     const calUrl = process.env.NEXT_PUBLIC_CALCOM_URL || 'https://cal.com/janos-mozer/30min'
     const [copied, setCopied] = useState(false)
+    const [copiedUv, setCopiedUv] = useState(false)
+    const [copiedPip, setCopiedPip] = useState(false)
 
     const copyCloneCommand = () => {
         navigator.clipboard.writeText('git clone https://github.com/BadC-mpany/lilith-zero')
         setCopied(true)
         setTimeout(() => setCopied(false), 2000)
+    }
+
+    const copyUvCommand = () => {
+        navigator.clipboard.writeText('uv add lilith-zero')
+        setCopiedUv(true)
+        setTimeout(() => setCopiedUv(false), 2000)
+    }
+
+    const copyPipCommand = () => {
+        navigator.clipboard.writeText('pip install lilith-zero')
+        setCopiedPip(true)
+        setTimeout(() => setCopiedPip(false), 2000)
     }
 
     return (
@@ -123,6 +137,54 @@ export default function OpenSource() {
                                 </div>
                             </StarBorder>
 
+                        </div>
+
+                        {/* Installation Commands Block */}
+                        <div className="bg-[#0d1117] border border-zinc-800 rounded-xl p-6 shadow-2xl relative overflow-hidden group hover:border-zinc-700 transition-all mt-6">
+                            <h3 className="text-white font-bold font-mono text-sm mb-4">Python SDK</h3>
+                            <div className="space-y-3">
+                                {/* uv add command */}
+                                <StarBorder as="div" color="magenta" speed="5s" className="w-full">
+                                    <div className="flex items-center justify-between">
+                                        <code className="font-mono text-sm text-gray-300">
+                                            <span className="text-[#ff7b72] mr-2">uv</span>
+                                            <span className="text-[#d2a8ff] mr-2">add</span>
+                                            lilith-zero
+                                        </code>
+                                        <button
+                                            onClick={copyUvCommand}
+                                            className="text-zinc-400 hover:text-white transition-colors"
+                                        >
+                                            {copiedUv ? (
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                                            ) : (
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
+                                            )}
+                                        </button>
+                                    </div>
+                                </StarBorder>
+
+                                {/* pip install command */}
+                                <StarBorder as="div" color="magenta" speed="5s" className="w-full">
+                                    <div className="flex items-center justify-between">
+                                        <code className="font-mono text-sm text-gray-300">
+                                            <span className="text-[#ff7b72] mr-2">pip</span>
+                                            <span className="text-[#d2a8ff] mr-2">install</span>
+                                            lilith-zero
+                                        </code>
+                                        <button
+                                            onClick={copyPipCommand}
+                                            className="text-zinc-400 hover:text-white transition-colors"
+                                        >
+                                            {copiedPip ? (
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                                            ) : (
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
+                                            )}
+                                        </button>
+                                    </div>
+                                </StarBorder>
+                            </div>
                         </div>
                     </motion.div>
                 </div>
