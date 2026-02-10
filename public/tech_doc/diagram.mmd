@@ -1,5 +1,38 @@
-graph TD
-    A[Start] --> B{Is it working?}
-    B -->|Yes| C[Great!]
-    B -->|No| D[Debug]
-    D --> B
+graph LR
+    classDef agent fill:transparent,stroke:#ff0055,stroke-width:2px,color:#ffffff;
+    classDef runtime fill:transparent,stroke:#7c3aed,stroke-width:2px,color:#ffffff;
+    classDef defense fill:transparent,stroke:#3b82f6,stroke-width:1px,stroke-dasharray: 5 5,color:#ffffff;
+    classDef kernel fill:transparent,stroke:#71717a,stroke-width:2px,color:#ffffff;
+    classDef log fill:transparent,stroke:#db2777,stroke-width:2px,color:#ffffff;
+
+    %% 1. The Isolated Agent
+    subgraph App_Layer [Application Layer]
+        Agent[Agent]:::agent
+    end
+
+    %% 2. The Runtime & Defense Logic
+    
+    
+    subgraph Logic [Runtime Defense Layer]
+        DefenseLogic["Policy Verifier<br/>&<br/>Secret Injector"]:::defense
+    end
+
+    %% 3. The Foundation
+    subgraph System_Layer [Kernel & Hardware Layer]
+        direction TB
+        Kernel[Lilith Kernel / OS]:::kernel
+        HW[Secure Hardware Root]:::kernel
+    end
+
+    Output[Authorized I/O]:::runtime
+    Audit[Audit Log]:::log
+
+    %% Flow
+    Agent -->|1. Call| Gate
+    Gate -->|2. Verify| Logic
+    Logic -->|3. Approved| Kernel
+    Kernel -->|4. Execute| HW
+    HW -->|5. External| Output
+
+    Gate -.->|Trace| Audit
+    HW -.->|Verify| Audit

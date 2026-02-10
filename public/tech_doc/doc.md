@@ -32,6 +32,7 @@ Meet ***Lilith***: runtime security and observability at the kernel layer.
 
 We provide ***Lilith*** as an execution environment that contains agent workloads, transforming untrusted AI agents into deterministic and secure systems. It provides a near-zero latency, provable and durable security environment for agents.
 
+![System Architecture](/tech_doc/diagram.mmd)
 
 # We offer ***Lilith*** for two deployment environments
 
