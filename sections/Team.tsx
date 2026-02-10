@@ -8,19 +8,22 @@ const team = [
     name: 'János Mozer',
     role: 'CEO',
     bio: 'Physics background with experience in developing error-proof systems for distributed, resilient architectures, guaranteeing high availability through secure protocols.',
-    image: '/images/profile.jpeg'
+    image: '/images/profile.jpeg',
+    linkedin: 'https://www.linkedin.com/in/janos-mozer/'
   },
   {
     name: 'Gregorio Jaca',
     role: 'RESEARCHER & ARCHITECT',
     bio: 'Physics and Biology background. Worked on simulations from fluid dynamics and rockets to network systems. Currently researching LLM dynamics and interpretability through the lens of chaos theory.',
-    image: '/images/grego.jpeg'
+    image: '/images/grego.jpeg',
+    linkedin: 'https://www.linkedin.com/in/gregorio-jaca-3ab70a296/'
   },
   {
     name: 'Péter Tallósy',
     role: 'CTO',
     bio: 'Physics-trained research engineer with deep expertise in ML/AI and full-stack software engineering capability. Experience in security and building directly on the hardware.',
-    image: '/images/petya.jpeg'
+    image: '/images/petya.jpeg',
+    linkedin: 'https://www.linkedin.com/in/peter-tallosy/'
   }
 ]
 
@@ -54,14 +57,19 @@ export default function Team() {
                 className="group bg-zinc-900 border border-zinc-800 rounded-lg p-8 hover:border-cyber-red/50 transition-all duration-300"
               >
                 <div className="flex flex-col items-center text-center">
-                  <div className="relative w-32 h-32 mb-6 rounded-full overflow-hidden border-2 border-zinc-800 group-hover:border-cyber-red/50 transition-colors">
+                  <a
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative w-32 h-32 mb-6 rounded-full overflow-hidden border-2 border-zinc-800 group-hover:border-cyber-red/50 transition-colors cursor-pointer"
+                  >
                     <Image
                       src={member.image}
                       alt={member.name}
                       fill
                       className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                     />
-                  </div>
+                  </a>
 
                   <h3 className="text-xl font-bold font-mono text-white mb-2">{member.name}</h3>
                   <div className="px-3 py-1 bg-cyber-red/10 border border-cyber-red/20 rounded mb-4">
