@@ -59,6 +59,11 @@ const nextConfig = {
         destination: 'https://raw.githubusercontent.com/BadC-mpany/lilith-zero/main/install.sh',
         permanent: false,
       },
+      {
+        source: '/lilith-zero/install.ps1',
+        destination: 'https://raw.githubusercontent.com/BadC-mpany/lilith-zero/main/install.ps1',
+        permanent: false,
+      },
     ];
   },
 }
