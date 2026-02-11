@@ -1,3 +1,5 @@
+import { Github } from 'lucide-react'
+
 export default function Footer() {
   return (
     <footer className="bg-cyber-black border-t border-zinc-800 py-8">
@@ -14,6 +16,15 @@ export default function Footer() {
 
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-xs text-zinc-600 font-mono whitespace-nowrap">
             <p>&copy; {new Date().getFullYear()} Bad Company Inc. All rights reserved.</p>
+            <a
+              href="https://github.com/BadC-mpany/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+              aria-label="GitHub"
+            >
+              <Github size={20} />
+            </a>
           </div>
         </div>
       </div>
