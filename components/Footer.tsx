@@ -1,4 +1,4 @@
-import { Github } from 'lucide-react'
+import { Github, Linkedin } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -16,15 +16,26 @@ export default function Footer() {
 
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-xs text-zinc-600 font-mono whitespace-nowrap">
             <p>&copy; {new Date().getFullYear()} Bad Company Inc. All rights reserved.</p>
-            <a
-              href="https://github.com/BadC-mpany/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transition-colors"
-              aria-label="GitHub"
-            >
-              <Github size={20} />
-            </a>
+            <div className="flex items-center gap-4">
+              <a
+                href="https://github.com/BadC-mpany/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+                aria-label="GitHub"
+              >
+                <Github size={20} />
+              </a>
+              <a
+                href="https://www.linkedin.com/company/badcompany-xyz/posts/?feedView=all"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={20} />
+              </a>
+            </div>
           </div>
         </div>
       </div>
