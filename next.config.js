@@ -51,6 +51,16 @@ const nextConfig = {
       },
     ]
   },
+
+  async redirects() {
+    return [
+      {
+        source: '/lilith-zero/install.sh',
+        destination: 'https://raw.githubusercontent.com/BadC-mpany/lilith-zero/main/install.sh',
+        permanent: false,
+      },
+    ];
+  },
 }
 
 module.exports = nextConfig
