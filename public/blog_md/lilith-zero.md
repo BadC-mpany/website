@@ -15,8 +15,7 @@ We also argue (many do since the beginning of 2025 already) that treating prompt
 
 Security is all about _verifiable guarantees_ of not getting fucked. An agent security solution has to be able to _verify data flows_, maintain rigorous execution state and impose near-zero latency when enforcing policies on the execution loop. We argue that _latency is itself a security feature_; if an auth proxy is slow, adding 50-200ms per tool call as python interpreters thrash through garbage collection, devs will inevitably bypass it.
 
-**Moats of optimized security in lilith-zero**
-----------------------------------------------
+## Moats of optimized security in lilith-zero
 
 For autonomous agents negotiating hundreds of asynchronous tool calls a minute, a Python interpreter overhead is fatal. The **`lilith-zero`** Rust core operates at microsecond scales, boasting _codec decoding times_ of approx. _247 ns_ and _policy validation_ in roughly _660 ns_ on a usual windows desktop (I wouldn’t show off with the results on M4 MacBook now though). But raw speed is only half of the equation. We leveraged Rust’s memory safety and affine type system to construct OS-level process isolation, making structural vulnerabilities _unrepresentable_.
 
@@ -28,8 +27,7 @@ The implemented taint tracking types (used for tag-based information flow contro
 
 Finally, **`lilith-zero`** intercepts communication entirely over standard stdio, enforcing rigorous `Content-Length` ([LSP-stlye](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/)) bounds and strict JSON-RPC 2.0 framing at the stream level. This pre-emptively strips away _JSON smuggling_ and _request splitting attacks_ before payloads can ever reach a vulnerable tool server.
 
-**YAML policy engine and Agents Rule of Two**
----------------------------------------------
+## YAML policy engine and Agents Rule of Two
 
 We entirely abandoned heuristic blocking in favor of a deterministic YAML policy engine. Devs explicitly define authorization logic, resource constraints using standard wildcards and granular state-tracking actions such as **`ADD_TAINT`** or **`CHECK_TAINT`**.
 
@@ -39,8 +37,7 @@ For data exfiltration event to occur, an attacker requires three things simultan
 
 Because LLM classifiers (guardrails) suffer from massive generalization gaps (plus all such defenses are _optimizable_ meaning they can be broken by adaptive attacks) when facing novel injection attacks, **`lilith-zero`** does not attempt to guess if a payload (e.g. prompt, tool description, tool response etc.) is malicious. Instead, it breaks the attack chain deterministically. Using the YAML engine, **`lilith-zero`** dynamically tracks session state. An agent is structurally forbidden from executing tools that satisfy all three legs of the **Lethal Trifecta** simultaneously.
 
-**Rigorous assurance during development**
------------------------------------------
+## Rigorous assurance during development
 
 We didn’t just write a middleware, unit tested it and pushed it to github; we used standard security methods developed for rust and formally proved the correctness of some key modules of **`lilith-zero`** and also analysed the runtime behavior of unsafe implementation with [**miri**](https://github.com/rust-lang/miri) (undefined behavior detection tool for rust).
 
@@ -48,8 +45,7 @@ We used the [**Kani Rust Verifier**](https://github.com/model-checking/kani) to 
 
 > Disclaimer: Even after dozens of sophisticated security testing, vulnerabilities could have seeked in and remain present, so don’t trust **`lilith-zero`** like you would trust a bank vault, though its pretty damn secure! If you find any issue or vulnerabily though, please report them to [security@badcompany.xyz](mailto:security@badcompany.xyz)
 
-**Sub-ms security in under a minute**
--------------------------------------
+## Sub-ms security in under a minute
 
 Hard reality of enterprise DevOps is that security fails if devs dont deploy it because of potential performance degradation or integration related friction (including the deployment agent; hopefully they know and understand the pretty high risk security threats coming with MCP out-of-the-box). **`lilith-zero`** is designed to _wrap_ any existing MCP server with minimal code changes, sidestepping the friction that slows.
 
@@ -95,32 +91,31 @@ if __name__ == "__main__":
 
 Memory-safe, deterministic, sub-ms agent infra is not a premium enterprise add-on. It’s the baseline like https for webapps.
 
-Next steps and considerations for lilith-zero
----------------------------------------------
+## Next steps and considerations for lilith-zero
 
 **`lilith-zero`** is a _foundational security layer_ for MCP, but the landscape of true autonomous agency is expanding rapidly. Our architectural roadmap is focused on expanding enforcement fidelity without sacrificing performance.
 
-**Cedar Policy Engine**
+### Cedar Policy Engine
 
 While our YAML engine is highly efficient, complex enterprise topologies require formal authorization languages. We plan to integrate [**AWS Cedar**](https://www.cedarpolicy.com/), an open-source policy language rooted in Verification-Guided Development. Because Cedar’s formal proofs guarantee that policies terminate and do not conflict, integrating it allows **`lilith-zero`** to support complex RBAC/ABAC models without sacrificing performance.
 
-**DAG-Based Information Flow Control**
+### DAG-Based Information Flow Control
 
 Binary taint tracking (e.g., classifying data as simply `TAINTED` or `CLEAN`) falls apart in highly complex, multi-agent workflows. Inspired by the [**FIDES**](https://arxiv.org/abs/2412.04633) (Flow Integrity Deterministic Enforcement System) architecture, we plan to migrate our binary taint tracking into a Directed Acyclic Graph (DAG) lattice. This allows **`lilith-zero`** to track granular data lineage across thousands of asynchronous executions, selectively quarantine downstream tool requests and enforce mathematically sound Information Flow Control across disparate MCP boundaries.
 
-**Transport Extension: Remote Server Support (streamable HTTP/SSE)**
+### Transport Extension: Remote Server Support (streamable HTTP/SSE)
 
 Currently, **`lilith-zero`** operates exclusively over local stdio to maximize process supervision. However, the ecosystem heavily utilizes remote tools. In an upcoming transport evolution, Lilith will natively support the Server-Sent Events (SSE) and streamable HTTP transport mechanisms standard in MCP (version 2025 november), allowing enterprises to securely proxy remote server connections while preserving our strict codec framing and boundary defenses.
 
-**Protocol Feature Sync: Handshakes and Elicitation**
+### Protocol Feature Sync: Handshakes and Elicitation
 
 Anthropic released several crucial features to the MCP protocol in late 2025, including native support for long-running task workflows, pagination, and human-in-the-loop elicitation. **`lilith-zero`**’s codec will be expanded to validate, sanitize, and pass through these new message types seamlessly.
 
-**Crucial Note on Separation of Concerns**
+### Crucial Note on Separation of Concerns
 
 The ecosystem also demands human-in-the-loop (HITL) authentication and tool execution authorization integrations, sandboxed tool execution envs for running unknown code (via WebAssembly or OS containers like gVisor), and cryptographic code/tool signing. While we view these features as absolutely essential for agent security, **`lilith-zero`** **will not build them.**
 
-**End**
+## End
 
 **`lilith-zero`** is a dedicated _general_ _transport-layer security middleware_. Building Identity Providers or WebAssembly runtimes directly into the proxy is an architectural mistake that fractures the ecosystem. Instead, our plan with **`lilith-zero`** is about making it easily integrable with these external systems (delegating execution sandboxing to the host systems and identity validation to specialized providers). This ensures that our core intercept remains _small_, _auditable_, and _blindingly fast,_ but supports _all_ parts of the _security lifecycle of agents_.
 
