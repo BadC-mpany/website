@@ -34,7 +34,7 @@ export default function Header() {
           {/* Left: Logo */}
           <Link href="/" className="flex items-center">
             <span className="text-xl font-bold font-mono text-cyber-red tracking-tighter">
-              Bad Company
+              BadCompany
             </span>
           </Link>
 

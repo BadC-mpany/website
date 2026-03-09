@@ -16,7 +16,7 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Bad Company - Agent Security',
+  title: 'BadCompany - Agent Security',
   description: 'Breaking the rules to protect your AI systems',
   icons: {
     icon: '/images/badcompany_logo_2.jpg',

@@ -93,7 +93,7 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
         fetch(`/blog_md/${params.slug === 'vsaml' ? 'vSAML' : params.slug}.md`)
             .then(res => res.text())
             .then(text => {
-                // Remove the first h1 (title) and the "By Bad Company Research" line
+                // Remove the first h1 (title) and the "By BadCompany Research" line
                 const lines = text.split('\n')
                 let skipNext = false
                 const processedLines = lines.filter((line, index) => {
@@ -268,7 +268,7 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
                                 <div className="flex items-center gap-4 text-gray-400 mb-8 font-mono">
                                     <span>{post.date}</span>
                                     <span>•</span>
-                                    <span>Bad Company Research</span>
+                                    <span>BadCompany Research</span>
                                 </div>
                             </div>
 
