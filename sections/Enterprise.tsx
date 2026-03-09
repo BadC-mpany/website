@@ -20,15 +20,9 @@ const enterprises = [
                     'attack surfaces',
                     'tool poisoning',
                     'other vulnerabilities',
+                    'discovery document + detailed remediation plan',
                 ],
             },
-            {
-                description: 'output',
-                features: [
-                    'discovery document',
-                    'detailed remediation plan',
-                ],
-            }
         ],
         icon: <Shield className="w-8 h-8 text-white" />,
     },
@@ -43,12 +37,14 @@ const enterprises = [
                     </span>
                 ),
                 features: [
-                    'security middleware',
-                    'define agent scope',
-                    'define policy set',
-                    'unlocking full observability into agent behavior live',
+                    'Security middleware at the application layer',
+                    'Agent scope definition',
+                    'Policy set definition',
+                    'Runtime observability',
+                    'MCP native',
+                    'Secure deployment of existing AI agents'
                 ],
-            }
+            },
         ],
         icon: <Activity className="w-8 h-8 text-white" />,
     },
@@ -60,8 +56,10 @@ const enterprises = [
                 description: 'Deploying Lilith substrate as an agent and os agnostic security layer',
                 features: [
                     'API access to NLP for precise and fine-grained policy definitions',
+                    'Built on the kernel',
+                    'Enterprise-grade security solution at the kernel-level',
                 ],
-            }
+            },
         ],
         icon: <Server className="w-8 h-8 text-white" />,
     },
