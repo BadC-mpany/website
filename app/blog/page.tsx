@@ -12,6 +12,11 @@ interface BlogPost {
 
 const blogPosts: BlogPost[] = [
   {
+    title: 'We built deterministic agent security at ms scale: Lilith Zero',
+    date: 'February 2026',
+    slug: 'lilith-zero'
+  },
+  {
     title: 'Agency Without Assurance: The Security Risks of OpenClaw',
     date: 'February 2026',
     slug: 'clawdbot'
