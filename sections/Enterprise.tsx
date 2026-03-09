@@ -10,45 +10,60 @@ import { Shield, Server, Activity } from 'lucide-react'
 
 const enterprises = [
     {
-        title: 'SECURE ENVIRONMENT',
-        subtitle: 'WORKSTATION SIDE',
-        description: 'Verified gateway for high-assurance use of agents.',
-        features: [
-            'Verified agentic browsing',
-            'Verified agentic coding',
-            'Observable activity',
-            'No API leak',
-            'No bloatware install',
-            'No network exploit',
+        title: 'MCP Security Audit',
+        subtitle: 'ASSESSMENT',
+        sections: [
+            {
+                description: 'white-box assessment',
+                features: [
+                    'logical defects',
+                    'attack surfaces',
+                    'tool poisoning',
+                    'other vulnerabilities',
+                ],
+            },
+            {
+                description: 'output',
+                features: [
+                    'discovery document',
+                    'detailed remediation plan',
+                ],
+            }
         ],
         icon: <Shield className="w-8 h-8 text-white" />,
     },
     {
-        title: 'SECURE DEPLOYMENT',
-        subtitle: 'SELF-DEPLOYED AGENTS',
-        description: 'Verified execution container for autonomous AI agents.',
-        features: [
-            'Agent swarms verified',
-            'No leftover zombie processes',
-            'No data exfiltration',
-            'No bloatware install',
-            'No sensitive data leak',
-            'No unauthorized database access',
-        ],
-        icon: <Server className="w-8 h-8 text-white" />,
-    },
-    {
-        title: 'COMPLETE SOLUTION',
-        subtitle: 'COMBINED PROTECTION',
-        description: 'End-to-end protection for critical IP and regulated data, on both agent and user side.',
-        features: [
-            'Confidential information obfuscation',
-            'Full audit trail for FDA',
-            'Encrypted inference',
-            'Model weight protection',
-            'Zero-trust data ingress',
+        title: 'Securing Existing Agents',
+        subtitle: 'DEPLOYMENT',
+        sections: [
+            {
+                description: (
+                    <span>
+                        Deploying <a href="https://github.com/BadC-mpany/lilith-zero" target="_blank" rel="noopener noreferrer" className="text-cyber-red hover:underline decoration-cyber-red/50 hover:text-white transition-colors">Lilith-zero</a>
+                    </span>
+                ),
+                features: [
+                    'security middleware',
+                    'define agent scope',
+                    'define policy set',
+                    'unlocking full observability into agent behavior live',
+                ],
+            }
         ],
         icon: <Activity className="w-8 h-8 text-white" />,
+    },
+    {
+        title: 'Complete workstation Safety',
+        subtitle: 'COMING SOON',
+        sections: [
+            {
+                description: 'Deploying Lilith substrate as an agent and os agnostic security layer',
+                features: [
+                    'API access to NLP for precise and fine-grained policy definitions',
+                ],
+            }
+        ],
+        icon: <Server className="w-8 h-8 text-white" />,
     },
 ]
 
@@ -94,22 +109,27 @@ export default function Enterprise() {
                                     </div>
 
                                     {/* Content */}
-                                    <h3 className="text-2xl font-bold font-mono text-white mb-3 transition-colors">
+                                    <h3 className="text-2xl font-bold font-mono text-white mb-6 transition-colors">
                                         {item.title}
                                     </h3>
-                                    <p className="text-gray-400 font-mono text-sm leading-relaxed mb-8">
-                                        {item.description}
-                                    </p>
 
-                                    {/* Features List */}
-                                    <ul className="space-y-3 mt-auto">
-                                        {item.features.map((feature, i) => (
-                                            <li key={i} className="flex items-start gap-3 text-sm font-mono text-zinc-500 group-hover:text-zinc-400 transition-colors">
-                                                <span className="text-cyber-red mt-0.5">/</span>
-                                                {feature}
-                                            </li>
+                                    <div className="flex flex-col gap-8">
+                                        {item.sections.map((section, idx) => (
+                                            <div key={idx} className="flex flex-col">
+                                                <p className="text-gray-400 font-mono text-sm leading-relaxed mb-4 flex gap-2">
+                                                    <span className="mt-0">{section.description}</span>
+                                                </p>
+                                                <ul className="space-y-3">
+                                                    {section.features.map((feature, i) => (
+                                                        <li key={i} className="flex items-start gap-3 text-sm font-mono text-zinc-500 group-hover:text-zinc-400 transition-colors">
+                                                            <span className="text-cyber-red mt-0.5">-</span>
+                                                            {feature}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
                                         ))}
-                                    </ul>
+                                    </div>
 
                                     {/* Decoration */}
                                     {/* Decoration element removed */}
