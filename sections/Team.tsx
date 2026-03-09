@@ -39,11 +39,11 @@ export default function Team() {
         >
           <div className="flex flex-col items-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 font-mono text-white text-center">
-              MEET THE <span className="text-cyber-red">TROUBLEMAKERS</span>
+              MEET THE <span className="text-cyber-red">TEAM</span>
             </h2>
-            <p className="text-xl text-gray-500 text-center font-mono max-w-2xl">
+            {/* <p className="text-xl text-gray-500 text-center font-mono max-w-2xl">
               The rebels behind the code
-            </p>
+            </p> */}
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
