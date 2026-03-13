@@ -47,13 +47,13 @@ export default function Hero() {
             </h1>
 
             {/* Subtitle */}
-            <p className="text-lg text-gray-400 mb-12 max-w-lg font-mono leading-relaxed">
+            <p className="text-base md:text-lg text-gray-400 mb-12 max-w-lg font-mono leading-relaxed px-1">
               The deterministic security architecture built for <span className="bg-white/10 px-1 py-0.5 rounded text-white text-sm">autonomous</span> AI systems.
             </p>
 
             {/* Terminal Install Box */}
             <div className="max-w-xl w-full max-w-[calc(100vw-3rem)]">
-              <div className="flex items-center gap-6 mb-2 ml-1">
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-3 ml-1">
                 <button
                   onClick={() => setActiveTab('unix')}
                   className={`text-xs font-mono pb-1 transition-colors ${activeTab === 'unix' ? 'text-white border-b border-cyber-red' : 'text-gray-500 hover:text-gray-300'}`}
@@ -67,10 +67,10 @@ export default function Hero() {
                   WINDOWS (POWERSHELL)
                 </button>
               </div>
-              <div className="relative group bg-zinc-900 border border-zinc-800 rounded-lg p-5 flex items-center justify-between hover:border-zinc-700 transition-colors">
-                <div className="flex items-center gap-3 font-mono text-sm text-gray-300 overflow-x-auto no-scrollbar flex-1 min-w-0">
+              <div className="relative group bg-zinc-900 border border-zinc-800 rounded-lg p-4 md:p-5 flex items-center justify-between hover:border-zinc-700 transition-colors">
+                <div className="flex items-center gap-3 font-mono text-xs md:text-sm text-gray-300 overflow-x-auto no-scrollbar flex-1 min-w-0">
                   <span className="text-gray-500 select-none">{'>'}</span>
-                  <span className="whitespace-nowrap">{commands[activeTab]}</span>
+                  <span className="break-all md:whitespace-nowrap">{commands[activeTab]}</span>
                 </div>
                 <button
                   onClick={copyToClipboard}
