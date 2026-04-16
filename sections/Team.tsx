@@ -15,7 +15,7 @@ const team = [
     name: 'Gregorio Jaca',
     role: 'RESEARCHER & ARCHITECT',
     bio: 'Physics and Biology background. Worked on simulations from fluid dynamics and rockets to network systems. Currently researching LLM dynamics and interpretability through the lens of chaos theory.',
-    image: '/images/grego.jpeg',
+    image: '/images/grego.jpg',
     linkedin: 'https://www.linkedin.com/in/gregorio-jaca-3ab70a296/'
   },
   {
