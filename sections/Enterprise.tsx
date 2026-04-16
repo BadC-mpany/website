@@ -10,24 +10,25 @@ import { Shield, Server, Activity } from 'lucide-react'
 
 const enterprises = [
     {
-        title: 'MCP Security Audit',
+        title: 'Security Audit',
         subtitle: 'ASSESSMENT',
         sections: [
             {
                 description: 'white-box assessment',
                 features: [
-                    'logical defects',
                     'attack surfaces',
                     'tool poisoning',
-                    'other vulnerabilities',
-                    'discovery document + detailed remediation plan',
+                    'MCP servers',
+                    'Coding agents: (Claude Code, Codex, Copilots)',
+                    'OpenClaw',
+                    'discovery document + remediation plan',
                 ],
             },
         ],
         icon: <Shield className="w-8 h-8 text-white" />,
     },
     {
-        title: 'Securing Existing Agents',
+        title: 'Securing MCP Agents',
         subtitle: 'DEPLOYMENT',
         sections: [
             {
@@ -49,7 +50,7 @@ const enterprises = [
         icon: <Activity className="w-8 h-8 text-white" />,
     },
     {
-        title: 'Complete workstation Safety',
+        title: 'Kernel-level Security',
         subtitle: 'DEPLOYMENT',
         sections: [
             {
@@ -59,6 +60,7 @@ const enterprises = [
                     'Built on the kernel',
                     'Enterprise-grade security solution at the kernel-level',
                     'Full observability and logging',
+                    'FIPS compliant'
                 ],
             },
         ],

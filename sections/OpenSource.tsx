@@ -48,7 +48,7 @@ export default function OpenSource() {
                             <span className="text-cyber-red font-mono text-sm tracking-wider uppercase">Open Source</span>
                         </div>
                         <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white font-mono">
-                            <span className="text-white uppercase">Lilith SDK</span>
+                            <span className="text-white uppercase">Lilith-zero SDK</span>
                         </h2>
 
                         <p className="text-xl text-gray-400 mb-8 max-w-xl font-mono leading-relaxed">
