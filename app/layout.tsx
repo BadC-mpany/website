@@ -15,11 +15,30 @@ const jetbrainsMono = JetBrains_Mono({
   variable: '--font-mono',
 })
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://badcompany.xyz'
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: 'BadCompany - Agent Security',
   description: 'Breaking the rules to protect your AI systems',
   icons: {
     icon: '/images/badcompany_logo_2.jpg',
+  },
+  openGraph: {
+    title: 'BadCompany - Agent Security',
+    description: 'Breaking the rules to protect your AI systems',
+    images: [
+      {
+        url: '/images/badcompany_logo_2.jpg',
+        alt: 'BadCompany logo',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'BadCompany - Agent Security',
+    description: 'Breaking the rules to protect your AI systems',
+    images: ['/images/badcompany_logo_2.jpg'],
   },
 }
 
