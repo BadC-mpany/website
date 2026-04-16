@@ -33,7 +33,7 @@ const enterprises = [
             {
                 description: (
                     <span>
-                        Deploying <a href="https://github.com/BadC-mpany/lilith-zero" target="_blank" rel="noopener noreferrer" className="text-cyber-red hover:underline decoration-cyber-red/50 hover:text-white transition-colors">Lilith-zero</a>
+                        Deploying <a href="https://github.com/BadC-mpany/lilith-zero" target="_blank" rel="noopener noreferrer" className="text-cyber-red hover:underline decoration-cyber-red/50 hover:text-white transition-colors">Lilith-zero</a> to secure MCP servers and agents
                     </span>
                 ),
                 features: [
@@ -50,14 +50,15 @@ const enterprises = [
     },
     {
         title: 'Complete workstation Safety',
-        subtitle: 'COMING SOON',
+        subtitle: 'DEPLOYMENT',
         sections: [
             {
-                description: 'Deploying Lilith substrate as an agent and os agnostic security layer',
+                description: 'Lilith is an agent and os agnostic security layer',
                 features: [
                     'API access to NLP for precise and fine-grained policy definitions',
                     'Built on the kernel',
                     'Enterprise-grade security solution at the kernel-level',
+                    'Full observability and logging',
                 ],
             },
         ],
