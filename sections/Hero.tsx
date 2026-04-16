@@ -22,8 +22,8 @@ export default function Hero() {
   }
   const features = [
     { icon: Lock, text: "deterministic security" },
-    { icon: Cpu, text: "complete hardware isolation" },
-    { icon: Zap, text: "near-zero overhead maximising utility" },
+    { icon: Cpu, text: "kernel-level enforcement" },
+    { icon: Zap, text: "near-zero latency and overhead" },
     { icon: Eye, text: "complete visibility into agentic processes" },
     { icon: BookOpen, text: "natural language for policy definitions + formal verification" },
   ]
@@ -48,7 +48,7 @@ export default function Hero() {
 
             {/* Subtitle */}
             <p className="text-base md:text-lg text-gray-400 mb-12 max-w-lg font-mono leading-relaxed px-1">
-              The deterministic security architecture built for <span className="bg-white/10 px-1 py-0.5 rounded text-white text-sm">autonomous</span> AI systems.
+              The deterministic security architecture built for  AI agents.
             </p>
 
             {/* Terminal Install Box */}
