@@ -1,136 +1,182 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useState } from 'react'
-import { Check, Copy, Lock, Cpu, Zap, Eye, BookOpen } from 'lucide-react'
-import AnimatedContent from '../components/AnimatedContent'
-import DecryptedText from '../components/DecryptedText'
+import { useState, useEffect } from 'react'
+import { Check, Copy } from 'lucide-react'
+import Link from 'next/link'
+
+const TERMINAL_LINES = [
+  { type: 'header', text: 'LILITH RUNTIME  v0.3.1  ● ACTIVE' },
+  { type: 'blank', text: '' },
+  { type: 'event', text: '[14:23:01] tools/call  read_file' },
+  { type: 'detail', text: '  identity: spiffe://corp/agent-42' },
+  { type: 'taint',  text: '  taint:    +file_read +sensitive' },
+  { type: 'allow',  text: '  verdict:  ALLOW   (0.3ms)' },
+  { type: 'blank', text: '' },
+  { type: 'event', text: '[14:23:02] tools/call  http_post' },
+  { type: 'detail', text: '  dest:     api.attacker.com:443' },
+  { type: 'warn',  text: '  taint:    file_read → BLOCKED' },
+  { type: 'deny',  text: '  verdict:  DENY    (0.2ms)' },
+  { type: 'blank', text: '' },
+  { type: 'alert', text: '✗ EXFILTRATION PREVENTED  seq:8821' },
+]
+
+const lineColor = {
+  header: 'text-emerald-400 font-bold',
+  blank:  '',
+  event:  'text-zinc-300',
+  detail: 'text-zinc-500',
+  taint:  'text-yellow-400',
+  allow:  'text-emerald-400',
+  warn:   'text-orange-400',
+  deny:   'text-cyber-red',
+  alert:  'text-cyber-red font-bold',
+}
+
+const INSTALL_CMD = 'pip install lilith-zero'
 
 export default function Hero() {
   const [copied, setCopied] = useState(false)
-  const [activeTab, setActiveTab] = useState<'unix' | 'windows'>('unix')
+  const [visibleLines, setVisibleLines] = useState(0)
 
-  const commands = {
-    unix: "curl -sSfL badcompany.xyz/lilith-zero/install.sh | sh",
-    windows: 'irm badcompany.xyz/lilith-zero/install.ps1 | iex'
-  }
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(commands[activeTab])
+  const copy = () => {
+    navigator.clipboard.writeText(INSTALL_CMD)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
-  const features = [
-    { icon: Lock, text: "deterministic security" },
-    { icon: Cpu, text: "kernel-level enforcement" },
-    { icon: Zap, text: "near-zero latency and overhead" },
-    { icon: Eye, text: "complete visibility into agentic processes" },
-    { icon: BookOpen, text: "natural language for policy definitions + formal verification" },
+
+  useEffect(() => {
+    let alive = true
+    let timer: ReturnType<typeof setTimeout>
+
+    const showNext = (n: number) => {
+      if (!alive) return
+      setVisibleLines(n)
+      if (n < TERMINAL_LINES.length) {
+        timer = setTimeout(() => showNext(n + 1), 380)
+      } else {
+        timer = setTimeout(() => {
+          if (!alive) return
+          setVisibleLines(0)
+          timer = setTimeout(() => showNext(1), 200)
+        }, 4000)
+      }
+    }
+
+    showNext(1)
+    return () => { alive = false; clearTimeout(timer) }
+  }, [])
+
+  const stats = [
+    { value: '>1.5M', label: 'decisions/sec' },
+    { value: '<1ms', label: 'latency overhead' },
+    { value: 'Ring 0', label: 'BPF-LSM enforcement' },
   ]
 
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center px-6 pt-20 bg-cyber-black overflow-hidden w-full max-w-[100vw] relative">
       <div className="container mx-auto max-w-7xl relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
+
+          {/* Left */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="flex flex-col justify-center max-w-full"
+            className="flex flex-col justify-center"
           >
-            {/* Heading */}
-            {/* Heading */}
-            <h1 className="text-3xl md:text-7xl font-bold leading-tight tracking-tight mb-8 text-white break-words w-full max-w-[calc(100vw-3rem)]">
+            <div className="flex items-center gap-2 mb-6">
+              <div className="w-2 h-2 bg-cyber-red rounded-full animate-pulse" />
+              <span className="text-cyber-red font-mono text-xs tracking-widest uppercase">AI Agent Security</span>
+            </div>
+
+            <h1 className="text-4xl md:text-7xl font-bold leading-tight tracking-tight mb-6 text-white">
               RUNTIME<br />
               DEFENSE FOR<br />
               <span className="text-cyber-red font-mono">AI AGENTS</span>
             </h1>
 
-            {/* Subtitle */}
-            <p className="text-base md:text-lg text-gray-400 mb-12 max-w-lg font-mono leading-relaxed px-1">
-              The deterministic security architecture built for  AI agents.
+            <p className="text-base md:text-lg text-gray-400 mb-8 max-w-lg font-mono leading-relaxed">
+              MCP agents operate without runtime security controls. Tool poisoning,
+              prompt injection, and lateral exfiltration go undetected by every
+              existing security layer. Lilith closes all three — at the kernel level.
             </p>
 
-            {/* Terminal Install Box */}
-            <div className="max-w-xl w-full max-w-[calc(100vw-3rem)]">
-              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-3 ml-1">
-                <button
-                  onClick={() => setActiveTab('unix')}
-                  className={`text-xs font-mono pb-1 transition-colors ${activeTab === 'unix' ? 'text-white border-b border-cyber-red' : 'text-gray-500 hover:text-gray-300'}`}
-                >
-                  MAC / LINUX
-                </button>
-                <button
-                  onClick={() => setActiveTab('windows')}
-                  className={`text-xs font-mono pb-1 transition-colors ${activeTab === 'windows' ? 'text-white border-b border-cyber-red' : 'text-gray-500 hover:text-gray-300'}`}
-                >
-                  WINDOWS (POWERSHELL)
-                </button>
-              </div>
-              <div className="relative group bg-zinc-900 border border-zinc-800 rounded-lg p-4 md:p-5 flex items-center justify-between hover:border-zinc-700 transition-colors">
-                <div className="flex items-center gap-3 font-mono text-xs md:text-sm text-gray-300 overflow-x-auto no-scrollbar flex-1 min-w-0">
-                  <span className="text-gray-500 select-none">{'>'}</span>
-                  <span className="break-all md:whitespace-nowrap">{commands[activeTab]}</span>
+            {/* Stats */}
+            <div className="flex gap-8 mb-10 border-l-2 border-cyber-red pl-6">
+              {stats.map((s) => (
+                <div key={s.label}>
+                  <div className="text-white font-mono font-bold text-xl">{s.value}</div>
+                  <div className="text-zinc-500 font-mono text-xs mt-0.5">{s.label}</div>
                 </div>
-                <button
-                  onClick={copyToClipboard}
-                  className="ml-4 p-2 text-gray-500 hover:text-white transition-colors rounded-md"
-                >
-                  {copied ? <Check size={18} /> : <Copy size={18} />}
-                </button>
+              ))}
+            </div>
 
-                {/* Corner accents */}
-                <div className="absolute -bottom-px -left-px w-2 h-2 border-b border-l border-zinc-600 rounded-bl-sm opacity-50"></div>
-                <div className="absolute -bottom-px -right-px w-2 h-2 border-b border-r border-zinc-600 rounded-br-sm opacity-50"></div>
+            {/* CTAs */}
+            <div className="flex flex-wrap gap-4 mb-10">
+              <Link
+                href="/product"
+                className="px-6 py-3 bg-white text-black hover:bg-gray-200 transition-colors rounded font-mono font-bold text-sm tracking-wide"
+              >
+                LILITH ZERO — FREE
+              </Link>
+              <Link
+                href="/#contact"
+                className="px-6 py-3 border border-zinc-700 text-white hover:border-cyber-red hover:text-cyber-red transition-colors rounded font-mono font-bold text-sm tracking-wide"
+              >
+                ENTERPRISE DEMO →
+              </Link>
+            </div>
+
+            {/* Install */}
+            <div className="relative bg-zinc-900 border border-zinc-800 rounded-lg p-4 flex items-center justify-between max-w-sm hover:border-zinc-700 transition-colors">
+              <div className="flex items-center gap-3 font-mono text-sm text-gray-300">
+                <span className="text-gray-500 select-none">$</span>
+                <span>{INSTALL_CMD}</span>
+              </div>
+              <button onClick={copy} className="ml-4 p-1.5 text-gray-500 hover:text-white transition-colors rounded">
+                {copied ? <Check size={16} /> : <Copy size={16} />}
+              </button>
+            </div>
+          </motion.div>
+
+          {/* Right — live enforcement terminal */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="hidden lg:block"
+          >
+            <div className="bg-[#0d1117] border border-zinc-800 rounded-xl overflow-hidden shadow-2xl">
+              {/* Window chrome */}
+              <div className="flex items-center gap-2 px-4 py-3 border-b border-zinc-800 bg-zinc-900/50">
+                <div className="w-3 h-3 rounded-full bg-red-500/70" />
+                <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
+                <div className="w-3 h-3 rounded-full bg-green-500/70" />
+                <span className="ml-3 font-mono text-xs text-zinc-500">lilith — enforcement log</span>
+              </div>
+
+              <div className="p-6 font-mono text-xs leading-relaxed min-h-[320px]">
+                {TERMINAL_LINES.slice(0, visibleLines).map((line, i) => (
+                  <div
+                    key={i}
+                    className={`${lineColor[line.type as keyof typeof lineColor]} ${line.type === 'blank' ? 'h-3' : ''}`}
+                  >
+                    {line.text}
+                  </div>
+                ))}
+                {visibleLines < TERMINAL_LINES.length && (
+                  <span className="inline-block w-2 h-4 bg-cyber-red animate-pulse ml-0.5" />
+                )}
               </div>
             </div>
 
+            {/* Glow */}
+            <div className="absolute inset-0 bg-cyber-red/3 blur-[120px] rounded-full pointer-events-none -z-10" />
           </motion.div>
 
-          {/* Right Content - Visual */}
-          <div className="hidden lg:flex flex-col justify-center items-start gap-8 relative pl-10 min-h-[600px]">
-            {/* Glow effect behind */}
-            <div className="absolute inset-0 bg-cyber-red/5 blur-[100px] rounded-full user-select-none pointer-events-none -z-10"></div>
-
-            {features.map((feature, index) => (
-              <AnimatedContent
-                key={index}
-                distance={100}
-                direction="vertical"
-                reverse={false}
-                duration={0.4}
-                ease="power3.out"
-                initialOpacity={0}
-                animateOpacity
-                scale={1}
-                threshold={0.1}
-                delay={index * 0.33}
-                disappearAfter={0}
-              >
-                <div className="flex items-center gap-6 group">
-                  <div className="p-3 rounded-lg bg-zinc-900/50 border border-zinc-800 group-hover:border-cyber-red/50 transition-colors">
-                    <feature.icon className="w-6 h-6 text-cyber-red" />
-                  </div>
-                  <div className="font-mono text-white text-lg tracking-tight">
-                    <DecryptedText
-                      text={feature.text}
-                      animateOn="view"
-                      animateDelay={index * 333 + 133}
-                      speed={33}
-                      maxIterations={20}
-                      revealDirection="start"
-                      sequential={true}
-                      className="text-white"
-                      parentClassName="block"
-                    />
-                  </div>
-                </div>
-              </AnimatedContent>
-            ))}
-          </div>
         </div>
       </div>
     </section>
   )
 }
-

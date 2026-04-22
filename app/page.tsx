@@ -1,10 +1,11 @@
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Hero from '../sections/Hero'
+import ThreatModel from '../sections/ThreatModel'
 import OpenSource from '../sections/OpenSource'
+import Enterprise from '../sections/Enterprise'
 import Repositories from '../sections/Repositories'
 import Subscribe from '../sections/Subscribe'
-import Enterprise from '../sections/Enterprise'
 import Team from '../sections/Team'
 import Contact from '../sections/Contact'
 
@@ -14,6 +15,7 @@ export default function Home() {
       <div className="relative z-10">
         <Header />
         <Hero />
+        <ThreatModel />
         <OpenSource />
         <Enterprise />
         <Repositories />
