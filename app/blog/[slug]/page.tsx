@@ -15,6 +15,16 @@ interface BlogPost {
 
 const blogPosts: BlogPost[] = [
     {
+        title: 'Why We Built on the Linux Kernel: BPF-LSM Enforcement for AI Agents',
+        date: 'April 2026',
+        slug: 'bpf-lsm-kernel'
+    },
+    {
+        title: 'Taint Propagation: Why Heuristics Will Always Lose Against Prompt Injection',
+        date: 'April 2026',
+        slug: 'taint-propagation'
+    },
+    {
         title: 'We built deterministic agent security at ms scale: Lilith Zero',
         date: 'February 2026',
         slug: 'lilith-zero'

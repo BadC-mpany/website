@@ -115,7 +115,7 @@ export default function OpenSource() {
             </div>
           </motion.div>
 
-          {/* Right — code + enforcement output */}
+          {/* Right: code + enforcement output */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}

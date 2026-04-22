@@ -99,7 +99,7 @@ export default function Hero() {
             <p className="text-base md:text-lg text-gray-400 mb-8 max-w-lg font-mono leading-relaxed">
               MCP agents operate without runtime security controls. Tool poisoning,
               prompt injection, and lateral exfiltration go undetected by every
-              existing security layer. Lilith closes all three — at the kernel level.
+              existing security layer. Lilith closes all three, at the kernel level.
             </p>
 
             {/* Stats */}
@@ -118,7 +118,7 @@ export default function Hero() {
                 href="/product"
                 className="px-6 py-3 bg-white text-black hover:bg-gray-200 transition-colors rounded font-mono font-bold text-sm tracking-wide"
               >
-                LILITH ZERO — FREE
+                LILITH ZERO / FREE
               </Link>
               <Link
                 href="/#contact"
@@ -140,7 +140,7 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* Right — live enforcement terminal */}
+          {/* Right: live enforcement terminal */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
@@ -153,7 +153,7 @@ export default function Hero() {
                 <div className="w-3 h-3 rounded-full bg-red-500/70" />
                 <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
                 <div className="w-3 h-3 rounded-full bg-green-500/70" />
-                <span className="ml-3 font-mono text-xs text-zinc-500">lilith — enforcement log</span>
+                <span className="ml-3 font-mono text-xs text-zinc-500">lilith: enforcement log</span>
               </div>
 
               <div className="p-6 font-mono text-xs leading-relaxed min-h-[320px]">

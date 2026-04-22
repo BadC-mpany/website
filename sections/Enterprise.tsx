@@ -12,13 +12,13 @@ const tiers = [
     name: 'Lilith Zero',
     tagline: 'Application-layer enforcement for MCP agents.',
     features: [
-      'Cedar policy engine — policy-as-code, human-readable',
+      'Cedar policy engine: policy-as-code, human-readable',
       '64-bit taint bitmask per agent session',
       'Python and TypeScript SDKs',
       '>1.5M decisions/sec, <1ms overhead',
       'HMAC-signed tamper-evident audit log',
       'Formal verification via Kani proof harnesses',
-      'MIT licensed — full source available',
+      'MIT licensed, full source available',
     ],
     cta: { label: 'View on GitHub →', href: 'https://github.com/BadC-mpany/lilith-zero', external: true },
     highlight: false,
@@ -30,13 +30,13 @@ const tiers = [
     name: 'Lilith',
     tagline: 'Kernel-level enforcement. Zero agent code changes.',
     features: [
-      'BPF-LSM at Ring 0 — transparent to any agent framework',
+      'BPF-LSM at Ring 0, transparent to any agent framework',
       'SPIFFE/SPIRE cryptographic workload identity',
-      'Cedar policy with taint propagation — per tool-call precision',
+      'Cedar policy with taint propagation, per tool-call precision',
       'Ed25519-signed policy capsules with anti-rollback watermarks',
-      'Fail-closed BPF heartbeat — all connections blocked if daemon dies',
+      'Fail-closed BPF heartbeat: all connections blocked if daemon dies',
       'FIPS 140-3 capable (aws-lc-rs crypto backend)',
-      'Audit stream — gRPC server-streaming, HMAC-verified',
+      'Audit stream: gRPC server-streaming, HMAC-verified',
     ],
     cta: { label: 'BOOK A DEMO →', href: '/#contact', external: false },
     highlight: true,
@@ -48,7 +48,7 @@ const tiers = [
     name: 'Professional Services',
     tagline: 'Architecture review, deployment, and ongoing security posture.',
     features: [
-      'Threat model assessment — Lethal Trifecta coverage audit',
+      'Threat model assessment: Lethal Trifecta coverage audit',
       'White-box security audit of existing AI agent pipelines',
       'MCP server attack surface review (tool poisoning, injection)',
       'Cedar policy authoring and formal verification',
@@ -121,7 +121,7 @@ export default function Enterprise() {
                 <ul className="space-y-3 mb-8 flex-1">
                   {tier.features.map((f) => (
                     <li key={f} className="flex items-start gap-3 text-sm font-mono text-zinc-400">
-                      <span className={`mt-0.5 shrink-0 ${tier.highlight ? 'text-cyber-red' : 'text-zinc-600'}`}>—</span>
+                      <span className={`mt-0.5 shrink-0 ${tier.highlight ? 'text-cyber-red' : 'text-zinc-600'}`}>-</span>
                       {f}
                     </li>
                   ))}
