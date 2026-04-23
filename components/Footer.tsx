@@ -10,7 +10,7 @@ export default function Footer() {
               BadCompany
             </span>
             <p className="text-gray-500 font-mono text-sm md:inline">
-              Runtime Defense for Autonomous AI Agents.
+              Runtime Security for Autonomous AI Agents.
             </p>
           </div>
 

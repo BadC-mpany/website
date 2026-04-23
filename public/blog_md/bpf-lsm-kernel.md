@@ -84,8 +84,6 @@ The agent tried to reach the internet. The kernel prevented it. No agent code wa
 
 **Kernel modules**: Require compilation per kernel version, no static verification, ring 0 bugs crash the machine. BPF-LSM programs are statically verified by the kernel before attachment.
 
-**Riptides**: Enforces at connection establishment using a kernel module, excellent for network identity, but no per-tool-call semantic enforcement and no session taint tracking. Complementary, not competing.
-
 ---
 
 Lilith is in private beta. If you're deploying AI agents in a regulated environment or one where data exfiltration is a real threat, [book a technical call](https://badcompany.xyz/#contact).

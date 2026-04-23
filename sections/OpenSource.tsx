@@ -5,39 +5,124 @@ import { useState } from 'react'
 import { Check, Copy } from 'lucide-react'
 import CalModal from '../components/CalModal'
 
-const CODE_EXAMPLE = `from lilith_zero import Guard, TaintPolicy
+const TABS = {
+  python: {
+    file:    'agent.py',
+    install: 'uv add lilith-zero',
+    label:   'Python',
+    code: `from lilith_zero import Lilith
 
-guard = Guard.from_cedar_file("policy.cedar")
+async with Lilith(
+    "python mcp_server.py",
+    policy="policy.yaml",
+) as lz:
+    result = await lz.call_tool(
+        "read_file",
+        {"path": "/data/report.txt"},
+    )`,
+  },
+  typescript: {
+    file:    'agent.ts',
+    install: 'bun add @badcompany/lilith-zero',
+    label:   'TypeScript',
+    code: `import { Lilith } from "@badcompany/lilith-zero";
 
-@guard.tool(taint=["file_read"])
-async def read_file(path: str) -> str:
-    return Path(path).read_text()
+await using lz = new Lilith({
+    upstream: "bun mcp_server.ts",
+    policy:   "policy.yaml",
+});
 
-@guard.tool(taint=["network_out"])
-async def http_post(url: str, body: str):
-    return await client.post(url, json=body)
+const result = await lz.callTool(
+    "read_file",
+    { path: "/data/report.txt" },
+);`,
+  },
+} as const
 
-# Cedar policy (policy.cedar):
-# forbid action == "http_post"
-#   when { context.data_touched
-#            .contains("file_read") };`
+type Tab = keyof typeof TABS
+
+const INSTALL_CMDS = {
+  unix:    'curl -sSfL https://www.badcompany.xyz/lilith-zero/install.sh | sh',
+  windows: 'irm https://www.badcompany.xyz/lilith-zero/install.ps1 | iex',
+}
 
 const ENFORCEMENT_LINES = [
-  { text: '✓  read_file("/etc/config.yaml")', color: 'text-emerald-400', sub: 'taint: +file_read    0.4ms' },
-  { text: '✗  http_post("api.attacker.com")', color: 'text-cyber-red', sub: 'taint: file_read → DENY  0.2ms' },
+  { text: '✓  read_file("/data/report.txt")', color: 'text-emerald-400', sub: 'taint: +file_read    0.4ms' },
+  { text: '✗  http_post("api.attacker.com")', color: 'text-cyber-red',   sub: 'taint: file_read → DENY  0.2ms' },
 ]
 
 const stats = [
   { value: '>1.5M', label: 'decisions/sec' },
   { value: '<1ms', label: 'overhead' },
-  { value: 'MIT', label: 'license' },
-  { value: 'Kani', label: 'formal proofs' },
+  { value: 'Apache 2.0', label: 'license' },
+  { value: 'CVC5', label: 'formal proofs' },
 ]
+
+// Minimal token-based syntax highlighter for the two sample languages
+type TT = 'kw' | 'str' | 'cmt' | 'fn' | 'cls' | 'plain'
+
+const PY_KW = new Set(['from','import','async','with','await','as','def','class','return','if','else','for','in','True','False','None'])
+const TS_KW = new Set(['import','from','export','const','let','var','await','using','new','async','function','return','if','else','for','of','in','true','false','null','undefined'])
+
+function tokenize(src: string, lang: Tab): Array<{t: TT; v: string}> {
+  const KW = lang === 'python' ? PY_KW : TS_KW
+  const out: Array<{t: TT; v: string}> = []
+  let pos = 0
+
+  while (pos < src.length) {
+    const rest = src.slice(pos)
+
+    // String literal (double or single quoted, handles escapes)
+    const strM = rest.match(/^"(?:\\.|[^"\\])*"|^'(?:\\.|[^'\\])*'/)
+    if (strM) { out.push({ t: 'str', v: strM[0] }); pos += strM[0].length; continue }
+
+    // Line comment (# or //)
+    const cmtM = rest.match(/^(#|\/\/).*/)
+    if (cmtM) { out.push({ t: 'cmt', v: cmtM[0] }); pos += cmtM[0].length; continue }
+
+    // Word: keyword, class name, or function call
+    const wordM = rest.match(/^[A-Za-z_$][A-Za-z0-9_$]*/)
+    if (wordM) {
+      const w = wordM[0]
+      const after = src[pos + w.length]
+      const t: TT = KW.has(w) ? 'kw' : after === '(' ? 'fn' : /^[A-Z]/.test(w) ? 'cls' : 'plain'
+      out.push({ t, v: w }); pos += w.length; continue
+    }
+
+    out.push({ t: 'plain', v: rest[0] }); pos++
+  }
+
+  return out
+}
+
+const TT_CLS: Record<TT, string> = {
+  kw:    'text-violet-400',
+  str:   'text-amber-400',
+  cmt:   'text-zinc-600',
+  fn:    'text-sky-400',
+  cls:   'text-emerald-400',
+  plain: 'text-zinc-500',
+}
+
+function CodeHighlight({ code, lang }: { code: string; lang: Tab }) {
+  return (
+    <>
+      {tokenize(code, lang).map((tk, i) => (
+        <span key={i} className={TT_CLS[tk.t]}>{tk.v}</span>
+      ))}
+    </>
+  )
+}
 
 export default function OpenSource() {
   const [isCalModalOpen, setIsCalModalOpen] = useState(false)
   const calUrl = process.env.NEXT_PUBLIC_CALCOM_URL || 'https://cal.com/janos-mozer/30min'
-  const [copiedClone, setCopiedClone] = useState(false)
+  const [activeTab, setActiveTab]         = useState<Tab>('python')
+  const [copiedClone, setCopiedClone]     = useState(false)
+  const [installTab, setInstallTab]       = useState<'unix' | 'windows'>('unix')
+  const [copiedInstall, setCopiedInstall] = useState(false)
+
+  const tab = TABS[activeTab]
 
   const copy = (text: string, setCopied: (v: boolean) => void) => {
     navigator.clipboard.writeText(text)
@@ -60,7 +145,8 @@ export default function OpenSource() {
             <div className="flex items-center gap-3 mb-6">
               <div className="w-2 h-2 bg-cyber-red rounded-full animate-pulse" />
               <span className="text-cyber-red font-mono text-xs tracking-widest uppercase">Open Source</span>
-              <span className="text-[10px] font-mono font-bold text-zinc-500 tracking-widest border border-zinc-700 px-2 py-0.5 rounded">MIT</span>
+              <span className="text-[10px] font-mono font-bold text-zinc-500 tracking-widest border border-zinc-700 px-2 py-0.5 rounded">Apache 2.0</span>
+              <span className="text-[10px] font-mono font-bold text-zinc-400 tracking-widest border border-zinc-700 px-2 py-0.5 rounded">v0.2.1</span>
             </div>
 
             <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white font-mono uppercase leading-tight">
@@ -69,8 +155,9 @@ export default function OpenSource() {
             </h2>
 
             <p className="text-lg text-gray-400 mb-8 max-w-xl font-mono leading-relaxed">
-              Cedar policy + taint propagation at the application layer.
-              Deterministic enforcement for MCP agents in under 10 minutes.
+              Taint propagation + policy hooks at the application layer.
+              Ships with pre-exec hooks for Claude Code and GitHub Copilot out of the box.
+              Works with OpenClaw, closing dozens of CVEs still unpatched in production agent systems.
               No kernel requirements. No infrastructure changes.
             </p>
 
@@ -115,7 +202,7 @@ export default function OpenSource() {
             </div>
           </motion.div>
 
-          {/* Right: code + enforcement output */}
+          {/* Right: code + enforcement + install */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -125,31 +212,39 @@ export default function OpenSource() {
           >
             {/* Code block */}
             <div className="bg-[#0d1117] border border-zinc-800 rounded-xl overflow-hidden shadow-2xl mb-4">
+              {/* Tab bar */}
               <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 bg-zinc-900/50">
-                <div className="flex items-center gap-3">
-                  <div className="flex gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-red-500/70" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/70" />
-                  </div>
-                  <span className="font-mono text-xs text-zinc-500">agent.py</span>
+                <div className="flex items-center gap-4">
+                  {(Object.keys(TABS) as Tab[]).map(k => (
+                    <button
+                      key={k}
+                      onClick={() => setActiveTab(k)}
+                      className={`font-mono text-xs pb-0.5 transition-colors ${
+                        activeTab === k
+                          ? 'text-white border-b border-cyber-red'
+                          : 'text-zinc-600 hover:text-zinc-400'
+                      }`}
+                    >
+                      {TABS[k].label}
+                    </button>
+                  ))}
                 </div>
                 <button
-                  onClick={() => copy('pip install lilith-zero', setCopiedClone)}
-                  className="font-mono text-xs text-zinc-500 hover:text-white transition-colors flex items-center gap-1"
+                  onClick={() => copy(tab.install, setCopiedClone)}
+                  className="font-mono text-xs text-zinc-600 hover:text-white transition-colors flex items-center gap-1.5"
                 >
                   {copiedClone ? <Check size={12} /> : <Copy size={12} />}
-                  <span>copy install</span>
+                  <span className="text-zinc-700">{tab.install}</span>
                 </button>
               </div>
 
-              <pre className="p-5 font-mono text-xs leading-relaxed text-zinc-300 overflow-x-auto">
-                <code>{CODE_EXAMPLE}</code>
+              <pre className="p-5 font-mono text-xs leading-relaxed overflow-x-auto">
+                <code><CodeHighlight code={tab.code} lang={activeTab} /></code>
               </pre>
             </div>
 
             {/* Enforcement output */}
-            <div className="bg-[#0d1117] border border-zinc-800 rounded-xl p-5 shadow-2xl">
+            <div className="bg-[#0d1117] border border-zinc-800 rounded-xl p-5 shadow-2xl mb-4">
               <div className="font-mono text-xs text-zinc-500 mb-3 uppercase tracking-widest">Runtime enforcement</div>
               {ENFORCEMENT_LINES.map((line, i) => (
                 <div key={i} className="mb-3">
@@ -157,6 +252,38 @@ export default function OpenSource() {
                   <div className="font-mono text-xs text-zinc-500 mt-0.5 ml-5">{line.sub}</div>
                 </div>
               ))}
+            </div>
+
+            {/* Install */}
+            <div className="bg-[#0d1117] border border-zinc-800 rounded-xl p-5 shadow-2xl">
+              <div className="flex items-center justify-between mb-3">
+                <div className="font-mono text-xs text-zinc-500 uppercase tracking-widest">Install Lilith Zero</div>
+                <div className="flex items-center gap-4">
+                  {(['unix', 'windows'] as const).map(t => (
+                    <button
+                      key={t}
+                      onClick={() => setInstallTab(t)}
+                      className={`font-mono text-[10px] pb-0.5 transition-colors ${
+                        installTab === t ? 'text-white border-b border-cyber-red' : 'text-zinc-600 hover:text-zinc-400'
+                      }`}
+                    >
+                      {t === 'unix' ? 'MAC / LINUX' : 'WINDOWS'}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="flex items-center justify-between bg-zinc-900 border border-zinc-800 rounded px-3 py-2.5">
+                <div className="flex items-center gap-2 font-mono text-xs text-gray-300 overflow-x-auto no-scrollbar flex-1 min-w-0">
+                  <span className="text-gray-600 select-none shrink-0">{installTab === 'unix' ? '$' : '>'}</span>
+                  <span className="whitespace-nowrap text-zinc-400">{INSTALL_CMDS[installTab]}</span>
+                </div>
+                <button
+                  onClick={() => copy(INSTALL_CMDS[installTab], setCopiedInstall)}
+                  className="ml-3 shrink-0 text-gray-500 hover:text-white transition-colors"
+                >
+                  {copiedInstall ? <Check size={12} /> : <Copy size={12} />}
+                </button>
+              </div>
             </div>
           </motion.div>
 
