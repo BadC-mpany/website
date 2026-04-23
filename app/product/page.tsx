@@ -262,11 +262,11 @@ export default function Product() {
             <div className="md:pt-1">
               <div className="font-mono text-[10px] text-zinc-600 tracking-widest uppercase mb-2">Layer 3</div>
               <div className="font-mono text-sm font-bold text-white">Seccomp + Landlock</div>
-              <div className="font-mono text-xs text-zinc-500 mt-1">Process</div>
+              <div className="font-mono text-xs text-zinc-500 mt-1">Kernel</div>
             </div>
             <div>
               <p className="text-sm text-zinc-400 leading-relaxed mb-6">
-                Even if Layers 1 and 2 are bypassed, Seccomp-BPF restricts agents to ~60 allowed syscalls.
+                Seccomp-BPF restricts agents to ~60 allowed syscalls.
                 All LPE primitives are blocked at the kernel boundary. Landlock constrains filesystem access
                 to specific ephemeral directories using kernel inode evaluation, TOCTOU-immune, composable,
                 unprivileged.

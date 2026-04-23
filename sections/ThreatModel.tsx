@@ -157,7 +157,7 @@ export default function ThreatModel() {
                 </div>
 
                 {/* Right: Lilith response */}
-                <div className="md:pl-12 mt-8 md:mt-0">
+                <div className="md:pl-12 mt-8 md:mt-0 flex flex-col justify-center">
                   <p className="font-mono text-[10px] text-cyber-red tracking-widest uppercase mb-5">How Lilith closes it</p>
                   <p className="text-zinc-300 text-sm leading-relaxed">{t.how}</p>
                 </div>
