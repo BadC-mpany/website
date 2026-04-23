@@ -3,8 +3,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import CalModal from '../components/CalModal'
-import ShinyText from '../components/ShinyText'
-import StarBorder from '../components/StarBorder'
 
 export default function Contact() {
   const [isCalModalOpen, setIsCalModalOpen] = useState(false)
@@ -63,14 +61,7 @@ export default function Contact() {
                   onClick={() => setIsCalModalOpen(true)}
                   className="px-10 py-4 bg-white text-black hover:bg-gray-200 transition-colors rounded font-mono font-bold text-sm tracking-widest group relative overflow-hidden"
                 >
-                  <ShinyText
-                    text="SCHEDULE A MEETING"
-                    disabled={false}
-                    speed={2}
-                    color="#4b5563"
-                    shineColor="#ffffff"
-                    className="shiny-text"
-                  />
+                  SCHEDULE A MEETING
                 </button>
               </div>
             </div>

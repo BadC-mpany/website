@@ -20,7 +20,7 @@ export default function Header() {
   const navLinks = [
     { href: '/product', label: 'PRODUCT' },
     { href: '/blog', label: 'BLOG' },
-    // { href: '/story', label: 'STORY' },
+    { href: '/story', label: 'STORY' },
     { href: '/#team', label: 'TEAM' },
   ]
 
