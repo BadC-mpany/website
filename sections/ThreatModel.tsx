@@ -16,29 +16,26 @@ const incidents = [
   {
     n: '01',
     tag: 'CVE-2025-59536',
-    cite: 'Adversa AI + Check Point, 2026',
     href: 'https://adversa.ai/blog/claude-code-security-bypass-deny-rules-disabled/',
-    name: 'Claude Code disables its own deny rules under load',
-    what: 'Security checks become too token-expensive and stop firing silently. Attacker-controlled instructions that should be blocked execute without any alert or audit entry. Check Point confirmed full RCE and API key theft via malicious repo files.',
-    how: 'The kernel hook fires on every connect() regardless of agent state. There is no token budget at Ring 0.',
+    name: 'Claude Code silently disables its own deny rules',
+    what: 'Security checks stop firing when they cost too many tokens. Full RCE and API key theft confirmed via malicious repo files.',
+    how: 'Kernel hook fires on every connect(). No token budget at Ring 0.',
   },
   {
     n: '02',
-    tag: 'INVARIANT LABS · APR 2025',
-    cite: 'invariantlabs.ai',
+    tag: 'INVARIANT LABS · 2025',
     href: 'https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks',
-    name: 'Hidden MCP tool descriptions exfiltrate SSH keys',
-    what: 'Instructions invisible to the user inside tool descriptions directed agents to read and upload private keys and configs to an attacker server. A second variant silently redirected all outbound email. Affected Anthropic, OpenAI, Zapier, Cursor.',
-    how: 'Taint is set on read_file. The outbound POST returns EPERM at the kernel before any data leaves. MCP server identity is pinned: a swapped server is refused before any tool call fires.',
+    name: 'Tool descriptions exfiltrate SSH keys and configs',
+    what: 'Instructions hidden in MCP tool descriptions directed agents to read and upload private keys to an attacker server. Affected Anthropic, OpenAI, Zapier, Cursor.',
+    how: 'Taint set on read_file. Outbound POST returns EPERM at the kernel before data leaves. Swapped MCP server refused before first call.',
   },
   {
     n: '03',
     tag: 'CVE-2025-32711',
-    cite: 'Aim Security · Jun 2025',
     href: 'https://www.aim.security/blog/echolean-the-first-zero-click-ai-data-exfiltration-attack',
     name: 'One email. OneDrive, SharePoint, Teams. No click.',
-    what: 'A crafted email caused Copilot to exfiltrate files across three Microsoft services with no user interaction, routed through a trusted domain. Four security controls were bypassed. No alert fired.',
-    how: 'Taint tracks data from any read. The outbound connection returns EPERM at the kernel hook before the packet forms, regardless of routing domain.',
+    what: 'Crafted email caused Copilot to exfiltrate across three Microsoft services. Four controls bypassed. No alert fired.',
+    how: 'Taint tracks every read. EPERM at kernel before the packet forms, regardless of routing domain.',
   },
 ]
 
@@ -102,64 +99,39 @@ export default function ThreatModel() {
           </motion.div>
 
           {/* Incidents */}
-          <div className="border-t border-zinc-800">
+          <div className="border-t border-zinc-800 font-mono">
             {incidents.map((t, i) => (
               <motion.div
                 key={t.n}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.3, delay: i * 0.06 }}
                 viewport={{ once: true }}
-                className="border-b border-zinc-800 py-10 grid md:grid-cols-[2fr_1px_2fr] gap-0"
+                className="border-b border-zinc-800 grid md:grid-cols-[24px_160px_1fr_1fr] gap-x-8 gap-y-3 py-6 items-start"
               >
-                {/* Left: attack */}
-                <div className="md:pr-12">
-                  <div className="flex items-center gap-3 mb-5">
-                    <span className="font-mono text-3xl font-bold text-zinc-800">{t.n}</span>
-                    <a
-                      href={t.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-mono text-[10px] text-cyber-red tracking-widest border border-cyber-red/20 bg-cyber-red/5 px-2 py-0.5 hover:bg-cyber-red/10 transition-colors"
-                    >
-                      {t.tag} ↗
-                    </a>
-                  </div>
+                <span className="text-zinc-700 text-sm pt-0.5">{t.n}</span>
+
+                <a
+                  href={t.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[10px] text-cyber-red tracking-widest border border-cyber-red/20 bg-cyber-red/5 px-2 py-0.5 hover:bg-cyber-red/10 transition-colors self-start whitespace-nowrap"
+                >
+                  {t.tag} ↗
+                </a>
+
+                <div>
                   <a href={t.href} target="_blank" rel="noopener noreferrer" className="group">
-                    <h3 className="text-xl font-bold text-white mb-4 group-hover:text-zinc-300 transition-colors leading-snug">
+                    <div className="text-sm font-bold text-white mb-2 group-hover:text-zinc-300 transition-colors leading-snug">
                       {t.name}
-                    </h3>
+                    </div>
                   </a>
-                  <p className="text-zinc-500 text-sm leading-relaxed">{t.what}</p>
-                  <a
-                    href={t.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-mono text-[9px] text-zinc-700 hover:text-zinc-500 tracking-widest mt-4 uppercase transition-colors inline-block"
-                  >
-                    {t.cite} ↗
-                  </a>
+                  <div className="text-xs text-zinc-500 leading-relaxed">{t.what}</div>
                 </div>
 
-                {/* Divider with BLOCKED label */}
-                <div className="hidden md:flex flex-col items-center justify-center gap-2 relative">
-                  <div className="w-px flex-1 bg-zinc-800" />
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3, delay: i * 0.08 + 0.2 }}
-                    viewport={{ once: true }}
-                    className="font-mono text-[9px] text-cyber-red tracking-widest uppercase border border-cyber-red/30 bg-cyber-red/5 px-2 py-1 rotate-90 whitespace-nowrap"
-                  >
-                    BLOCKED
-                  </motion.div>
-                  <div className="w-px flex-1 bg-zinc-800" />
-                </div>
-
-                {/* Right: Lilith response */}
-                <div className="md:pl-12 mt-8 md:mt-0 flex flex-col justify-center">
-                  <p className="font-mono text-[10px] text-cyber-red tracking-widest uppercase mb-5">How Lilith closes it</p>
-                  <p className="text-zinc-300 text-sm leading-relaxed">{t.how}</p>
+                <div>
+                  <div className="text-[9px] text-cyber-red tracking-widest uppercase mb-2">Lilith</div>
+                  <div className="text-xs text-zinc-300 leading-relaxed">{t.how}</div>
                 </div>
               </motion.div>
             ))}

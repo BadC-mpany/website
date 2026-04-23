@@ -60,6 +60,12 @@ export default function Product() {
             no idea Lilith<br />
             <span className="text-cyber-red">exists.</span>
           </h1>
+          <p className="text-base text-zinc-300 font-mono leading-relaxed max-w-2xl mb-6 border-l-2 border-cyber-red pl-5">
+            Any agent that touches your infrastructure or config is an unsecured attack surface.
+            Cloud credentials, SSH keys, production secrets: no runtime control exists for any of it.
+            Tool poisoning, prompt injection, and silent exfiltration are all demonstrated in the wild.
+            Lilith enforces at the kernel with full observability of every agent action, transparent to agents, impossible to bypass from userspace.
+          </p>
           <p className="text-base text-zinc-400 font-mono leading-relaxed max-w-2xl">
             Lilith is a systemd daemon that enforces security at the kernel level, before any
             agent syscall completes, before any byte reaches the network. No SDK to install.
