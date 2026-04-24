@@ -76,7 +76,7 @@ export default function Product() {
       </section>
 
       {/* Transparent proxy intercept */}
-      <section className="px-6 py-20 border-b border-zinc-900">
+      <section className="px-6 py-24 border-b border-zinc-900">
         <div className="max-w-4xl mx-auto">
           <p className="font-mono text-xs text-cyber-red tracking-widest uppercase mb-4">
             Transparent Interception
@@ -87,17 +87,17 @@ export default function Product() {
           </h2>
 
           {/* Architecture flow diagram — vertical, full-width, no scroll */}
-          <div className="mb-10 bg-[#0a0a0a] border border-zinc-800 rounded-xl p-8">
+          <div className="mb-10 bg-[#0a0a0a] border border-zinc-800 p-8">
 
             {/* Row 1: Agent */}
-            <div className="border border-dashed border-zinc-700 rounded-xl p-5">
+            <div className="border border-zinc-700 p-5">
               <div className="font-mono text-[10px] text-zinc-500 tracking-widest uppercase mb-4">Agent Process</div>
-              <div className="flex items-center justify-between border border-zinc-700 rounded-lg px-6 py-5 bg-zinc-900/30">
+              <div className="flex items-center justify-between border border-zinc-700 px-6 py-5 bg-zinc-900/30">
                 <div>
                   <div className="font-mono text-sm font-semibold text-white mb-1">AI Agent</div>
                   <div className="font-mono text-xs text-zinc-400">MCP / gRPC / HTTP</div>
                 </div>
-                <div className="font-mono text-xs text-zinc-600 bg-[#0d1117] rounded px-3 py-2">
+                <div className="font-mono text-xs text-zinc-600 bg-[var(--surface-terminal)] px-3 py-2">
                   connect(&quot;mcp-server:8080&quot;)
                 </div>
               </div>
@@ -106,17 +106,17 @@ export default function Product() {
             <DownArrow label="intercepted at kernel, before connect() returns" />
 
             {/* Row 2: Kernel */}
-            <div className="border border-dashed border-red-900/50 rounded-xl p-5">
+            <div className="border border-red-900/50 p-5">
               <div className="font-mono text-[10px] text-cyber-red tracking-widest uppercase mb-4">Linux Kernel</div>
               <div className="flex items-center gap-3">
-                <div className="flex-1 border border-zinc-700 rounded-lg px-5 py-4 bg-zinc-900/50">
+                <div className="flex-1 border border-zinc-700 px-5 py-4 bg-zinc-900/50">
                   <div className="font-mono text-xs font-semibold text-white mb-2">cgroup/connect4</div>
                   <div className="font-mono text-[11px] text-zinc-500 leading-relaxed">
                     Rewrites destination to 127.0.0.1:7890. Agent never sees this rewrite.
                   </div>
                 </div>
                 <StepArrow />
-                <div className="flex-1 border border-zinc-700 rounded-lg px-5 py-4 bg-zinc-900/50">
+                <div className="flex-1 border border-zinc-700 px-5 py-4 bg-zinc-900/50">
                   <div className="font-mono text-xs font-semibold text-white mb-2">socket_connect LSM</div>
                   <div className="font-mono text-[11px] text-zinc-500 leading-relaxed">
                     Allows only the tproxy endpoint. All other AF_INET from managed processes: EPERM.
@@ -128,17 +128,17 @@ export default function Product() {
             <DownArrow label="plaintext stream arrives at Lilith" />
 
             {/* Row 3: Daemon */}
-            <div className="border border-dashed border-emerald-900/40 rounded-xl p-5">
+            <div className="border border-emerald-900/40 p-5">
               <div className="font-mono text-[10px] text-emerald-500 tracking-widest uppercase mb-4">Lilith Daemon</div>
               <div className="flex items-center gap-3 mb-4">
-                <div className="flex-1 border border-zinc-700 rounded-lg px-5 py-4 bg-zinc-900/50">
+                <div className="flex-1 border border-zinc-700 px-5 py-4 bg-zinc-900/50">
                   <div className="font-mono text-xs font-semibold text-white mb-2">SPIFFE Identity</div>
                   <div className="font-mono text-[11px] text-zinc-500 leading-relaxed">
                     Resolved from task_struct* key. PID-reuse attacks are structurally impossible.
                   </div>
                 </div>
                 <StepArrow />
-                <div className="flex-1 border border-zinc-700 rounded-lg px-5 py-4 bg-zinc-900/50">
+                <div className="flex-1 border border-zinc-700 px-5 py-4 bg-zinc-900/50">
                   <div className="font-mono text-xs font-semibold text-white mb-2">Cedar Policy Eval</div>
                   <div className="font-mono text-[11px] text-zinc-500 leading-relaxed">
                     Non-Turing-complete. ~100 µs p99. Zero heap allocation per evaluation.
@@ -146,11 +146,11 @@ export default function Product() {
                 </div>
               </div>
               <div className="flex gap-3">
-                <div className="flex-1 border border-emerald-800/50 rounded-lg px-5 py-4 bg-emerald-900/10">
+                <div className="flex-1 border border-emerald-800/50 px-5 py-4 bg-emerald-900/10">
                   <div className="font-mono text-xs text-emerald-400 font-bold mb-1">ALLOW</div>
                   <div className="font-mono text-[11px] text-zinc-500">TLS 1.3 relay to original upstream</div>
                 </div>
-                <div className="flex-1 border border-red-900/50 rounded-lg px-5 py-4 bg-red-900/10">
+                <div className="flex-1 border border-red-900/50 px-5 py-4 bg-red-900/10">
                   <div className="font-mono text-xs text-cyber-red font-bold mb-1">DENY</div>
                   <div className="font-mono text-[11px] text-zinc-500">RST_STREAM + audit event emitted</div>
                 </div>
@@ -161,7 +161,7 @@ export default function Product() {
 
           {/* Two-column callouts */}
           <div className="grid md:grid-cols-2 gap-4">
-            <div className="border border-zinc-800 rounded-lg p-5">
+            <div className="border border-zinc-800 p-5">
               <div className="font-mono text-[10px] text-zinc-500 tracking-widest uppercase mb-3">Identity</div>
               <p className="font-mono text-xs text-zinc-300 leading-relaxed">
                 Identity is stored in <span className="text-cyber-red">IDENTITY_TASK_STORAGE</span> keyed
@@ -169,7 +169,7 @@ export default function Product() {
                 are structurally impossible: the kernel frees the entry automatically when the task exits.
               </p>
             </div>
-            <div className="border border-zinc-800 rounded-lg p-5">
+            <div className="border border-zinc-800 p-5">
               <div className="font-mono text-[10px] text-zinc-500 tracking-widest uppercase mb-3">Protocol</div>
               <p className="font-mono text-xs text-zinc-300 leading-relaxed">
                 Protocol-agnostic. Cedar evaluates the same{' '}
@@ -182,7 +182,7 @@ export default function Product() {
       </section>
 
       {/* Three enforcement layers */}
-      <section className="px-6 py-20 border-b border-zinc-900">
+      <section className="px-6 py-24 border-b border-zinc-900">
         <div className="max-w-4xl mx-auto">
           <p className="font-mono text-xs text-cyber-red tracking-widest uppercase mb-4">
             Enforcement Architecture
@@ -228,7 +228,7 @@ export default function Product() {
                 capsules with anti-rollback watermarks.
               </p>
 
-              <div className="bg-[#0d1117] border border-zinc-800 rounded-lg p-4 font-mono text-xs mb-6">
+              <div className="bg-[var(--surface-terminal)] border border-zinc-800 p-4 font-mono text-xs mb-6">
                 <div className="text-zinc-600 text-[10px] tracking-widest uppercase mb-3">Cedar example</div>
                 <div>
                   <span className="text-emerald-400">permit</span>
@@ -254,7 +254,7 @@ export default function Product() {
                   ['Formally verified', 'Lean 4 + Dafny; CVC5 SMT static analysis'],
                   ['~100 µs p99', 'Zero heap allocation per evaluation'],
                 ].map(([title, desc]) => (
-                  <div key={title} className="border border-zinc-800 rounded p-4">
+                  <div key={title} className="border border-zinc-800 p-4">
                     <div className="font-mono text-xs text-white font-bold mb-1.5">{title}</div>
                     <div className="font-mono text-xs text-zinc-500">{desc}</div>
                   </div>
@@ -278,7 +278,7 @@ export default function Product() {
                 unprivileged.
               </p>
               <div className="grid grid-cols-2 gap-3">
-                <div className="border border-zinc-800 rounded p-4">
+                <div className="border border-zinc-800 p-4">
                   <div className="font-mono text-[10px] text-emerald-400 font-bold tracking-widest uppercase mb-2">
                     Allowed syscalls
                   </div>
@@ -290,7 +290,7 @@ export default function Product() {
                     <div>exit, exit_group</div>
                   </div>
                 </div>
-                <div className="border border-zinc-800 rounded p-4">
+                <div className="border border-zinc-800 p-4">
                   <div className="font-mono text-[10px] text-cyber-red font-bold tracking-widest uppercase mb-2">
                     Blocked (LPE primitives)
                   </div>
@@ -309,7 +309,7 @@ export default function Product() {
       </section>
 
       {/* Taint propagation */}
-      <section className="px-6 py-20 border-b border-zinc-900">
+      <section className="px-6 py-24 border-b border-zinc-900">
         <div className="max-w-4xl mx-auto">
           <p className="font-mono text-xs text-cyber-red tracking-widest uppercase mb-4">
             Data Flow Tracking
@@ -324,7 +324,7 @@ export default function Product() {
             and structurally prohibit egress after any sensitive read.
           </p>
 
-          <div className="bg-[#0d1117] border border-zinc-800 rounded-xl overflow-hidden">
+          <div className="bg-[var(--surface-terminal)] border border-zinc-800 overflow-hidden">
             <div className="px-5 py-3 border-b border-zinc-800">
               <span className="font-mono text-[10px] text-zinc-500 tracking-widest uppercase">
                 64-bit taint bitmask: data_touched per SPIFFE session
@@ -343,7 +343,7 @@ export default function Product() {
                 ].map(b => (
                   <div
                     key={b.bit}
-                    className={`border rounded px-2.5 py-2 text-center font-mono ${
+                    className={`border px-2.5 py-2 text-center font-mono ${
                       b.active
                         ? 'border-cyber-red bg-cyber-red/10 text-cyber-red'
                         : 'border-zinc-800 text-zinc-700'
@@ -387,7 +387,7 @@ export default function Product() {
       </section>
 
       {/* Fail-closed */}
-      <section className="px-6 py-20 border-b border-zinc-900">
+      <section className="px-6 py-24 border-b border-zinc-900">
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <div>
@@ -405,7 +405,7 @@ export default function Product() {
                 within 2 seconds, no silent bypass, no open window.
               </p>
             </div>
-            <div className="bg-[#0d1117] border border-zinc-800 rounded-lg p-5 font-mono text-xs">
+            <div className="bg-[var(--surface-terminal)] border border-zinc-800 p-5 font-mono text-xs">
               <div className="text-zinc-600 text-[10px] tracking-widest uppercase mb-3">
                 socket_connect LSM hook
               </div>
@@ -438,9 +438,9 @@ export default function Product() {
       </section>
 
       {/* Metrics */}
-      <section className="px-6 py-20 border-b border-zinc-900">
+      <section className="px-6 py-24 border-b border-zinc-900">
         <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-zinc-800 border border-zinc-800 rounded-xl overflow-hidden">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-zinc-800 border border-zinc-800 overflow-hidden">
             {METRICS.map(m => (
               <div key={m.unit} className="bg-cyber-black p-8">
                 <div className="font-mono text-3xl font-bold text-white mb-1">{m.value}</div>
@@ -453,7 +453,7 @@ export default function Product() {
       </section>
 
       {/* Deployment */}
-      <section className="px-6 py-20 border-b border-zinc-900">
+      <section className="px-6 py-24 border-b border-zinc-900">
         <div className="max-w-4xl mx-auto">
           <p className="font-mono text-xs text-cyber-red tracking-widest uppercase mb-4">Deployment</p>
           <h2 className="text-2xl font-bold mb-4">One daemon. Any agent. Any protocol.</h2>
@@ -495,7 +495,7 @@ export default function Product() {
                 ],
               },
             ].map(d => (
-              <div key={d.env} className="bg-[#0d1117] border border-zinc-800 rounded-lg p-5">
+              <div key={d.env} className="bg-[var(--surface-terminal)] border border-zinc-800 p-5">
                 <div className="font-mono text-[10px] text-zinc-500 tracking-widest uppercase mb-3">{d.env}</div>
                 <div className="space-y-1.5">
                   {d.lines.map(l => (
@@ -506,14 +506,14 @@ export default function Product() {
             ))}
           </div>
 
-          <div className="mt-6 border border-zinc-800 rounded-lg p-5">
+          <div className="mt-6 border border-zinc-800 p-5">
             <div className="font-mono text-[10px] text-zinc-500 tracking-widest uppercase mb-3">Requirements</div>
             <div className="flex flex-wrap gap-3 font-mono text-xs text-zinc-400">
-              <span className="border border-zinc-800 rounded px-3 py-1.5">Linux 5.15+ LTS</span>
-              <span className="border border-zinc-800 rounded px-3 py-1.5">CONFIG_BPF_LSM=y</span>
-              <span className="border border-zinc-800 rounded px-3 py-1.5">CONFIG_DEBUG_INFO_BTF=y</span>
-              <span className="border border-zinc-800 rounded px-3 py-1.5">lsm=bpf,landlock,yama</span>
-              <span className="border border-zinc-800 rounded px-3 py-1.5">SPIRE agent (workload attestation)</span>
+              <span className="border border-zinc-800 px-3 py-1.5">Linux 5.15+ LTS</span>
+              <span className="border border-zinc-800 px-3 py-1.5">CONFIG_BPF_LSM=y</span>
+              <span className="border border-zinc-800 px-3 py-1.5">CONFIG_DEBUG_INFO_BTF=y</span>
+              <span className="border border-zinc-800 px-3 py-1.5">lsm=bpf,landlock,yama</span>
+              <span className="border border-zinc-800 px-3 py-1.5">SPIRE agent (workload attestation)</span>
             </div>
           </div>
         </div>
@@ -531,13 +531,13 @@ export default function Product() {
           <div className="flex gap-4 shrink-0">
             <Link
               href="/#contact"
-              className="px-6 py-3 bg-white text-black hover:bg-gray-200 transition-colors rounded font-mono font-bold text-sm tracking-wide"
+              className="px-6 py-3 bg-white text-black hover:bg-zinc-200 transition-colors duration-200 font-mono font-bold text-sm tracking-wide"
             >
               BOOK A DEMO
             </Link>
             <Link
               href="/product"
-              className="px-6 py-3 border border-zinc-700 text-white hover:border-zinc-500 transition-colors rounded font-mono font-bold text-sm tracking-wide"
+              className="px-6 py-3 border border-zinc-700 text-white hover:border-zinc-500 transition-colors duration-200 font-mono font-bold text-sm tracking-wide"
             >
               LILITH ZERO
             </Link>

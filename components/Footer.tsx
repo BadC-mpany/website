@@ -9,7 +9,7 @@ export default function Footer() {
             <span className="text-lg font-bold font-mono text-white tracking-tighter block md:inline md:mr-4">
               BadCompany
             </span>
-            <p className="text-gray-500 font-mono text-sm md:inline">
+            <p className="text-zinc-500 font-mono text-sm md:inline">
               Runtime Security for Autonomous AI Agents.
             </p>
           </div>

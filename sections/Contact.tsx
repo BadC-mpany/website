@@ -9,7 +9,7 @@ export default function Contact() {
 
   const calUrl = process.env.NEXT_PUBLIC_CALCOM_URL || 'https://cal.com/janos-mozer/30min'
   return (
-    <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-20">
+    <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-24">
       <div className="container mx-auto max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -23,7 +23,7 @@ export default function Contact() {
             </h2>
           </div>
 
-          <div className="group bg-zinc-900 border border-zinc-800 p-8 md:p-12 rounded-lg hover:border-cyber-red/50 transition-all duration-300">
+          <div className="group bg-zinc-900 border border-zinc-800 p-8 md:p-12 hover:border-cyber-red/50 transition-colors duration-200">
             <div className="flex flex-col md:flex-row items-center justify-between gap-12">
               {/* Left: Socials */}
               <div className="flex flex-col gap-8 w-full md:w-auto">
@@ -33,7 +33,7 @@ export default function Contact() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-6 group/social"
                 >
-                  <div className="px-3 py-1 bg-cyber-red/10 border border-cyber-red/20 rounded">
+                  <div className="px-3 py-1 bg-cyber-red/10 border border-cyber-red/20">
                     <p className="text-[10px] font-bold font-mono text-cyber-red tracking-widest">LINKEDIN</p>
                   </div>
                   <span className="text-xl font-bold font-mono text-white group-hover/social:text-cyber-red transition-colors">Janos Mozer</span>
@@ -45,7 +45,7 @@ export default function Contact() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-6 group/social"
                 >
-                  <div className="px-3 py-1 bg-cyber-red/10 border border-cyber-red/20 rounded">
+                  <div className="px-3 py-1 bg-cyber-red/10 border border-cyber-red/20">
                     <p className="text-[10px] font-bold font-mono text-cyber-red tracking-widest">DISCORD</p>
                   </div>
                   <span className="text-xl font-bold font-mono text-white group-hover/social:text-cyber-red transition-colors">Join Community</span>
@@ -59,7 +59,7 @@ export default function Contact() {
               <div className="flex flex-col items-center md:items-end w-full md:w-auto">
                 <button
                   onClick={() => setIsCalModalOpen(true)}
-                  className="px-10 py-4 bg-white text-black hover:bg-gray-200 transition-colors rounded font-mono font-bold text-sm tracking-widest group relative overflow-hidden"
+                  className="px-10 py-4 bg-white text-black hover:bg-gray-200 transition-colors duration-200 font-mono font-bold text-sm tracking-widest group relative overflow-hidden"
                 >
                   SCHEDULE A MEETING
                 </button>

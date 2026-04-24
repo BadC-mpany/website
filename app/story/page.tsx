@@ -125,13 +125,13 @@ export default function Story() {
             <div className="mt-16 pt-12 border-t border-zinc-900 flex flex-wrap gap-4">
               <Link
                 href="/#contact"
-                className="px-6 py-3 bg-white text-black hover:bg-gray-200 transition-colors rounded font-mono font-bold text-sm tracking-wide"
+                className="px-6 py-3 bg-white text-black hover:bg-zinc-200 transition-colors duration-200 font-mono font-bold text-sm tracking-wide"
               >
                 TALK TO US
               </Link>
               <Link
                 href="/product"
-                className="px-6 py-3 border border-zinc-700 text-white hover:border-cyber-red hover:text-cyber-red transition-colors rounded font-mono font-bold text-sm tracking-wide"
+                className="px-6 py-3 border border-zinc-700 text-white hover:border-cyber-red hover:text-cyber-red transition-colors duration-200 font-mono font-bold text-sm tracking-wide"
               >
                 READ THE DOCS
               </Link>

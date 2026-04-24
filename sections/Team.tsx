@@ -54,7 +54,7 @@ export default function Team() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="group bg-zinc-900 border border-zinc-800 rounded-lg p-8 hover:border-cyber-red/50 transition-all duration-300"
+                className="group bg-zinc-900 border border-zinc-800 p-8 hover:border-cyber-red/50 transition-colors duration-200"
               >
                 <div className="flex flex-col items-center text-center">
                   <a
@@ -72,7 +72,7 @@ export default function Team() {
                   </a>
 
                   <h3 className="text-xl font-bold font-mono text-white mb-2">{member.name}</h3>
-                  <div className="px-3 py-1 bg-cyber-red/10 border border-cyber-red/20 rounded mb-4">
+                  <div className="px-3 py-1 bg-cyber-red/10 border border-cyber-red/20 mb-4">
                     <p className="text-xs font-bold font-mono text-cyber-red tracking-wider">{member.role}</p>
                   </div>
 

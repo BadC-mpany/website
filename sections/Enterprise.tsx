@@ -72,7 +72,7 @@ export default function Enterprise() {
             ONE SECURITY<br />
             <span className="text-zinc-500">ARCHITECTURE.</span>
           </h2>
-          <p className="text-gray-400 font-mono text-sm leading-relaxed">
+          <p className="text-zinc-400 font-mono text-sm leading-relaxed">
             Start open source at the application layer. Upgrade to kernel-level enforcement
             when the threat model demands it. Both run the same Cedar policy language and taint engine.
           </p>
@@ -88,9 +88,9 @@ export default function Enterprise() {
               viewport={{ once: true }}
               className="group relative h-full"
             >
-              <div className={`h-full flex flex-col bg-zinc-900/40 border rounded-lg p-7 transition-all duration-300 ${
+              <div className={`h-full flex flex-col bg-zinc-900/40 border p-7 transition-colors duration-200 ${
                 tier.highlight
-                  ? 'border-cyber-red/40 shadow-[0_0_40px_rgba(255,0,85,0.06)]'
+                  ? 'border-cyber-red/40 shadow-glow-red'
                   : 'border-zinc-800/80 hover:border-zinc-700'
               }`}>
                 {tier.highlight && (
@@ -98,7 +98,7 @@ export default function Enterprise() {
                 )}
 
                 <div className="flex items-start justify-between mb-6">
-                  <div className={`p-2.5 rounded-md transition-colors ${
+                  <div className={`p-2.5 transition-colors duration-200 ${
                     tier.highlight ? 'bg-cyber-red/15' : 'bg-zinc-800 group-hover:bg-zinc-700/80'
                   }`}>
                     <tier.icon className={`w-5 h-5 ${tier.highlight ? 'text-cyber-red' : 'text-white'}`} />
@@ -118,7 +118,7 @@ export default function Enterprise() {
                         </span>
                       </div>
                     )}
-                    <span className={`text-[10px] font-mono font-bold tracking-widest border px-2 py-0.5 rounded ${tier.badgeColor}`}>
+                    <span className={`text-[10px] font-mono font-bold tracking-widest border px-2 py-0.5 ${tier.badgeColor}`}>
                       {tier.badge}
                     </span>
                   </div>
@@ -142,7 +142,7 @@ export default function Enterprise() {
                       href={tier.cta.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`font-mono font-bold text-xs tracking-widest transition-colors ${
+                      className={`font-mono font-bold text-xs tracking-widest transition-colors duration-200 ${
                         tier.highlight ? 'text-cyber-red hover:text-white' : 'text-zinc-500 hover:text-white'
                       }`}
                     >
@@ -151,7 +151,7 @@ export default function Enterprise() {
                   ) : (
                     <Link
                       href={tier.cta.href}
-                      className={`font-mono font-bold text-xs tracking-widest transition-colors ${
+                      className={`font-mono font-bold text-xs tracking-widest transition-colors duration-200 ${
                         tier.highlight ? 'text-cyber-red hover:text-white' : 'text-zinc-500 hover:text-white'
                       }`}
                     >

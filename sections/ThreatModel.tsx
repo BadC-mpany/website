@@ -115,14 +115,14 @@ export default function ThreatModel() {
                   href={t.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[10px] text-cyber-red tracking-widest border border-cyber-red/20 bg-cyber-red/5 px-2 py-0.5 hover:bg-cyber-red/10 transition-colors self-start whitespace-nowrap"
+                  className="text-[10px] text-cyber-red tracking-widest border border-cyber-red/20 bg-cyber-red/5 px-2 py-0.5 hover:bg-cyber-red/10 transition-colors duration-200 self-start whitespace-nowrap"
                 >
                   {t.tag} ↗
                 </a>
 
                 <div>
                   <a href={t.href} target="_blank" rel="noopener noreferrer" className="group">
-                    <div className="text-sm font-bold text-white mb-2 group-hover:text-zinc-300 transition-colors leading-snug">
+                    <div className="text-sm font-bold text-white mb-2 group-hover:text-zinc-300 transition-colors duration-200 leading-snug">
                       {t.name}
                     </div>
                   </a>

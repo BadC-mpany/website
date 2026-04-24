@@ -86,7 +86,7 @@ export default function Hero() {
               <span className="text-cyber-red font-mono">AI AGENTS</span>
             </h1>
 
-            <p className="text-base md:text-lg text-gray-400 mb-8 max-w-lg font-mono leading-relaxed">
+            <p className="text-base md:text-lg text-zinc-400 mb-8 max-w-lg font-mono leading-relaxed">
               Your AI agents have access to your infrastructure. Nothing stops them from using it wrong.
             </p>
 
@@ -104,13 +104,13 @@ export default function Hero() {
             <div className="flex flex-wrap gap-4 mb-10">
               <Link
                 href="/#contact"
-                className="px-6 py-3 bg-white text-black hover:bg-gray-200 transition-colors rounded font-mono font-bold text-sm tracking-wide"
+                className="px-6 py-3 bg-white text-black hover:bg-zinc-200 transition-colors duration-200 font-mono font-bold text-sm tracking-wide"
               >
                 LILITH
               </Link>
               <Link
                 href="/product"
-                className="px-6 py-3 border border-zinc-700 text-white hover:border-zinc-500 transition-colors rounded font-mono font-bold text-sm tracking-wide"
+                className="px-6 py-3 border border-zinc-700 text-white hover:border-zinc-500 transition-colors duration-200 font-mono font-bold text-sm tracking-wide"
               >
                 LILITH ZERO (OPEN SOURCE)
               </Link>
@@ -125,7 +125,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="hidden lg:block"
           >
-            <div className="bg-[#0d1117] border border-zinc-800 rounded-xl overflow-hidden shadow-2xl">
+            <div className="bg-[var(--surface-terminal)] border border-zinc-800 overflow-hidden shadow-2xl">
               <div className="flex items-center gap-2 px-4 py-3 border-b border-zinc-800 bg-zinc-900/50">
                 <div className="w-3 h-3 rounded-full bg-red-500/70" />
                 <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
