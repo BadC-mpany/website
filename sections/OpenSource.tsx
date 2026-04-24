@@ -146,7 +146,7 @@ export default function OpenSource() {
               <div className="w-2 h-2 bg-cyber-red rounded-full animate-pulse" />
               <span className="text-cyber-red font-mono text-xs tracking-widest uppercase">Open Source</span>
               <span className="text-[10px] font-mono font-bold text-zinc-500 tracking-widest border border-zinc-700 px-2 py-0.5">Apache 2.0</span>
-              <span className="text-[10px] font-mono font-bold text-zinc-400 tracking-widest border border-zinc-700 px-2 py-0.5">v0.2.1</span>
+              <span className="text-[10px] font-mono font-bold text-zinc-500 tracking-widest border border-zinc-700 px-2 py-0.5">v0.2.1</span>
             </div>
 
             <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white font-mono uppercase leading-tight">
