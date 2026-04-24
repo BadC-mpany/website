@@ -109,7 +109,7 @@ export default function Hero() {
                 LILITH
               </Link>
               <Link
-                href="/product"
+                href="#opensource"
                 className="px-6 py-3 border border-zinc-700 text-white hover:border-zinc-500 transition-colors duration-200 font-mono font-bold text-sm tracking-wide"
               >
                 LILITH ZERO (OPEN SOURCE)

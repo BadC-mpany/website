@@ -147,7 +147,7 @@ export default function ThreatModel() {
           >
             Firewalls inspect packets. WAFs inspect HTTP headers. EDRs watch process creation.{' '}
             <span className="text-white">None operate at tool-call granularity. None track data flow across calls. None enforce at the moment connect() fires.</span>{' '}
-            The only enforcement point that cannot be bypassed from userspace is the kernel.
+            <span className="text-cyber-red">The only enforcement point that cannot be bypassed from userspace is the kernel.</span>
           </motion.p>
 
         </div>
