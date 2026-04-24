@@ -64,7 +64,7 @@ export default function Header() {
               </svg>
               <span className="tracking-wide">Lilith Zero</span>
               <span className="text-[8px] md:text-[9px] text-zinc-600 group-hover:text-zinc-400 border border-zinc-800 group-hover:border-zinc-600 px-1 py-px transition-all font-mono">
-                0.2.0
+                0.2.1
               </span>
             </a>
             <Link
