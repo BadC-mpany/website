@@ -3,6 +3,12 @@ import Header from '../../components/Header'
 
 const blogPosts = [
   {
+    title: 'SEON x BadCompany Security Audit',
+    date: 'July 2026',
+    slug: 'seon',
+    tag: 'Security',
+  },
+  {
     title: 'Why We Built on the Linux Kernel: BPF-LSM Enforcement for AI Agents',
     date: 'March 2026',
     slug: 'bpf-lsm-kernel',
