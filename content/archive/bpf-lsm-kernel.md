@@ -4,7 +4,7 @@
 
 Every AI security product you've seen so far is a proxy. A Python wrapper. An LLM-based guardrail. They all share a fatal structural flaw: they operate in user space, at the application layer, and they can all be bypassed if the agent process itself is compromised, which is exactly the threat model we're trying to defend against.
 
-We went a different direction. Lilith enforces at Ring 0, using BPF-LSM hooks in the Linux kernel. Here's why that decision matters and exactly what we built.
+We went a different direction. Lilith enforces with BPF-LSM hooks in the Linux kernel. Here's why that decision matters and exactly what we built.
 
 ## The Fundamental Problem With Application-Layer Security
 
@@ -18,7 +18,7 @@ The only security boundary that cannot be escaped by an application is the kerne
 
 Linux Security Modules (LSM) is the kernel's hook system for mandatory access control. Historically you needed to write a kernel module to use it. BPF-LSM (introduced in Linux 5.7, stabilized in 5.19) lets you attach eBPF programs to LSM hooks, programs that the kernel's verifier statically proves to be safe before they ever run.
 
-The hooks fire synchronously in the kernel's execution path. When a managed process calls `connect()`, the kernel executes our `socket_connect` hook before the syscall completes. The hook can return `-EPERM` to block the call entirely. The process never gets a file descriptor. There's nothing in user space to bypass.
+The hooks fire synchronously in the kernel's execution path. When a managed process calls `connect()`, the kernel executes our `socket_connect` hook before the syscall completes. The hook can return `-EPERM` to block the call entirely. The process never gets a file descriptor. Local privilege escalation is a different bound.
 
 We attach 8 LSM hooks:
 

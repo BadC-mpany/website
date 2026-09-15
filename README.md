@@ -1,6 +1,6 @@
-# Badcompany Website
+# Bad Company
 
-AI Security company website with a cyberpunk aesthetic.
+Website for Lilith: mandatory access control for AI agents.
 
 ## Development
 
@@ -8,7 +8,7 @@ AI Security company website with a cyberpunk aesthetic.
 bun run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+Open http://localhost:3000
 
 ## Build
 
@@ -17,15 +17,14 @@ bun run build
 bun run start
 ```
 
-## Project Structure
+## Surfaces
 
 ```
-/
-├── app/              Next.js app directory
-├── components/       Reusable components (Header)
-├── sections/         Page sections (Hero, Team, etc)
-├── ui/              UI primitives (Noise effect)
-└── public/          Static assets
+/                 NAME / SYNOPSIS / DESCRIPTION
+/lilith           kernel product
+/lilith/zero      Apache 2.0 SDK
+/notes            writing
+/people           names
 ```
 
 ## Stack
@@ -33,6 +32,4 @@ bun run start
 - Next.js 14
 - TypeScript
 - Tailwind CSS
-- Framer Motion
 - Bun
- 
