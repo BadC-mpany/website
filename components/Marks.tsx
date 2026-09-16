@@ -31,7 +31,11 @@ export default function Marks() {
         <legend>Systems</legend>
         <div className="marks">
           <Mark label="Linux">
-            <rect x="3" y="3" width="10" height="10" />
+            <ellipse cx="5.2" cy="14.3" rx="2.2" ry="1.15" />
+            <ellipse cx="10.8" cy="14.3" rx="2.2" ry="1.15" />
+            <ellipse cx="8" cy="10" rx="4.5" ry="4.7" />
+            <circle cx="8" cy="4.5" r="2.8" />
+            <polygon points="10.2,4.2 14.2,5.5 10.2,6.8" />
           </Mark>
           <Mark label="Kubernetes">
             <polygon points="8,2 13,5.5 13,10.5 8,14 3,10.5 3,5.5" />
